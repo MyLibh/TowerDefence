@@ -1,0 +1,132 @@
+{
+    "width": 5,
+    "height": 5,
+    "cells": [
+       {
+          "type": "Field",
+      "x": 0,
+      "y": 0
+       },
+       {
+          "type": "Field",
+      "x": 1,
+      "y": 0
+       },
+       {
+          "type": "Field",
+      "x": 2,
+      "y": 0
+       },
+       {
+          "type": "River",
+      "x": 3,
+      "y": 0
+       },
+       {
+          "type": "River",
+      "x": 4,
+      "y": 0
+       },
+       {
+          "type": "Field",
+      "x": 0,
+      "y": 1
+       },
+       {
+          "type": "Mountain",
+      "x": 1,
+      "y": 1
+       },
+       {
+          "type": "Field",
+      "x": 2,
+      "y": 1
+       },
+       {
+          "type": "River",
+      "x": 3,
+      "y": 1
+       },
+       {
+          "type": "River",
+      "x": 4,
+      "y": 1
+       },
+       {
+          "type": "Castle",
+      "x": 0,
+      "y": 2,
+      "money": 100
+       },
+       {
+          "type": "Mountain",
+      "x": 1,
+      "y": 2
+       },
+       {
+          "type": "Field",
+      "x": 2,
+      "y": 2
+       },
+       {
+          "type": "Field",
+      "x": 3,
+      "y": 2
+       },
+       {
+          "type": "Lair",
+      "x": 4,
+      "y": 2
+       },
+       {
+          "type": "Field",
+      "x": 0,
+      "y": 3
+       },
+       {
+          "type": "Mountain",
+      "x": 1,
+      "y": 3
+       },
+       {
+          "type": "Field",
+      "x": 2,
+      "y": 3
+       },
+       {
+          "type": "River",
+      "x": 3,
+      "y": 3
+       },
+       {
+          "type": "River",
+      "x": 4,
+      "y": 3
+       },
+       {
+          "type": "Field",
+      "x": 0,
+      "y": 4
+       },
+       {
+          "type": "Field",
+      "x": 1,
+      "y": 4
+       },
+       {
+          "type": "Field",
+      "x": 2,
+      "y": 4
+       },
+       {
+          "type": "River",
+      "x": 3,
+      "y": 4
+       },
+       {
+          "type": "River",
+        "x": 4,
+      "y": 4
+       }
+    ]
+}

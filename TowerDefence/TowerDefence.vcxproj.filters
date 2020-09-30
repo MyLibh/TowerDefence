@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{ef7e7ae7-87e5-408d-9596-d5761feb0bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map\Objects">
+      <UniqueIdentifier>{54bd0a97-f3b9-45b6-973e-b55bda532880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map\Objects\Buildings">
+      <UniqueIdentifier>{1a7e438c-3817-4fb3-9bc7-8e29c52311bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{d1eeae0c-c33f-4613-86b6-2500248f5680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map\Objects">
+      <UniqueIdentifier>{b3077933-a384-43ec-b84d-4b5ba229489d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map\Objects\Buildings">
+      <UniqueIdentifier>{8e50405b-5c75-4773-8b30-456090a3bd80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map\Objects\Enemies">
+      <UniqueIdentifier>{b2f24e86-3073-4711-be54-7f21ff397bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map\Objects\Props">
+      <UniqueIdentifier>{4cca5093-ed5f-451b-864b-f9a51acd0b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{1b73dbc3-a520-4b21-a5eb-a4c4a6ec9721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{84adf6f3-0d4f-4a9c-b461-79b67e1b6d45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map\Objects\Cells">
+      <UniqueIdentifier>{df213c8a-14fa-46b8-bcb3-32e5a8283228}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="TowerDefence.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+    <QtUic Include="TowerDefence.ui">
+      <Filter>Resource Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\TowerDefence.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Castle.cpp">
+      <Filter>Source Files\Map\Objects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Tower.cpp">
+      <Filter>Source Files\Map\Objects\Buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Landscape.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\PropsManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MapLoader.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Lair.cpp">
+      <Filter>Source Files\Map\Objects\Buildings</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Castle.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Graphics.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Landscape.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Building.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Pos.hpp">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Tower.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entity.hpp">
+      <Filter>Header Files\Map\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Enemy.hpp">
+      <Filter>Header Files\Map\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\UpgradableBuilding.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BreakableBuilding.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CastleProps.hpp">
+      <Filter>Header Files\Map\Objects\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TowerProps.hpp">
+      <Filter>Header Files\Map\Objects\Props</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Wall.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PropsManager.hpp">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Lair.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MapLoader.hpp">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Cell.hpp">
+      <Filter>Header Files\Map\Objects\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\River.hpp">
+      <Filter>Header Files\Map\Objects\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Mountain.hpp">
+      <Filter>Header Files\Map\Objects\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Field.hpp">
+      <Filter>Header Files\Map\Objects\Cells</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="..\src\TowerDefence.hpp">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+</Project>

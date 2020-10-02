@@ -8,15 +8,14 @@ namespace TowerDefence
 	class BreakableBuilding : virtual public Building
 	{
 	public:
-		inline BreakableBuilding(const PosF pos, const int health = 0) noexcept :
+		_INLINE_VAR BreakableBuilding(const PosF& pos, const int health = 0) noexcept :
 			Building(pos),
 			m_health(health)
 		{ }
 
-		inline virtual ~BreakableBuilding() noexcept override = default;
+		_INLINE_VAR virtual ~BreakableBuilding() noexcept override = default;
 
-		_NODISCARD
-		inline constexpr auto getHealth() const noexcept { return m_health; }
+		_NODISCARD _INLINE_VAR _CONSTEXPR20 auto getHealth() const noexcept { return m_health; }
 
 		void decreaseHealth(const int amount)
 		{

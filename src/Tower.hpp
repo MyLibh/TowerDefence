@@ -2,6 +2,7 @@
 #define __TOWER_HPP_INCLUDED__
 
 #include "UpgradableBuilding.hpp"
+#include "PropsManager.hpp"
 
 namespace TowerDefence
 {
@@ -10,9 +11,11 @@ namespace TowerDefence
 	public:
 		~Tower() noexcept override = default;
 
-		void update(float dt) override;
+		bool canUpgrade() const override { return PropsManager::canTowerUpgrade(m_lvl + 1); }
 
 		bool upgrade() noexcept override;
+
+		void update(float dt) override;
 
 	private:
 		float m_shotTimer;

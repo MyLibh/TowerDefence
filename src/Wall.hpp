@@ -8,7 +8,7 @@ namespace TowerDefence
 	class Wall final : public BreakableBuilding
 	{
 	public:
-		inline Wall(const PosF pos) noexcept :
+		_INLINE_VAR Wall(const PosF& pos) noexcept :
 			BreakableBuilding(pos)
 		{ }
 	};

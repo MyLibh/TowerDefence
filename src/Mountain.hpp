@@ -8,11 +8,11 @@ namespace TowerDefence
 	class Mountain final : public Cell
 	{
 	public:
-		inline constexpr Mountain(const PosF& pos) noexcept :
+		_INLINE_VAR _CONSTEXPR20 Mountain(const PosF& pos) noexcept :
 			Cell(pos)
 		{ }
 
-		inline ~Mountain() noexcept override = default;
+		_INLINE_VAR~Mountain() noexcept override = default;
 	};
 } // namespace TowerDefence
 

@@ -8,11 +8,11 @@ namespace TowerDefence
 	class River final : public Cell
 	{
 	public:
-		inline constexpr River(const PosF& pos) noexcept :
+		_INLINE_VAR _CONSTEXPR20 River(const PosF& pos) noexcept :
 			Cell(pos)
 		{ }
 
-		inline ~River() noexcept override = default;
+		_INLINE_VAR ~River() noexcept override = default;
 	};
 } // namespace TowerDefence
 

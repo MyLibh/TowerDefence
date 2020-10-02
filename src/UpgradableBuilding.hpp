@@ -8,12 +8,14 @@ namespace TowerDefence
 	class UpgradableBuilding : virtual public Building
 	{
 	public:
-		inline UpgradableBuilding(const PosF pos, const int lvl = 1) noexcept :
+		_INLINE_VAR UpgradableBuilding(const PosF& pos, const int lvl = 1) noexcept :
 			Building(pos),
 			m_lvl(lvl)
 		{ }
 
-		inline virtual ~UpgradableBuilding() noexcept override = default;
+		_INLINE_VAR virtual ~UpgradableBuilding() noexcept override = default;
+
+		virtual bool canUpgrade() const = 0;
 
 		virtual bool upgrade() noexcept = 0;
 

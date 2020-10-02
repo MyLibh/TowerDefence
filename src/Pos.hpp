@@ -2,6 +2,7 @@
 #define __POS_HPP_INCLUDED__
 
 #include <type_traits>
+#include <compare>
 
 namespace TowerDefence
 {
@@ -13,9 +14,12 @@ namespace TowerDefence
 	{
 		_T x;
 		_T y;
+
+		auto operator<=>(const Pos<_T>& other) const noexcept = default;
 	};
 
 	using PosF = Pos<float>;
+
 } // namespace TowerDefence
 
 #endif /* !__POS_HPP_INCLUDED__ */

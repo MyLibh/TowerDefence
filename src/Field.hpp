@@ -11,18 +11,18 @@ namespace TowerDefence
 	class Field final : public Cell
 	{
 	public:
-		inline constexpr Field(const PosF& pos) noexcept :
+		_INLINE_VAR _CONSTEXPR20 Field(const PosF& pos) noexcept :
 			Cell(pos),
 			m_building{}
 		{ }
 
-		inline ~Field() noexcept override = default;
+		_INLINE_VAR ~Field() noexcept override = default;
 
-		_NODISCARD inline const auto getBuilding() const noexcept { return m_building; }
+		_NODISCARD _INLINE_VAR const auto getBuilding() const noexcept { return m_building; }
 
-		inline bool isBusy() const noexcept { return m_building != nullptr; }
+		_INLINE_VAR bool isBusy() const noexcept { return m_building != nullptr; }
 
-		inline void build(std::shared_ptr<Building> building) noexcept
+		_INLINE_VAR void build(std::shared_ptr<Building> building) noexcept
 		{
 			if (!isBusy())
 				m_building = std::move(building);

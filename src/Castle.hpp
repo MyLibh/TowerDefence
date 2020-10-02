@@ -10,10 +10,10 @@ namespace TowerDefence
 	class Castle final : public UpgradableBuilding, public BreakableBuilding
 	{
 	private:
-		inline static constexpr auto REPAIR_AMOUNT{ 1 };
+		_INLINE_VAR static _CONSTEXPR20 auto REPAIR_AMOUNT{ 1 };
 
 	public:
-		inline Castle(const int startMoney, const PosF pos) :
+		_INLINE_VAR Castle(const int startMoney, const PosF& pos) :
 			UpgradableBuilding(pos),
 			BreakableBuilding(pos),
 			Building(pos),
@@ -21,11 +21,15 @@ namespace TowerDefence
 			m_props(PropsManager::getCastleProps(m_lvl))
 		{ }
 
-		inline ~Castle() noexcept override = default;
+		_INLINE_VAR ~Castle() noexcept override = default;
+
+		bool canUpgrade() const override { return PropsManager::canCastleUpgrade(m_lvl + 1); }
 
 		bool upgrade() noexcept override;
 
 		void update(const float dt) override;
+
+		_NODISCARD _INLINE_VAR _CONSTEXPR20 auto getMoney() const noexcept { return m_money; }
 
 	private:
 		int m_money;

@@ -12,6 +12,8 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QScrollBar>
+#include <QPushButton>
+#include <QLayout>
 
 namespace TowerDefence
 {
@@ -23,6 +25,30 @@ namespace TowerDefence
         QMainWindow::keyPressEvent(event);
     }
 
+    void TowerDefence::mousePressEvent(QMouseEvent* event)
+    {
+        if (event->x() <= m_ui->canvas->width())
+        {
+            m_graphics->setCurrentTilePos(event->x(), event->y());
+
+            if (m_graphics->isTileSelected())
+            {
+                auto pos = m_graphics->getSelectedTilePos();
+                m_ui->buildButton->setEnabled(m_landscape->canBuildHere(pos));
+                m_ui->upgradeButton->setEnabled(m_landscape->canUpgradeHere(pos));
+                m_ui->repairButton->setEnabled(m_landscape->canRepairHere(pos));
+            }
+            else
+            {
+                m_ui->buildButton->setEnabled(false);
+                m_ui->upgradeButton->setEnabled(false);
+                m_ui->repairButton->setEnabled(false);
+            }
+        }
+
+        QMainWindow::mousePressEvent(event);
+    }
+
     void TowerDefence::initWidgets()
     {
         auto canvas = m_ui->canvas;
@@ -30,11 +56,22 @@ namespace TowerDefence
         canvas->verticalScrollBar()->blockSignals(true);
 
         QMainWindow::showFullScreen();
-        m_ui->canvas->resize(QMainWindow::size());
+        canvas->resize(QMainWindow::width() - TowerDefence::BUTTON_SIZE, QMainWindow::height());
+
+        m_ui->buildButton->move(canvas->width(), 0);
+        m_ui->upgradeButton->move(canvas->width(), TowerDefence::BUTTON_SIZE);
+        m_ui->repairButton->move(canvas->width(), 2 * TowerDefence::BUTTON_SIZE);
+
+        m_ui->moneyLabel->move(canvas->width(), QMainWindow::height() - TowerDefence::BUTTON_SIZE);
 
         auto& scene = m_graphics->getScene();
         canvas->setScene(scene.get());
         scene->setParent(canvas);
+    }
+
+    void TowerDefence::updateMoneyLabel(const int money)
+    {
+        m_ui->moneyLabel->setText(QString("Money:\n%1").arg(money));
     }
 
     TowerDefence::TowerDefence(QWidget* parent /* = nullptr */) :
@@ -55,7 +92,8 @@ namespace TowerDefence
 
         m_landscape = MapLoader::load("cfg/maps/empty.json");
 
-        m_graphics->createMap(QMainWindow::width() * 1. / m_landscape->getWidth(), QMainWindow::height() * 1. / m_landscape->getHeight(), m_landscape);
+        m_graphics->setTileSize(m_ui->canvas->width() * 1. / m_landscape->getWidth(), m_ui->canvas->height() * 1. / m_landscape->getHeight());
+        m_graphics->createMap(m_landscape);
     }
 
     TowerDefence::~TowerDefence() noexcept = default;
@@ -65,5 +103,7 @@ namespace TowerDefence
         m_landscape->update(1.f);
     
         m_graphics->draw();
+
+        updateMoneyLabel(m_landscape->getCastle()->getMoney());
     }
 } // namespace TowerDefence

@@ -70,7 +70,6 @@ std::shared_ptr<TowerDefence::Landscape> TowerDefence::MapLoader::load(const std
     file.close();
 
     auto landscape = std::make_shared<Landscape>(json.value(QString("width")).toInt(), json.value(QString("height")).toInt());
-    // MapObject::setEnvironmentDescriptor(envDescr->shared_from_this());
 
     detail::loadCells(json.value(QString("cells")).toArray(), landscape);
 

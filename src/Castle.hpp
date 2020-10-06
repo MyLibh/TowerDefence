@@ -29,7 +29,15 @@ namespace TowerDefence
 
 		void update(const float dt) override;
 
+		_NODISCARD _INLINE_VAR int getUpgradePrice() const noexcept override { return m_props.price; }
+
+		_NODISCARD _INLINE_VAR int getMaxHealth() const noexcept override { return m_props.maxHealth; }
+
 		_NODISCARD _INLINE_VAR _CONSTEXPR20 auto getMoney() const noexcept { return m_money; }
+
+		void withdraw(const int amount);
+
+		_INLINE_VAR bool hasMoney(const int amount) const noexcept { return m_money >= amount; }
 
 	private:
 		int m_money;

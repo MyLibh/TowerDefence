@@ -7,6 +7,7 @@
 #include "River.hpp"
 #include "Field.hpp"
 #include "Lair.hpp"
+#include "Tower.hpp"
 
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
@@ -37,6 +38,11 @@ namespace TowerDefence
 	{
 		m_currentTile = m_scene->addRect(0., 0., m_tileWidth, m_tileHeight, QPen(Qt::green));
 		m_currentTile->setVisible(false);
+	}
+
+	void Graphics::addCastle(std::shared_ptr<Castle> castle)
+	{
+		m_castle = std::make_unique<CastleGraphics>(m_scene, m_images.at("Castle").scaled(m_tileWidth, m_tileHeight), castle);
 	}
 
 	PosF Graphics::getSelectedTilePos() const noexcept
@@ -78,8 +84,8 @@ namespace TowerDefence
 				if (field->isBusy())
 					if (typeid(*field->getBuilding()) == typeid(Castle))
 					{
-						auto pm = m_scene->addPixmap(m_images.at("Castle").scaled(m_tileWidth, m_tileHeight));
-						pm->setPos(1. * x * m_tileWidth, 1. * y * m_tileHeight);
+						addCastle(std::dynamic_pointer_cast<Castle>(field->getBuilding()));
+						m_castle->setPos({ x * m_tileWidth, y * m_tileHeight });
 					}
 					else if (typeid(*field->getBuilding()) == typeid(Lair))
 					{
@@ -94,6 +100,7 @@ namespace TowerDefence
 
 	void Graphics::draw() const
 	{
+		m_castle->draw();
 	}
 
 	void Graphics::setCurrentTilePos(int x, int y)
@@ -110,5 +117,12 @@ namespace TowerDefence
 			m_currentTile->setVisible(true);
 
 		m_currentTile->setPos(x - x % static_cast<int>(m_tileWidth), y - y % static_cast<int>(m_tileHeight));
+	}
+
+	void Graphics::addTower(std::shared_ptr<Tower> tower)
+	{
+		m_towers.emplace_back(m_scene, m_images.at("Tower").scaled(m_tileWidth, m_tileHeight), tower);
+
+		m_towers.back().setPos({ tower->getX() * m_tileWidth, tower->getY() * m_tileHeight });
 	}
 } // namespace TowerDefence

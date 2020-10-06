@@ -1,9 +1,11 @@
-#ifndef __TOWER_HPP_INCLUDED__
-#define __TOWER_HPP_INCLUDED__
+#ifndef __TOWER_DEFENCE_HPP_INCLUDED__
+#define __TOWER_DEFENCE_HPP_INCLUDED__
 
 #include <QtWidgets/QMainWindow>
 #include <memory>
 #include <chrono>
+
+#include "Pos.hpp"
 
 using namespace std::chrono_literals;
 
@@ -34,7 +36,15 @@ namespace TowerDefence
 
         void initWidgets();
 
+        void initButtons();
+
         void updateMoneyLabel(const int money);
+
+        void updateButtons();
+
+        void setButtons(const PosF& pos);
+
+        void disableButtons();
 
     public:
         TowerDefence(QWidget* parent = nullptr);
@@ -50,4 +60,4 @@ namespace TowerDefence
         std::shared_ptr<Landscape>             m_landscape;
     };
 } // namespace TowerDefense
-#endif /* !__TOWER_HPP_INCLUDED__ */
+#endif /* !__TOWER_DEFENCE_HPP_INCLUDED__ */

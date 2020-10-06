@@ -17,6 +17,8 @@ namespace TowerDefence
 
 		_NODISCARD _INLINE_VAR _CONSTEXPR20 auto getHealth() const noexcept { return m_health; }
 
+		virtual int getMaxHealth() const noexcept = 0;
+
 		void decreaseHealth(const int amount)
 		{
 			m_health -= amount;

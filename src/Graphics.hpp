@@ -1,19 +1,14 @@
 #ifndef __GRAPHICS_HPP_INCLUDED__
 #define __GRAPHICS_HPP_INCLUDED__
 
-#include "Pos.hpp"
+#include "TowerGraphics.hpp"
+#include "CastleGraphics.hpp"
 
-#include <memory>
 #include <vector>
 #include <map>
 #include <string>
 
-#include <QtGlobal>
-
-class QGraphicsScene;
 class QGraphicsLineItem;
-class QGraphicsRectItem;
-class QPixmap;
 
 namespace TowerDefence
 {
@@ -28,14 +23,18 @@ namespace TowerDefence
 
 		void createSelectionTile();
 
+		void addCastle(std::shared_ptr<Castle> castle);
+
 	public:
 		_INLINE_VAR Graphics() :
 			m_tileWidth{},
 			m_tileHeight{},
-			m_scene(std::make_unique<QGraphicsScene>()),
+			m_scene(std::make_shared<QGraphicsScene>()),
 			m_grid(),
 			m_images(),
-			m_currentTile{}
+			m_currentTile{},
+			m_castle(),
+			m_towers()
 		{ }
 
 		_INLINE_VAR ~Graphics() noexcept = default;
@@ -58,13 +57,18 @@ namespace TowerDefence
 
 		void setCurrentTilePos(int x, int y);
 
+		void addTower(std::shared_ptr<Tower> tower);
+
 	private:
 		float                           m_tileWidth;
 		float                           m_tileHeight;
-		std::unique_ptr<QGraphicsScene> m_scene;
+		std::shared_ptr<QGraphicsScene> m_scene;
 		std::vector<QGraphicsLineItem*> m_grid[2];
 		std::map<std::string, QPixmap>  m_images;
 		QGraphicsRectItem*              m_currentTile;
+		
+		std::unique_ptr<CastleGraphics> m_castle;
+		std::vector<TowerGraphics>      m_towers;
 	};
 } // namespace TowerDefence
 

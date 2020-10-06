@@ -19,6 +19,8 @@ namespace TowerDefence
 
 		virtual bool upgrade() noexcept = 0;
 
+		virtual int getUpgradePrice() const noexcept = 0;
+
 	protected:
 		int m_lvl;
 	};

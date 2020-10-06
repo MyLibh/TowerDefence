@@ -99,7 +99,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\CastleGraphics.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
+    <ClCompile Include="..\src\HP.cpp" />
     <ClCompile Include="..\src\Landscape.cpp" />
     <ClCompile Include="..\src\Lair.cpp" />
     <ClCompile Include="..\src\main.cpp" />
@@ -107,6 +109,7 @@
     <ClCompile Include="..\src\PropsManager.cpp" />
     <ClCompile Include="..\src\Tower.cpp" />
     <ClCompile Include="..\src\TowerDefence.cpp" />
+    <ClCompile Include="..\src\TowerGraphics.cpp" />
     <QtRcc Include="TowerDefence.qrc" />
     <QtUic Include="TowerDefence.ui" />
     <ClCompile Include="..\src\Castle.cpp" />
@@ -115,12 +118,14 @@
     <ClInclude Include="..\src\BreakableBuilding.hpp" />
     <ClInclude Include="..\src\Building.hpp" />
     <ClInclude Include="..\src\Castle.hpp" />
+    <ClInclude Include="..\src\CastleGraphics.hpp" />
     <ClInclude Include="..\src\CastleProps.hpp" />
     <ClInclude Include="..\src\Cell.hpp" />
     <ClInclude Include="..\src\Enemy.hpp" />
     <ClInclude Include="..\src\Entity.hpp" />
     <ClInclude Include="..\src\Field.hpp" />
     <ClInclude Include="..\src\Graphics.hpp" />
+    <ClInclude Include="..\src\HP.hpp" />
     <ClInclude Include="..\src\Landscape.hpp" />
     <ClInclude Include="..\src\Lair.hpp" />
     <ClInclude Include="..\src\MapLoader.hpp" />
@@ -129,6 +134,7 @@
     <ClInclude Include="..\src\PropsManager.hpp" />
     <ClInclude Include="..\src\River.hpp" />
     <ClInclude Include="..\src\Tower.hpp" />
+    <ClInclude Include="..\src\TowerGraphics.hpp" />
     <ClInclude Include="..\src\TowerProps.hpp" />
     <ClInclude Include="..\src\UpgradableBuilding.hpp" />
     <ClInclude Include="..\src\Wall.hpp" />

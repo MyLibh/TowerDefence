@@ -55,6 +55,15 @@
     <Filter Include="Header Files\Map\Objects\Cells">
       <UniqueIdentifier>{df213c8a-14fa-46b8-bcb3-32e5a8283228}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{9349cb52-e303-4ffa-8801-3999d065d491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{56a77776-41a7-4f92-a45f-4532718f2b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Map\Utility">
+      <UniqueIdentifier>{83dbf75e-e019-4fba-969d-b1707bdec9b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="TowerDefence.qrc">
@@ -71,17 +80,11 @@
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Castle.cpp">
       <Filter>Source Files\Map\Objects\Buildings</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Tower.cpp">
       <Filter>Source Files\Map\Objects\Buildings</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Landscape.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\PropsManager.cpp">
       <Filter>Source Files\Managers</Filter>
@@ -92,22 +95,28 @@
     <ClCompile Include="..\src\Lair.cpp">
       <Filter>Source Files\Map\Objects\Buildings</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Graphics.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Landscape.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TowerGraphics.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\HP.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\CastleGraphics.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Castle.hpp">
       <Filter>Header Files\Map\Objects\Buildings</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Graphics.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Landscape.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Building.hpp">
       <Filter>Header Files\Map\Objects\Buildings</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Pos.hpp">
-      <Filter>Header Files\Map</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Tower.hpp">
       <Filter>Header Files\Map\Objects\Buildings</Filter>
@@ -153,6 +162,24 @@
     </ClInclude>
     <ClInclude Include="..\src\Field.hpp">
       <Filter>Header Files\Map\Objects\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Graphics.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Landscape.hpp">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Pos.hpp">
+      <Filter>Header Files\Map\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\CastleGraphics.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TowerGraphics.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\HP.hpp">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -26,9 +26,9 @@ namespace TowerDefence
 
 		_INLINE_VAR static bool canTowerUpgrade(const int lvl) { return sTowerProps.contains(lvl); }
 
-		_INLINE_VAR static auto getCastleProps(const int lvl) { return sCastleProps.at(lvl); }
+		_INLINE_VAR static auto getCastleProps(const int lvl = 1) { return sCastleProps.at(lvl); }
 
-		_INLINE_VAR static auto getTowerProps(const int lvl) { return sCastleProps.at(lvl); }
+		_INLINE_VAR static auto getTowerProps(const int lvl = 1) { return sTowerProps.at(lvl); }
 	};
 } // namespace TowerDefence
 

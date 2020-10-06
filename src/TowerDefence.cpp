@@ -31,19 +31,7 @@ namespace TowerDefence
         {
             m_graphics->setCurrentTilePos(event->x(), event->y());
 
-            if (m_graphics->isTileSelected())
-            {
-                auto pos = m_graphics->getSelectedTilePos();
-                m_ui->buildButton->setEnabled(m_landscape->canBuildHere(pos));
-                m_ui->upgradeButton->setEnabled(m_landscape->canUpgradeHere(pos));
-                m_ui->repairButton->setEnabled(m_landscape->canRepairHere(pos));
-            }
-            else
-            {
-                m_ui->buildButton->setEnabled(false);
-                m_ui->upgradeButton->setEnabled(false);
-                m_ui->repairButton->setEnabled(false);
-            }
+            updateButtons();
         }
 
         QMainWindow::mousePressEvent(event);
@@ -69,9 +57,54 @@ namespace TowerDefence
         scene->setParent(canvas);
     }
 
+    void TowerDefence::initButtons()
+    {
+        auto exec = [&](auto func)
+        {
+            auto pos = m_graphics->getSelectedTilePos();
+
+            ((*m_landscape).*func)(pos);
+
+            setButtons(pos);
+        };
+
+        QObject::connect(m_ui->buildButton,   &QPushButton::clicked,
+            [=]()
+            { 
+                exec(&Landscape::build);
+
+                if (auto field = std::dynamic_pointer_cast<Field>(m_landscape->getCell(m_graphics->getSelectedTilePos())); field && field->isBusy())
+                    m_graphics->addTower(std::dynamic_pointer_cast<Tower>(field->getBuilding()));
+            });
+        QObject::connect(m_ui->upgradeButton, &QPushButton::clicked, [=]() { exec(&Landscape::upgrade); });
+        QObject::connect(m_ui->repairButton,  &QPushButton::clicked, [=]() { exec(&Landscape::repair); });
+    }
+
     void TowerDefence::updateMoneyLabel(const int money)
     {
         m_ui->moneyLabel->setText(QString("Money:\n%1").arg(money));
+    }
+
+    void TowerDefence::updateButtons()
+    {
+        if (m_graphics->isTileSelected())
+            setButtons(m_graphics->getSelectedTilePos());
+        else
+            disableButtons();
+    }
+
+    void TowerDefence::setButtons(const PosF& pos)
+    {
+        m_ui->buildButton->setEnabled(m_landscape->canBuildHere(pos));
+        m_ui->upgradeButton->setEnabled(m_landscape->canUpgradeHere(pos));
+        m_ui->repairButton->setEnabled(m_landscape->canRepairHere(pos));
+    }
+
+    void TowerDefence::disableButtons()
+    {
+        m_ui->buildButton->setEnabled(false);
+        m_ui->upgradeButton->setEnabled(false);
+        m_ui->repairButton->setEnabled(false);
     }
 
     TowerDefence::TowerDefence(QWidget* parent /* = nullptr */) :
@@ -83,6 +116,7 @@ namespace TowerDefence
         m_ui->setupUi(this);
 
         initWidgets();
+        initButtons();
 
         QObject::connect(m_timer.get(), &QTimer::timeout, this, &TowerDefence::update);
         m_timer->start(TowerDefence::TIMER_INTERVAL);
@@ -105,5 +139,7 @@ namespace TowerDefence
         m_graphics->draw();
 
         updateMoneyLabel(m_landscape->getCastle()->getMoney());
+
+        updateButtons();
     }
 } // namespace TowerDefence

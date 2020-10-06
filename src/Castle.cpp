@@ -26,5 +26,15 @@ namespace TowerDefence
 		
 		if (m_health > m_props.maxHealth)
 			m_health = m_props.maxHealth;
+
+		m_money += m_props.profit;
+	}
+
+	void Castle::withdraw(const int amount)
+	{
+		if (m_money < amount)
+			throw std::runtime_error("Not enought money");
+
+		m_money -= amount;
 	}
 }

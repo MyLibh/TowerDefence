@@ -110,6 +110,7 @@
     <ClCompile Include="..\src\Tower.cpp" />
     <ClCompile Include="..\src\TowerDefence.cpp" />
     <ClCompile Include="..\src\TowerGraphics.cpp" />
+    <ClCompile Include="..\src\WallGraphics.cpp" />
     <QtRcc Include="TowerDefence.qrc" />
     <QtUic Include="TowerDefence.ui" />
     <ClCompile Include="..\src\Castle.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="..\src\TowerProps.hpp" />
     <ClInclude Include="..\src\UpgradableBuilding.hpp" />
     <ClInclude Include="..\src\Wall.hpp" />
+    <ClInclude Include="..\src\WallGraphics.hpp" />
     <QtMoc Include="..\src\TowerDefence.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

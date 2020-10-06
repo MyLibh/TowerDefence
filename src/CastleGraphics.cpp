@@ -27,4 +27,4 @@ namespace TowerDefence
 	{
 		m_hp.setHP(1.f * m_castle->getHealth() / m_castle->getMaxHealth());
 	}
-}
+} // namespace TowerDefence

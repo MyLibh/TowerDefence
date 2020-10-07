@@ -26,8 +26,8 @@ namespace TowerDefence
         Q_OBJECT
 
     private:
-        _INLINE_VAR static _CONSTEXPR20 auto TIMER_INTERVAL{ 1s };
-        _INLINE_VAR static _CONSTEXPR20 auto BUTTON_SIZE{ 100 };
+        inline static constexpr auto TIMER_INTERVAL{ 1s };
+        inline static constexpr auto BUTTON_SIZE{ 100 };
 
     private:
         void keyPressEvent(QKeyEvent* event) override;

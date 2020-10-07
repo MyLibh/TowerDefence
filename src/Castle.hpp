@@ -10,10 +10,10 @@ namespace TowerDefence
 	class Castle final : public UpgradableBuilding, public BreakableBuilding
 	{
 	private:
-		_INLINE_VAR static _CONSTEXPR20 auto REPAIR_AMOUNT{ 1 };
+		inline static constexpr auto REPAIR_AMOUNT{ 1 };
 
 	public:
-		_INLINE_VAR Castle(const int startMoney, const PosF& pos) :
+		inline Castle(const int startMoney, const PosF& pos) :
 			UpgradableBuilding(pos),
 			BreakableBuilding(pos),
 			Building(pos),
@@ -21,7 +21,7 @@ namespace TowerDefence
 			m_props(PropsManager::getCastleProps(m_lvl))
 		{ }
 
-		_INLINE_VAR ~Castle() noexcept override = default;
+		inline ~Castle() noexcept override = default;
 
 		bool canUpgrade() const override { return PropsManager::canCastleUpgrade(m_lvl + 1); }
 
@@ -29,15 +29,15 @@ namespace TowerDefence
 
 		void update(const float dt) override;
 
-		_NODISCARD _INLINE_VAR int getUpgradePrice() const noexcept override { return m_props.price; }
+		_NODISCARD inline int getUpgradePrice() const noexcept override { return m_props.price; }
 
-		_NODISCARD _INLINE_VAR int getMaxHealth() const noexcept override { return m_props.maxHealth; }
+		_NODISCARD inline int getMaxHealth() const noexcept override { return m_props.maxHealth; }
 
-		_NODISCARD _INLINE_VAR _CONSTEXPR20 auto getMoney() const noexcept { return m_money; }
+		_NODISCARD inline constexpr auto getMoney() const noexcept { return m_money; }
 
 		void withdraw(const int amount);
 
-		_INLINE_VAR bool hasMoney(const int amount) const noexcept { return m_money >= amount; }
+		inline bool hasMoney(const int amount) const noexcept { return m_money >= amount; }
 
 	private:
 		int m_money;

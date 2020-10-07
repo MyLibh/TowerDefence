@@ -13,8 +13,8 @@ namespace TowerDefence
 	class HP
 	{
 	private:
-		_INLINE_VAR static _CONSTEXPR20 auto WIDTH{ 30 };
-		_INLINE_VAR static _CONSTEXPR20 auto HEIGHT{ 10 };
+		inline static constexpr auto WIDTH{ 30 };
+		inline static constexpr auto HEIGHT{ 10 };
 
 	public:
 		HP(std::shared_ptr<QGraphicsScene> scene);

@@ -26,7 +26,7 @@ namespace TowerDefence
 		void addCastle(std::shared_ptr<Castle> castle);
 
 	public:
-		_INLINE_VAR Graphics() :
+		inline Graphics() :
 			m_tileWidth{},
 			m_tileHeight{},
 			m_scene(std::make_shared<QGraphicsScene>()),
@@ -37,13 +37,13 @@ namespace TowerDefence
 			m_towers()
 		{ }
 
-		_INLINE_VAR ~Graphics() noexcept = default;
+		inline ~Graphics() noexcept = default;
 
-		_NODISCARD _INLINE_VAR auto& getScene() const noexcept { return m_scene; }
+		_NODISCARD inline auto& getScene() const noexcept { return m_scene; }
 
 		_NODISCARD PosF getSelectedTilePos() const noexcept;
 
-		_INLINE_VAR void setTileSize(const float width, const float height) noexcept
+		inline void setTileSize(const float width, const float height) noexcept
 		{
 			m_tileWidth = width;
 			m_tileHeight = height;

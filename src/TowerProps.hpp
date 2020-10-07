@@ -13,7 +13,7 @@ namespace TowerDefence
 		int price;
 	};
 
-	_INLINE_VAR std::istream& operator>>(std::istream& istr, TowerProps& props)
+	inline std::istream& operator>>(std::istream& istr, TowerProps& props)
 	{
 		return istr >> props.r >> props.damage >> props.attackSpeed >> props.price;
 	}

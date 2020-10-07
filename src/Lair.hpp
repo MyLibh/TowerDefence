@@ -17,12 +17,12 @@ namespace TowerDefence
 		void spawn(std::shared_ptr<Enemy> enemy);
 
 	public:
-		_INLINE_VAR Lair(const PosF& pos) noexcept :
+		inline Lair(const PosF& pos) noexcept :
 			Building(pos),
 			m_timer{}
 		{ }
 
-		_INLINE_VAR ~Lair() noexcept override = default;
+		inline ~Lair() noexcept override = default;
 
 		void update(float dt) override;
 

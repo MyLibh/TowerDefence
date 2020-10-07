@@ -8,7 +8,7 @@ namespace TowerDefence
 {
 	void Lair::spawn(std::shared_ptr<Enemy> enemy)
 	{
-		// enemy->setPos(m_pos);
+		enemy->setPos(m_pos);
 		m_enemies->insert(enemy);
 	}
 

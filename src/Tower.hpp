@@ -24,7 +24,9 @@ namespace TowerDefence
 
 		void update(float dt) override;
 
-		_NODISCARD inline int getUpgradePrice() const noexcept override { return m_props.price; }
+		[[nodiscard]] inline int getUpgradePrice() const noexcept override { return m_props.price; }
+
+		[[nodiscard]] inline auto getR() const noexcept { return m_props.r; }
 
 	private:
 		float m_shotTimer;

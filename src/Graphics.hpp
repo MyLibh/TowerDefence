@@ -1,8 +1,7 @@
 #ifndef __GRAPHICS_HPP_INCLUDED__
 #define __GRAPHICS_HPP_INCLUDED__
 
-#include "TowerGraphics.hpp"
-#include "CastleGraphics.hpp"
+#include "GraphicsObjectWithHPAndAura.hpp"
 
 #include <vector>
 #include <map>
@@ -13,6 +12,11 @@ class QGraphicsLineItem;
 namespace TowerDefence
 {
 	class Landscape;
+	class Castle;
+	class Lair;
+	class Wall;
+	class Tower;
+	class Enemy;
 
 	class Graphics
 	{
@@ -23,8 +27,6 @@ namespace TowerDefence
 
 		void createSelectionTile();
 
-		void addCastle(std::shared_ptr<Castle> castle);
-
 	public:
 		inline Graphics() :
 			m_tileWidth{},
@@ -33,15 +35,18 @@ namespace TowerDefence
 			m_grid(),
 			m_images(),
 			m_currentTile{},
-			m_castle(),
-			m_towers()
+			m_castle{},
+			m_lairs(),
+			m_walls(),
+			m_towers(),
+			m_enemies()
 		{ }
 
 		inline ~Graphics() noexcept = default;
 
-		_NODISCARD inline auto& getScene() const noexcept { return m_scene; }
+		[[nodiscard]] inline auto& getScene() const noexcept { return m_scene; }
 
-		_NODISCARD PosF getSelectedTilePos() const noexcept;
+		[[nodiscard]] PosF getSelectedTilePos() const noexcept;
 
 		inline void setTileSize(const float width, const float height) noexcept
 		{
@@ -53,11 +58,37 @@ namespace TowerDefence
 
 		void createMap(const std::shared_ptr<Landscape>& landscape);
 
+		void update();
+
 		void draw() const;
 
 		void setCurrentTilePos(int x, int y);
 
-		void addTower(std::shared_ptr<Tower> tower);
+		template<typename _T>
+		inline void add(std::shared_ptr<_T> object)
+		{
+#define _add(cont, str, ...) ptr = &cont.emplace_back(m_scene, m_images.at(str).scaled(m_tileWidth, m_tileHeight), object, __VA_ARGS__)
+
+			GraphicsObject<_T>* ptr{};
+			if constexpr (std::is_same_v<_T, Castle>)
+				ptr = &(m_castle = GraphicsObjectWithHP<Castle>(m_scene, m_images.at("Castle").scaled(m_tileWidth, m_tileHeight), object, PosI{ 100, 15 }));
+			else if constexpr (std::is_same_v<_T, Lair>)
+				_add(m_lairs, "Lair");
+			else if constexpr (std::is_same_v<_T, Wall>)
+				_add(m_walls, "Wall");
+			else if constexpr (std::is_same_v<_T, Tower>)
+				_add(m_towers, "Tower", object->getR() * m_tileWidth, object->getR() * m_tileHeight);
+			else if constexpr (std::is_same_v<_T, Enemy>)
+			{
+				if (typeid(*object) == typeid(AirEnemy))
+					_add(m_enemies, "AirEnemy");
+			}
+
+			if (ptr)
+				ptr->setPos({ object->getX() * m_tileWidth, object->getY() * m_tileHeight });
+
+#undef _add
+		}
 
 	private:
 		float                           m_tileWidth;
@@ -67,8 +98,11 @@ namespace TowerDefence
 		std::map<std::string, QPixmap>  m_images;
 		QGraphicsRectItem*              m_currentTile;
 		
-		std::unique_ptr<CastleGraphics> m_castle;
-		std::vector<TowerGraphics>      m_towers;
+		GObjectWithHP<Castle>                    m_castle;
+		std::vector<GObject<Lair>>               m_lairs;
+		std::vector<GObjectWithHP<Lair>>         m_walls;
+		std::vector<GObjectWithAura<Tower>>      m_towers;
+		std::vector<GObjectWithHPAndAura<Enemy>> m_enemies;
 	};
 } // namespace TowerDefence
 

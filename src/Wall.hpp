@@ -17,7 +17,7 @@ namespace TowerDefence
 
 		inline ~Wall() noexcept override = default;
 
-		_NODISCARD inline int getMaxHealth() const noexcept override { return Wall::MAX_HEALTH; }
+		[[nodiscard]] inline int getMaxHealth() const noexcept override { return Wall::MAX_HEALTH; }
 	};
 } // namespace TowerDefence
 

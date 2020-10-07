@@ -101,17 +101,14 @@
     <ClCompile Include="..\src\Landscape.cpp">
       <Filter>Source Files\Map</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\TowerGraphics.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\HP.cpp">
       <Filter>Source Files\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\CastleGraphics.cpp">
-      <Filter>Source Files\Graphics</Filter>
+    <ClCompile Include="..\src\EnemyManager.cpp">
+      <Filter>Source Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\WallGraphics.cpp">
-      <Filter>Source Files\Graphics</Filter>
+    <ClCompile Include="..\src\GraphicsAura.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,16 +172,31 @@
     <ClInclude Include="..\src\Pos.hpp">
       <Filter>Header Files\Map\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\CastleGraphics.hpp">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\TowerGraphics.hpp">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\HP.hpp">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\WallGraphics.hpp">
+    <ClInclude Include="..\src\EnemyManager.hpp">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\AirEnemy.hpp">
+      <Filter>Header Files\Map\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GraphicsObject.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GraphicsObjectWithHP.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ObjectWithHP.hpp">
+      <Filter>Header Files\Map\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GraphicsObjectWithAura.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GraphicsObjectWithHPAndAura.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GraphicsAura.hpp">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
@@ -192,5 +204,8 @@
     <QtMoc Include="..\src\TowerDefence.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

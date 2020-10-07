@@ -7,6 +7,7 @@
 #include "River.hpp"
 #include "Field.hpp"
 #include "Lair.hpp"
+#include "AirEnemy.hpp"
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -21,6 +22,19 @@ namespace detail
 #define loadUInt(name) static_cast<unsigned>(loadInt(name))
 #define loadFloat(name) static_cast<float>(object.value(QString(name)).toDouble())
 #define loadString(name) object.value(QString(name)).toString().toUtf8()
+
+    auto loadLairInfo(const QJsonArray& array, std::shared_ptr<Landscape> landscape)
+    {
+        std::multimap<float, std::shared_ptr<Enemy>> shedule;
+        for (const auto& item : array)
+        {
+            const auto&& object = item.toObject();
+            if (const auto&& type = loadString("type"); type == "Air")
+                shedule.emplace(loadFloat("time"), std::make_shared<AirEnemy>());
+        }
+
+        return std::move(shedule);
+    }
 
     void loadCells(const QJsonArray& array, std::shared_ptr<Landscape> landscape)
     {
@@ -39,16 +53,16 @@ namespace detail
                 auto pos = PosF{ loadFloat("x"), loadFloat("y") };
                 auto cell = landscape->addCell<Field>(pos);
 
-                auto entity = landscape->addEntity<Castle>(loadInt("money"), std::move(pos));
-                std::dynamic_pointer_cast<Field>(cell)->build(std::dynamic_pointer_cast<Building>(entity));
+                auto castle = landscape->addEntity<Castle>(loadInt("money"), std::move(pos));
+                std::dynamic_pointer_cast<Field>(cell)->build(std::dynamic_pointer_cast<Building>(castle));
             }
             else if (type == "Lair")
             {
                 auto pos = PosF{ loadFloat("x"), loadFloat("y") };
                 auto cell = landscape->addCell<Field>(pos);
 
-                auto entity = landscape->addEntity<Lair>(std::move(pos));
-                std::dynamic_pointer_cast<Field>(cell)->build(std::dynamic_pointer_cast<Building>(entity));
+                auto lair = landscape->addEntity<Lair>(std::move(pos), loadLairInfo(object.value(QString("spawn")).toArray(), landscape));
+                std::dynamic_pointer_cast<Field>(cell)->build(std::dynamic_pointer_cast<Building>(lair));
             }
         }
     }

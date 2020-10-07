@@ -8,13 +8,11 @@
 #include "Field.hpp"
 #include "Lair.hpp"
 #include "Tower.hpp"
+#include "Enemy.hpp"
 
-#include <QGraphicsScene>
 #include <QGraphicsLineItem>
-#include <QGraphicsPixmapItem>
 #include <QGraphicsRectItem>
 #include <QDir>
-#include <QPixmap>
 
 namespace TowerDefence
 {
@@ -38,11 +36,6 @@ namespace TowerDefence
 	{
 		m_currentTile = m_scene->addRect(0., 0., m_tileWidth, m_tileHeight, QPen(Qt::green));
 		m_currentTile->setVisible(false);
-	}
-
-	void Graphics::addCastle(std::shared_ptr<Castle> castle)
-	{
-		m_castle = std::make_unique<CastleGraphics>(m_scene, m_images.at("Castle").scaled(m_tileWidth, m_tileHeight), castle);
 	}
 
 	PosF Graphics::getSelectedTilePos() const noexcept
@@ -83,24 +76,26 @@ namespace TowerDefence
 
 				if (field->isBusy())
 					if (typeid(*field->getBuilding()) == typeid(Castle))
-					{
-						addCastle(std::dynamic_pointer_cast<Castle>(field->getBuilding()));
-						m_castle->setPos({ x * m_tileWidth, y * m_tileHeight });
-					}
+						add(std::dynamic_pointer_cast<Castle>(field->getBuilding()));
 					else if (typeid(*field->getBuilding()) == typeid(Lair))
-					{
-						auto pm = m_scene->addPixmap(m_images.at("Lair").scaled(m_tileWidth, m_tileHeight));
-						pm->setPos(1. * x * m_tileWidth, 1. * y * m_tileHeight);
-					}
+						add(std::dynamic_pointer_cast<Lair>(field->getBuilding()));
 			}
 
 		createGrid(landscape->getWidth() * m_tileWidth, landscape->getHeight() * m_tileHeight);
 		createSelectionTile();
 	}
 
+	void Graphics::update()
+	{
+		m_enemies.erase(std::remove_if(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { return enemy.getObject()->isAlive(); }), std::end(m_enemies));
+	}
+
 	void Graphics::draw() const
 	{
-		m_castle->draw();
+		m_castle.draw();
+
+		// std::for_each(std::begin(m_walls), std::end(m_walls), [](const auto& wall) { wall.draw(); });
+		std::for_each(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { enemy.draw(); });
 	}
 
 	void Graphics::setCurrentTilePos(int x, int y)
@@ -117,12 +112,5 @@ namespace TowerDefence
 			m_currentTile->setVisible(true);
 
 		m_currentTile->setPos(x - x % static_cast<int>(m_tileWidth), y - y % static_cast<int>(m_tileHeight));
-	}
-
-	void Graphics::addTower(std::shared_ptr<Tower> tower)
-	{
-		m_towers.emplace_back(m_scene, m_images.at("Tower").scaled(m_tileWidth, m_tileHeight), tower);
-
-		m_towers.back().setPos({ tower->getX() * m_tileWidth, tower->getY() * m_tileHeight });
 	}
 } // namespace TowerDefence

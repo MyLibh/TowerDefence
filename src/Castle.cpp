@@ -22,7 +22,8 @@ namespace TowerDefence
 
 	void Castle::update(const float dt)
 	{
-		m_health += std::ceil(dt * REPAIR_AMOUNT);
+		if (m_health)
+			m_health += std::ceil(dt * REPAIR_AMOUNT);
 		
 		if (m_health > m_props.maxHealth)
 			m_health = m_props.maxHealth;

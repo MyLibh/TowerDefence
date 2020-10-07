@@ -18,7 +18,7 @@ namespace TowerDefence
 
 		inline ~Field() noexcept override = default;
 
-		_NODISCARD inline const auto getBuilding() const noexcept { return m_building; }
+		[[nodiscard]] inline const auto getBuilding() const noexcept { return m_building; }
 
 		inline bool isBusy() const noexcept { return m_building != nullptr; }
 

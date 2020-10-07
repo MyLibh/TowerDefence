@@ -101,7 +101,6 @@
   <ItemGroup>
     <ClCompile Include="..\src\EnemyManager.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
-    <ClCompile Include="..\src\GraphicsAura.cpp" />
     <ClCompile Include="..\src\HP.cpp" />
     <ClCompile Include="..\src\Landscape.cpp" />
     <ClCompile Include="..\src\Lair.cpp" />
@@ -126,11 +125,8 @@
     <ClInclude Include="..\src\Entity.hpp" />
     <ClInclude Include="..\src\Field.hpp" />
     <ClInclude Include="..\src\Graphics.hpp" />
-    <ClInclude Include="..\src\GraphicsAura.hpp" />
     <ClInclude Include="..\src\GraphicsObject.hpp" />
-    <ClInclude Include="..\src\GraphicsObjectWithAura.hpp" />
     <ClInclude Include="..\src\GraphicsObjectWithHP.hpp" />
-    <ClInclude Include="..\src\GraphicsObjectWithHPAndAura.hpp" />
     <ClInclude Include="..\src\HP.hpp" />
     <ClInclude Include="..\src\Landscape.hpp" />
     <ClInclude Include="..\src\Lair.hpp" />

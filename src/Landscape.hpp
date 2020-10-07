@@ -4,6 +4,8 @@
 #include "Castle.hpp"
 #include "Field.hpp"
 #include "Tower.hpp"
+#include "EnemyManager.hpp"
+#include "Lair.hpp"
 
 #include <set>
 #include <memory>
@@ -22,28 +24,29 @@ namespace TowerDefence
 				if (cell->getPos() != pos || typeid(*cell) != typeid(Field))
 					return false;
 
-				return p(std::dynamic_pointer_cast<Field>(cell)); // TODO: check money?
+				return p(std::dynamic_pointer_cast<Field>(cell));
 			}) != std::end(m_cells);
 		}
 
 	public:
-		inline Landscape() noexcept = default;
-
-		inline Landscape(const unsigned width, const unsigned height) noexcept :
+		inline Landscape(const unsigned width, const unsigned height) :
 			m_width(width),
 			m_height(height),
 			m_entities(),
 			m_cells(),
-			m_castle{}
-		{ }
+			m_castle{},
+			m_enemyManager(std::make_shared<EnemyManager>())
+		{
+			Lair::setEnemyManager(m_enemyManager);
+		}
 
-		_NODISCARD inline constexpr auto getWidth() const noexcept { return m_width; }
+		[[nodiscard]] inline constexpr auto getWidth() const noexcept { return m_width; }
 
-		_NODISCARD inline constexpr auto getHeight() const noexcept { return m_height; }
+		[[nodiscard]] inline constexpr auto getHeight() const noexcept { return m_height; }
 
-		_NODISCARD inline const auto& getEntities() const noexcept { return m_entities; }
+		[[nodiscard]] inline const auto& getEntities() const noexcept { return m_entities; }
 
-		_NODISCARD inline const std::shared_ptr<Cell> getCell(const PosF& pos) const noexcept
+		[[nodiscard]] inline const std::shared_ptr<Cell> getCell(const PosF& pos) const noexcept
 		{
 			const auto cell = std::find_if(std::cbegin(m_cells), std::cend(m_cells), [&pos](const auto& el) { return el->getPos() == pos; });
 			if (cell == std::end(m_cells)) [[unlikely]]
@@ -52,9 +55,9 @@ namespace TowerDefence
 			return *cell;
 		}
 
-		_NODISCARD inline const auto& getCells() const noexcept { return m_cells; }
+		[[nodiscard]] inline const auto& getCells() const noexcept { return m_cells; }
 
-		_NODISCARD inline auto getCastle() const noexcept { return m_castle; }
+		[[nodiscard]] inline auto getCastle() const noexcept { return m_castle; }
 
 		void update(const float dt);
 
@@ -63,7 +66,7 @@ namespace TowerDefence
 		{
 			auto& entity = *m_entities.emplace(std::make_shared<_EntityType>(std::forward<_Args>(args)...)).first;
 
-			if _CONSTEXPR_IF(std::is_same_v<_EntityType, Castle>)
+			if constexpr (std::is_same_v<_EntityType, Castle>)
 				m_castle = std::dynamic_pointer_cast<Castle>(entity);
 
 			return entity;
@@ -133,6 +136,7 @@ namespace TowerDefence
 		std::set<std::shared_ptr<Entity>> m_entities;
 		std::set<std::shared_ptr<Cell>>   m_cells;
 		std::shared_ptr<Castle>           m_castle;
+		std::shared_ptr<EnemyManager>     m_enemyManager;
 	};
 } // namespace TowerDefence
 

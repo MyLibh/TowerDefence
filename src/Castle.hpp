@@ -15,10 +15,10 @@ namespace TowerDefence
 	public:
 		inline Castle(const int startMoney, const PosF& pos) :
 			UpgradableBuilding(pos),
-			BreakableBuilding(pos),
+			BreakableBuilding(pos, PropsManager::getCastleProps().maxHealth),
 			Building(pos),
 			m_money(startMoney),
-			m_props(PropsManager::getCastleProps(m_lvl))
+			m_props(PropsManager::getCastleProps())
 		{ }
 
 		inline ~Castle() noexcept override = default;
@@ -29,11 +29,11 @@ namespace TowerDefence
 
 		void update(const float dt) override;
 
-		_NODISCARD inline int getUpgradePrice() const noexcept override { return m_props.price; }
+		[[nodiscard]] inline int getUpgradePrice() const noexcept override { return m_props.price; }
 
-		_NODISCARD inline int getMaxHealth() const noexcept override { return m_props.maxHealth; }
+		[[nodiscard]] inline int getMaxHealth() const noexcept override { return m_props.maxHealth; }
 
-		_NODISCARD inline constexpr auto getMoney() const noexcept { return m_money; }
+		[[nodiscard]] inline constexpr auto getMoney() const noexcept { return m_money; }
 
 		void withdraw(const int amount);
 

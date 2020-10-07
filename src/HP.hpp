@@ -10,14 +10,19 @@ class QGraphicsRectItem;
 
 namespace TowerDefence
 {
-	class HP
+	class HP final
 	{
-	private:
+	public:
 		inline static constexpr auto WIDTH{ 30 };
 		inline static constexpr auto HEIGHT{ 10 };
 
 	public:
-		HP(std::shared_ptr<QGraphicsScene> scene);
+		inline constexpr HP() noexcept :
+			m_back{},
+			m_front{}
+		{ }
+
+		HP(std::shared_ptr<QGraphicsScene> scene, const PosI& size = { HP::WIDTH, HP::HEIGHT });
 
 		void setPos(const PosF& pos);
 

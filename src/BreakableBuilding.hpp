@@ -2,32 +2,19 @@
 #define __BREAKABLE_BUILDING_HPP_INCLUDED__
 
 #include "Building.hpp"
+#include "ObjectWithHP.hpp"
 
 namespace TowerDefence
 {
-	class BreakableBuilding : virtual public Building
+	class BreakableBuilding : virtual public Building, public ObjectWithHP
 	{
 	public:
-		inline BreakableBuilding(const PosF& pos, const int health = 0) noexcept :
+		inline explicit BreakableBuilding(const PosF& pos, const int health = 0) noexcept :
 			Building(pos),
-			m_health(health)
+			ObjectWithHP(health)
 		{ }
 
 		inline virtual ~BreakableBuilding() noexcept override = default;
-
-		_NODISCARD inline constexpr auto getHealth() const noexcept { return m_health; }
-
-		virtual int getMaxHealth() const noexcept = 0;
-
-		void decreaseHealth(const int amount)
-		{
-			m_health -= amount;
-			if (m_health < 0)
-				m_health = 0;
-		}
-
-	protected:
-		int m_health;
 	};
 } // namespace TowerDefence
 

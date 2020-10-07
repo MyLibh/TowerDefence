@@ -14,11 +14,11 @@ namespace TowerDefence
 
 		virtual ~Cell() noexcept = default;
 
-		_NODISCARD inline constexpr auto getX() const noexcept { return m_pos.x; }
+		[[nodiscard]] inline constexpr auto getX() const noexcept { return m_pos.x; }
 
-		_NODISCARD inline constexpr auto getY() const noexcept { return m_pos.y; }
+		[[nodiscard]] inline constexpr auto getY() const noexcept { return m_pos.y; }
 
-		_NODISCARD inline constexpr auto getPos() const noexcept { return m_pos; }
+		[[nodiscard]] inline constexpr auto getPos() const noexcept { return m_pos; }
 
 	protected:
 		PosF m_pos;

@@ -8,23 +8,29 @@
 
 namespace TowerDefence
 {
-	HP::HP(std::shared_ptr<QGraphicsScene> scene) :
-		m_back(scene->addRect(0., 0., HP::WIDTH, HP::HEIGHT, QPen(Qt::black), Qt::transparent)),
-		m_front(scene->addRect(0., 0., HP::WIDTH, HP::HEIGHT, QPen(Qt::transparent), Qt::green))
+	HP::HP(std::shared_ptr<QGraphicsScene> scene, const PosI& size /* = { HP::WIDTH, HP::HEIGHT } */) :
+		m_back(scene->addRect(0., 0., size.x, size.y, QPen(Qt::black), Qt::transparent)),
+		m_front(scene->addRect(0., 0., size.x, size.y, QPen(Qt::transparent), Qt::green))
 	{ }
 
 	void HP::setPos(const PosF & pos)
 	{
 		if (m_back && m_front)
 		{
-			m_back->setPos(pos.x, pos.y);
-			m_front->setPos(pos.x, pos.y);
+			const QPointF newPos{ pos.x - m_back->rect().width() / 2, pos.y };
+			m_back->setPos(newPos);
+			m_front->setPos(newPos);
 		}
 	}
 
 	void HP::setHP(const float percent)
 	{
 		if (m_front)
-			;
+		{
+			auto rect = m_front->rect();
+			rect.setWidth(rect.width() * percent);
+
+			m_front->setRect(rect);
+		}
 	}
 } // namespace TowerDefence

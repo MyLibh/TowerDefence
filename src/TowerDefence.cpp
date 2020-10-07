@@ -74,7 +74,7 @@ namespace TowerDefence
                 exec(&Landscape::build);
 
                 if (auto field = std::dynamic_pointer_cast<Field>(m_landscape->getCell(m_graphics->getSelectedTilePos())); field && field->isBusy())
-                    m_graphics->addTower(std::dynamic_pointer_cast<Tower>(field->getBuilding()));
+                    m_graphics->add(std::dynamic_pointer_cast<Tower>(field->getBuilding()));
             });
         QObject::connect(m_ui->upgradeButton, &QPushButton::clicked, [=]() { exec(&Landscape::upgrade); });
         QObject::connect(m_ui->repairButton,  &QPushButton::clicked, [=]() { exec(&Landscape::repair); });
@@ -136,10 +136,14 @@ namespace TowerDefence
     {
         m_landscape->update(1.f);
     
+        m_graphics->update();
         m_graphics->draw();
 
         updateMoneyLabel(m_landscape->getCastle()->getMoney());
 
         updateButtons();
+
+        if (!m_landscape->getCastle()->isAlive())
+            QMainWindow::close();
     }
 } // namespace TowerDefence

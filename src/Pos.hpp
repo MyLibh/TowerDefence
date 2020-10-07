@@ -19,7 +19,7 @@ namespace TowerDefence
 	};
 
 	using PosF = Pos<float>;
-
+	using PosI = Pos<int>;
 } // namespace TowerDefence
 
 #endif /* !__POS_HPP_INCLUDED__ */

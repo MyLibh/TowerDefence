@@ -10,7 +10,7 @@ namespace TowerDefence
 	void Lair::spawn(std::shared_ptr<Enemy> enemy)
 	{
 		enemy->setPos(m_pos);
-		sEnemyManager->add(enemy);
+		sEnemyManager->add(enemy, this);
 	}
 
 	void Lair::update(float dt)

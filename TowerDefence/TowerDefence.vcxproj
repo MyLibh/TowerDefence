@@ -140,6 +140,8 @@
     <ClInclude Include="..\src\Pos.hpp" />
     <ClInclude Include="..\src\PropsManager.hpp" />
     <ClInclude Include="..\src\River.hpp" />
+    <ClInclude Include="..\src\Route.hpp" />
+    <ClInclude Include="..\src\Routes.hpp" />
     <ClInclude Include="..\src\Tower.hpp" />
     <ClInclude Include="..\src\TowerProps.hpp" />
     <ClInclude Include="..\src\UpgradableBuilding.hpp" />

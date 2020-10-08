@@ -31,9 +31,11 @@ namespace TowerDefence
 			}
 		}
 
-		inline void draw() const
+		inline void update(const float dx, const float dy) noexcept override
 		{
 			m_hp.setHP(static_cast<float>(m_object->getHealth()) / m_object->getMaxHealth());
+
+			GObject<_T>::update(dx, dy);
 		}
 
 	protected:

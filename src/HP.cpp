@@ -13,7 +13,7 @@ namespace TowerDefence
 		m_front(scene->addRect(0., 0., size.x, size.y, QPen(Qt::transparent), Qt::green))
 	{ }
 
-	void HP::setPos(const PosF & pos)
+	void HP::setPos(const PosF & pos) noexcept
 	{
 		if (m_back && m_front)
 		{
@@ -23,7 +23,7 @@ namespace TowerDefence
 		}
 	}
 
-	void HP::setHP(const float percent)
+	void HP::setHP(const float percent) noexcept
 	{
 		if (m_front)
 		{

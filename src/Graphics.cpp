@@ -7,8 +7,6 @@
 #include "River.hpp"
 #include "Field.hpp"
 #include "Lair.hpp"
-#include "Tower.hpp"
-#include "Enemy.hpp"
 
 #include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
@@ -87,15 +85,12 @@ namespace TowerDefence
 
 	void Graphics::update()
 	{
+		m_castle.update(m_tileWidth, m_tileHeight);
+
 		m_enemies.erase(std::remove_if(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { return enemy.getObject()->isAlive(); }), std::end(m_enemies));
-	}
 
-	void Graphics::draw() const
-	{
-		m_castle.draw();
-
-		// std::for_each(std::begin(m_walls), std::end(m_walls), [](const auto& wall) { wall.draw(); });
-		std::for_each(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { enemy.draw(); });
+		// std::for_each(std::begin(m_walls), std::end(m_walls), [](auto& wall) { wall.update(); });
+		std::for_each(std::begin(m_enemies), std::end(m_enemies), [&](auto& enemy) { enemy.update(m_tileWidth, m_tileHeight); });
 	}
 
 	void Graphics::setCurrentTilePos(int x, int y)

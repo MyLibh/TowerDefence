@@ -56,7 +56,7 @@ namespace TowerDefence
     private:
         std::unique_ptr<Ui::TowerDefenceClass> m_ui;
         std::unique_ptr<QTimer>                m_timer;
-        std::unique_ptr<Graphics>              m_graphics;
+        std::shared_ptr<Graphics>              m_graphics;
         std::shared_ptr<Landscape>             m_landscape;
     };
 } // namespace TowerDefense

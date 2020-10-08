@@ -29,6 +29,8 @@ namespace TowerDefence
 			GObjectWithHP<_T>::setPos(pos);
 			GObjectWithAura<_T>::setPos(pos);
 		}
+
+		inline void update(const float dx, const float dy) noexcept override { GObjectWithHP<_T>::update(dx, dy); }
 	};
 
 	template<typename _T>

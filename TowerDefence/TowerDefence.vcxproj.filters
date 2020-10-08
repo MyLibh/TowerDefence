@@ -108,7 +108,7 @@
       <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="..\src\GraphicsAura.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +198,12 @@
     </ClInclude>
     <ClInclude Include="..\src\GraphicsAura.hpp">
       <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Route.hpp">
+      <Filter>Header Files\Map\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Routes.hpp">
+      <Filter>Header Files\Map\Utility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

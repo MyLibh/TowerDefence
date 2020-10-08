@@ -2,6 +2,11 @@
 #define __GRAPHICS_HPP_INCLUDED__
 
 #include "GraphicsObjectWithHPAndAura.hpp"
+#include "AirEnemy.hpp"
+#include "Castle.hpp"
+#include "Lair.hpp"
+#include "Wall.hpp"
+#include "Tower.hpp"
 
 #include <vector>
 #include <map>
@@ -12,11 +17,6 @@ class QGraphicsLineItem;
 namespace TowerDefence
 {
 	class Landscape;
-	class Castle;
-	class Lair;
-	class Wall;
-	class Tower;
-	class Enemy;
 
 	class Graphics
 	{
@@ -60,8 +60,6 @@ namespace TowerDefence
 
 		void update();
 
-		void draw() const;
-
 		void setCurrentTilePos(int x, int y);
 
 		template<typename _T>
@@ -81,7 +79,7 @@ namespace TowerDefence
 			else if constexpr (std::is_same_v<_T, Enemy>)
 			{
 				if (typeid(*object) == typeid(AirEnemy))
-					_add(m_enemies, "AirEnemy");
+					ptr = &m_enemies.emplace_back(m_scene, m_images.at("AirEnemy"), object, 0, 0);
 			}
 
 			if (ptr)
@@ -100,7 +98,7 @@ namespace TowerDefence
 		
 		GObjectWithHP<Castle>                    m_castle;
 		std::vector<GObject<Lair>>               m_lairs;
-		std::vector<GObjectWithHP<Lair>>         m_walls;
+		std::vector<GObjectWithHP<Wall>>         m_walls;
 		std::vector<GObjectWithAura<Tower>>      m_towers;
 		std::vector<GObjectWithHPAndAura<Enemy>> m_enemies;
 	};

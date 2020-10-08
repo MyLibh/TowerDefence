@@ -24,9 +24,9 @@ namespace TowerDefence
 
 		HP(std::shared_ptr<QGraphicsScene> scene, const PosI& size = { HP::WIDTH, HP::HEIGHT });
 
-		void setPos(const PosF& pos);
+		void setPos(const PosF& pos) noexcept;
 
-		void setHP(const float percent);
+		void setHP(const float percent) noexcept;
 
 	private:
 		QGraphicsRectItem* m_back;

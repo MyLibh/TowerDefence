@@ -111,7 +111,7 @@ namespace TowerDefence
         QMainWindow(parent),
         m_ui(std::make_unique<Ui::TowerDefenceClass>()),
         m_timer(std::make_unique<QTimer>(this)),
-        m_graphics(std::make_unique<Graphics>())
+        m_graphics(std::make_shared<Graphics>())
     {
         m_ui->setupUi(this);
 
@@ -128,16 +128,20 @@ namespace TowerDefence
 
         m_graphics->setTileSize(m_ui->canvas->width() * 1. / m_landscape->getWidth(), m_ui->canvas->height() * 1. / m_landscape->getHeight());
         m_graphics->createMap(m_landscape);
+
+        EnemyManager::setGraphics(m_graphics);
     }
 
-    TowerDefence::~TowerDefence() noexcept = default;
+    TowerDefence::~TowerDefence() noexcept
+    {
+        EnemyManager::setGraphics(nullptr);
+    }
 
     void TowerDefence::update()
     {
         m_landscape->update(1.f);
     
         m_graphics->update();
-        m_graphics->draw();
 
         updateMoneyLabel(m_landscape->getCastle()->getMoney());
 

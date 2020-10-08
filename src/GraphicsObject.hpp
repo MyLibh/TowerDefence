@@ -35,6 +35,12 @@ namespace TowerDefence
 				m_item->setPos(pos.x, pos.y);
 		}
 
+		inline virtual void update(const float dx, const float dy) noexcept 
+		{
+			auto [x, y] = m_object->getPos();
+			setPos({ x * dx, y * dy });
+		}
+
 	protected:
 		QGraphicsPixmapItem* m_item;
 		std::shared_ptr<_T>  m_object;

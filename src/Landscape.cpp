@@ -7,7 +7,8 @@ namespace TowerDefence
 {
 	void Landscape::update(const float dt)
 	{
-		for (auto entity : m_entities)
-			entity->update(dt);
+		std::for_each(std::begin(m_entities), std::end(m_entities), [dt](auto& entity) { entity->update(dt); });
+
+		m_enemyManager->update(dt);
 	}
 }

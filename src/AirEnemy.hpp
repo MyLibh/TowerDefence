@@ -12,8 +12,6 @@ namespace TowerDefence
 
 		inline ~AirEnemy() noexcept override = default;
 
-		void update(const float dt) override {}
-
 		inline int getMaxHealth() const noexcept override { return 50; }
 	};
 } // namespace TowerDefence

@@ -21,7 +21,7 @@ namespace TowerDefence
 
 		GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float rx, const float ry);
 
-		void setPos(const PosF& pos);
+		void setPos(const PosF& pos) noexcept;
 
 	private:
 		float m_rx;

@@ -14,7 +14,7 @@ namespace TowerDefence
 		m_item(scene->addEllipse(0., 0., 2. * m_rx, 2. * m_ry, QPen(Qt::black)))
 	{ }
 
-	void GraphicsAura::setPos(const PosF& pos)
+	void GraphicsAura::setPos(const PosF& pos) noexcept
 	{
 		if (m_item)
 		{

@@ -15,7 +15,13 @@ namespace TowerDefence
 
 		inline virtual ~Enemy() noexcept override = default;
 
-		// void setRoute(const Route& route);
+		void update(const float dt) override final { m_pos.x += dt * m_v.x - 1; m_pos.y += dt * m_v.y; }
+
+		inline void setRoute(std::shared_ptr<Route> route) noexcept { m_route = std::move(route); }
+
+	protected:
+		std::shared_ptr<Route> m_route;
+		PosF m_v;
 	};
 } // namespace TowerDefence
 

@@ -59,6 +59,8 @@ namespace TowerDefence
 
 		[[nodiscard]] inline auto getCastle() const noexcept { return m_castle; }
 
+		[[nodiscard]] inline auto getEnemyManager() const noexcept { return m_enemyManager; }
+
 		void update(const float dt);
 
 		template<typename _EntityType, typename... _Args, typename = std::enable_if_t<std::is_base_of_v<Entity, _EntityType>>>
@@ -67,7 +69,11 @@ namespace TowerDefence
 			auto& entity = *m_entities.emplace(std::make_shared<_EntityType>(std::forward<_Args>(args)...)).first;
 
 			if constexpr (std::is_same_v<_EntityType, Castle>)
+			{
 				m_castle = std::dynamic_pointer_cast<Castle>(entity);
+
+				m_enemyManager->setCastlePos(m_castle->getPos());
+			}
 
 			return entity;
 		}

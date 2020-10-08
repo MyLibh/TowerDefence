@@ -37,6 +37,7 @@ namespace TowerDefence
 		void spawn();
 
 	private:
+		int                                          m_id;
 		float                                        m_timer;
 		std::multimap<float, std::shared_ptr<Enemy>> m_shedule;
 	};

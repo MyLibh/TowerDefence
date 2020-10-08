@@ -8,5 +8,6 @@
         <file>assets/Grass.jpg</file>
         <file>assets/Mountain.jpg</file>
         <file>assets/Tower.png</file>
+        <file>assets/AirEnemy.png</file>
     </qresource>
 </RCC>

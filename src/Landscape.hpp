@@ -15,6 +15,10 @@ namespace TowerDefence
 	class Landscape
 	{
 	private:
+		template<typename _T>
+		using matrix_t = std::vector<std::vector<_T>>;
+
+	private:
 		template<typename _Pred>
 		inline bool canDoHere(const PosF& pos, _Pred pred) const
 		{
@@ -60,6 +64,8 @@ namespace TowerDefence
 		[[nodiscard]] inline auto getCastle() const noexcept { return m_castle; }
 
 		[[nodiscard]] inline auto getEnemyManager() const noexcept { return m_enemyManager; }
+
+		inline bool isInField(const PosF& pos) const noexcept { return pos.x >= 0.f && pos.x < m_width&& pos.y >= 0.f && pos.y <= m_height; }
 
 		void update(const float dt);
 

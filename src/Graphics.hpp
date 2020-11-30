@@ -3,6 +3,8 @@
 
 #include "GraphicsObjectWithHPAndAura.hpp"
 #include "AirEnemy.hpp"
+#include "HeavyEnemy.hpp"
+#include "LightEnemy.hpp"
 #include "Castle.hpp"
 #include "Lair.hpp"
 #include "Wall.hpp"
@@ -79,7 +81,11 @@ namespace TowerDefence
 			else if constexpr (std::is_same_v<_T, Enemy>)
 			{
 				if (typeid(*object) == typeid(AirEnemy))
-					ptr = &m_enemies.emplace_back(m_scene, m_images.at("AirEnemy"), object, 0, 0);
+					_add(m_enemies, "AirEnemy", 0, 0);
+				else if (typeid(*object) == typeid(HeavyEnemy))
+					_add(m_enemies, "HeavyEnemy", 0, 0);
+				else if (typeid(*object) == typeid(LightEnemy))
+					_add(m_enemies, "LightEnemy", 0, 0);
 			}
 
 			if (ptr)

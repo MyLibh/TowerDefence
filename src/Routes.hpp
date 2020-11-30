@@ -13,6 +13,13 @@ namespace TowerDefence
 		std::shared_ptr<Route> heavy;
 		std::shared_ptr<Route> air;
 	};
+
+	enum class RouteType
+	{
+		Air,
+		Heavy,
+		Light
+	};
 } // namespace TowerDefence
 
 #endif /* !__ROUTES_hPP_INCLUDED__*/

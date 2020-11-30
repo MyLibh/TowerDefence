@@ -26,7 +26,7 @@ namespace TowerDefence
         Q_OBJECT
 
     private:
-        inline static constexpr auto TIMER_INTERVAL{ 1s };
+        inline static constexpr auto TIMER_INTERVAL{ 100ms };
         inline static constexpr auto BUTTON_SIZE{ 100 };
 
     private:

@@ -10,7 +10,7 @@ namespace TowerDefence
 	class Route
 	{
 	public:
-		Route() = delete;
+		Route() = default;
 
 		inline Route(const PosF& to, std::queue<PosF> path) noexcept :
 			m_to(to),
@@ -35,10 +35,12 @@ namespace TowerDefence
 			if (m_path.empty())
 				return m_to;
 
-			return m_to;
+			return m_path.front();
 		}
 
 		[[nodiscard]] inline constexpr auto to() const noexcept { m_to; }
+
+		inline bool isFinished() const noexcept { return m_path.empty(); }
 
 		operator bool() const noexcept { return !m_path.empty(); }
 

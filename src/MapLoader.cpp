@@ -8,6 +8,9 @@
 #include "Field.hpp"
 #include "Lair.hpp"
 #include "AirEnemy.hpp"
+#include "HeavyEnemy.hpp"
+#include "LightEnemy.hpp"
+#include "PropsManager.hpp"
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -30,7 +33,11 @@ namespace detail
         {
             const auto&& object = item.toObject();
             if (const auto&& type = loadString("type"); type == "Air")
-                shedule.emplace(loadFloat("time"), std::make_shared<AirEnemy>());
+                shedule.emplace(loadFloat("time"), std::make_shared<AirEnemy>(PropsManager::getEnemyProps("air")));
+            else if (type == "Heavy")
+                shedule.emplace(loadFloat("time"), std::make_shared<HeavyEnemy>(PropsManager::getEnemyProps("heavy")));
+            else if (type == "Light")
+                shedule.emplace(loadFloat("time"), std::make_shared<LightEnemy>(PropsManager::getEnemyProps("light")));
         }
 
         return std::move(shedule);

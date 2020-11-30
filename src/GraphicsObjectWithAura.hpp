@@ -15,7 +15,7 @@ namespace TowerDefence
 		{ }
 
 		inline GraphicsObjectWithAura(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const float rx, const float ry) :
-			GraphicsObject(scene, pixmap, object),
+			GObject<_T>(scene, pixmap, object),
 			m_aura(scene, rx, ry)
 		{ }
 
@@ -23,11 +23,11 @@ namespace TowerDefence
 
 		inline virtual void setPos(const PosF& pos) noexcept override
 		{
-			if (m_item)
+			if (this->m_item)
 			{
-				m_item->setPos(pos.x, pos.y);
+				this->m_item->setPos(pos.x, pos.y);
 
-				m_aura.setPos({ pos.x + static_cast<float>(m_item->boundingRect().width() / 2), pos.y });
+				m_aura.setPos({ pos.x + static_cast<float>(this->m_item->boundingRect().width() / 2), pos.y });
 			}
 		}
 

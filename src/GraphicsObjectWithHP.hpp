@@ -15,7 +15,7 @@ namespace TowerDefence
 		{ }
 
 		inline GraphicsObjectWithHP(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
-			GraphicsObject(scene, pixmap, object),
+			GObject<_T>(scene, pixmap, object),
 			m_hp(scene, size)
 		{ }
 
@@ -23,17 +23,17 @@ namespace TowerDefence
 
 		inline virtual void setPos(const PosF& pos) noexcept override
 		{
-			if (m_item)
+			if (this->m_item)
 			{
-				m_item->setPos(pos.x, pos.y);
+				this->m_item->setPos(pos.x, pos.y);
 
-				m_hp.setPos({ pos.x + static_cast<float>(m_item->boundingRect().width() / 2), pos.y });
+				m_hp.setPos({ pos.x + static_cast<float>(this->m_item->boundingRect().width() / 2), pos.y });
 			}
 		}
 
 		inline void update(const float dx, const float dy) noexcept override
 		{
-			m_hp.setHP(static_cast<float>(m_object->getHealth()) / m_object->getMaxHealth());
+			m_hp.setHP(static_cast<float>(this->m_object->getHealth()) / this->m_object->getMaxHealth());
 
 			GObject<_T>::update(dx, dy);
 		}

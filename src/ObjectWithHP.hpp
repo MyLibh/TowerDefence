@@ -1,6 +1,8 @@
 #ifndef __OBJECT_WITH_HP_HPP_INCLUDED__
 #define __OBJECT_WITH_HP_HPP_INCLUDED__
 
+#include <algorithm>
+
 namespace TowerDefence
 {
 	class ObjectWithHP
@@ -18,12 +20,9 @@ namespace TowerDefence
 
 		virtual int getMaxHealth() const noexcept = 0;
 
-		void decreaseHealth(const int amount)
-		{
-			m_health -= amount;
-			if (m_health < 0)
-				m_health = 0;
-		}
+		void decreaseHealth(const int amount) { m_health = std::max(0, m_health - amount); }
+
+		void increaseHealth(const int amount) { m_health = std::min(m_health + amount, getMaxHealth()); }
 
 	protected:
 		int m_health;

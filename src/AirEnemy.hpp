@@ -8,7 +8,9 @@ namespace TowerDefence
 	class AirEnemy : public Enemy
 	{
 	public:
-		inline AirEnemy() noexcept = default;
+		inline AirEnemy(std::shared_ptr<EnemyProps> props) noexcept :
+			Enemy(props)
+		{}
 
 		inline ~AirEnemy() noexcept override = default;
 

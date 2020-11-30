@@ -14,17 +14,21 @@ namespace TowerDefence
 	class Graphics;
 	class Castle;
 	class Lair;
+	class Landscape;
 
-	class EnemyManager
+	class EnemyManager : std::enable_shared_from_this<EnemyManager>
 	{
 	private:
 		inline static std::shared_ptr<Graphics> sGraphics;
-
+		inline static std::shared_ptr<Landscape> sLandscape;
+		
 	public:
 		inline static void setGraphics(std::shared_ptr<Graphics> graphics) noexcept { sGraphics = std::move(graphics); }
 
+		inline static void setLandscape(std::shared_ptr<Landscape> landscape) noexcept { sLandscape = std::move(landscape); }
+
 	private:
-		std::shared_ptr<Route> createRoute(const PosF& from);
+		std::shared_ptr<Route> createRoute(const PosF& from, RouteType routeType);
 
 		void createRoutes(const Lair* lair);
 
@@ -35,11 +39,10 @@ namespace TowerDefence
 	public:
 		inline explicit EnemyManager() noexcept :
 			m_enemies(),
-			m_castlePos(),
-			m_currentRoute()
+			m_castlePos()
 		{ }
 
-		[[nodiscard]] const auto getCurrentRoute() const noexcept { return m_currentRoute; }
+		[[nodiscard]] std::vector<std::shared_ptr<Enemy>> getEnemiesAround(const PosF& pos, const float r) const;
 
 		void setCastlePos(const PosF& castlePos)
 		{
@@ -56,7 +59,6 @@ namespace TowerDefence
 	private:
 		std::vector<std::shared_ptr<Enemy>> m_enemies;
 		PosF                                m_castlePos;
-		std::shared_ptr<Route>              m_currentRoute;
 		std::map<const Lair*, Routes>       m_routes;
 	};
 } // namespace TowerDefence

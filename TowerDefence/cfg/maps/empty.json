@@ -80,11 +80,7 @@
          "y": 2,
          "spawn":
          [
-            { "type": "Air", "time": 1 },
-            { "type": "Air", "time": 2 },
-            { "type": "Air", "time": 3 },
-            { "type": "Air", "time": 4 },
-            { "type": "Air", "time": 6 }
+            { "type": "Air", "time": 1 }
          ]
       },
       {

@@ -64,6 +64,15 @@
     <Filter Include="Header Files\Map\Utility">
       <UniqueIdentifier>{83dbf75e-e019-4fba-969d-b1707bdec9b5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Map\Objects\Auras">
+      <UniqueIdentifier>{fc169367-f862-443e-a906-9dcba796c302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Auras">
+      <UniqueIdentifier>{43603f66-ba80-408e-9665-4231ecfd1e58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Enemies">
+      <UniqueIdentifier>{2a69e087-d8eb-4532-8b9f-68dceabfbb73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="TowerDefence.qrc">
@@ -109,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="..\src\GraphicsAura.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Aura.cpp">
+      <Filter>Source Files\Auras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\HealingAura.cpp">
+      <Filter>Source Files\Auras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Enemy.cpp">
+      <Filter>Source Files\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +222,27 @@
     </ClInclude>
     <ClInclude Include="..\src\Routes.hpp">
       <Filter>Header Files\Map\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Aura.hpp">
+      <Filter>Header Files\Map\Objects\Auras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\LightEnemy.hpp">
+      <Filter>Header Files\Map\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\HealingAura.hpp">
+      <Filter>Header Files\Map\Objects\Auras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MaxHealthAura.hpp">
+      <Filter>Header Files\Map\Objects\Auras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SpeedAura.hpp">
+      <Filter>Header Files\Map\Objects\Auras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\HeavyEnemy.hpp">
+      <Filter>Header Files\Map\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EnemyProps.hpp">
+      <Filter>Header Files\Map\Objects\Props</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

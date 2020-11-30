@@ -22,7 +22,11 @@ namespace TowerDefence
 
 		void decreaseHealth(const int amount) { m_health = std::max(0, m_health - amount); }
 
-		void increaseHealth(const int amount) { m_health = std::min(m_health + amount, getMaxHealth()); }
+		void increaseHealth(const int amount)
+		{
+			if (m_health)
+				m_health = std::min(m_health + amount, getMaxHealth());
+		}
 
 	protected:
 		int m_health;

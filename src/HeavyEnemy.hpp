@@ -13,8 +13,6 @@ namespace TowerDefence
 		{}
 
 		inline ~HeavyEnemy() noexcept override = default;
-
-		inline int getMaxHealth() const noexcept override { return 50; }
 	};
 } // namespace TowerDefence
 

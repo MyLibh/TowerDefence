@@ -1,18 +1,20 @@
 #ifndef __WALL_HPP_INCLUDED__
 #define __WALL_HPP_INCLUDED__
 
-#include "BreakableBuilding.hpp"
+#include "Building.hpp"
+#include "ObjectWithHP.hpp"
 
 namespace TowerDefence
 {
-	class Wall final : public BreakableBuilding
+	class Wall final : public Building, public ObjectWithHP
 	{
 	private:
 		inline static constexpr auto MAX_HEALTH{ 100 };
 
 	public:
 		inline Wall(const PosF& pos) noexcept :
-			BreakableBuilding(pos)
+			Building(pos),
+			ObjectWithHP(Wall::MAX_HEALTH)
 		{ }
 
 		inline ~Wall() noexcept override = default;

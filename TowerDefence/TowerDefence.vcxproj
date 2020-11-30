@@ -120,7 +120,6 @@
   <ItemGroup>
     <ClInclude Include="..\src\AirEnemy.hpp" />
     <ClInclude Include="..\src\Aura.hpp" />
-    <ClInclude Include="..\src\BreakableBuilding.hpp" />
     <ClInclude Include="..\src\Building.hpp" />
     <ClInclude Include="..\src\Castle.hpp" />
     <ClInclude Include="..\src\CastleProps.hpp" />
@@ -160,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

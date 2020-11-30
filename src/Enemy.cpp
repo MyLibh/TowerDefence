@@ -1,5 +1,7 @@
 #include "Enemy.hpp"
 #include "Aura.hpp"
+#include "EnemyManager.hpp"
+#include "Castle.hpp"
 
 #include <algorithm>
 
@@ -7,6 +9,8 @@ namespace TowerDefence
 {
 	void Enemy::attack()
 	{
+		if (sEnemyManager && sEnemyManager->getCastle())
+			sEnemyManager->getCastle()->decreaseHealth(m_props->damage);
 	}
 
 	void Enemy::move(const float dt)
@@ -52,14 +56,14 @@ namespace TowerDefence
 
 		accumulator += dt;
 
-		if (m_route && m_route.isFinished())
-			attack();
-		else
+		if (m_route && !m_route.isFinished())
 			move(dt);
-
-		if (accumulator >= 1.f)
+		else if (accumulator >= 1.f)
 		{
 			accumulator -= 1.f;
+
+			if (m_route.isFinished())
+				attack();
 
 			regenerate();
 

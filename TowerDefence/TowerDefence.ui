@@ -43,7 +43,17 @@
      </sizepolicy>
     </property>
     <property name="text">
-     <string>Build</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="TowerDefence.qrc">
+      <normaloff>:/assets/buttons/Build.png</normaloff>:/assets/buttons/Build.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="upgradeButton">

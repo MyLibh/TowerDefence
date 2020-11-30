@@ -11,9 +11,16 @@
 
 namespace TowerDefence
 {
+	class EnemyManager;
 	class Aura;
 	class Enemy : public Entity, public ObjectWithHP
 	{
+	private:
+		inline static std::shared_ptr<EnemyManager> sEnemyManager;
+
+	public:
+		inline static void setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept { sEnemyManager = std::move(enemyManager); }
+
 	private:
 		void attack();
 
@@ -25,10 +32,13 @@ namespace TowerDefence
 
 	public:
 		inline Enemy(std::shared_ptr<EnemyProps> props) noexcept :
+			ObjectWithHP(props->maxHealth),
 			m_props(std::move(props))
 		{}
 
 		inline virtual ~Enemy() noexcept override = default;
+
+		inline int getMaxHealth() const noexcept final { return m_props->maxHealth; }
 
 		void update(const float dt) override final;
 

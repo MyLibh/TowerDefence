@@ -6,6 +6,7 @@
 #include "Tower.hpp"
 #include "EnemyManager.hpp"
 #include "Lair.hpp"
+#include "Enemy.hpp"
 
 #include <set>
 #include <memory>
@@ -42,6 +43,13 @@ namespace TowerDefence
 			m_enemyManager(std::make_shared<EnemyManager>())
 		{
 			Lair::setEnemyManager(m_enemyManager);
+			Enemy::setEnemyManager(m_enemyManager);
+		}
+
+		~Landscape()
+		{
+			Lair::setEnemyManager(nullptr);
+			Enemy::setEnemyManager(nullptr);
 		}
 
 		[[nodiscard]] inline constexpr auto getWidth() const noexcept { return m_width; }
@@ -78,7 +86,7 @@ namespace TowerDefence
 			{
 				m_castle = std::dynamic_pointer_cast<Castle>(entity);
 
-				m_enemyManager->setCastlePos(m_castle->getPos());
+				m_enemyManager->setCastle(m_castle);
 			}
 
 			return entity;

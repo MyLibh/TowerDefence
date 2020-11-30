@@ -148,9 +148,6 @@
     <ClInclude Include="..\src\UpgradableBuilding.hpp">
       <Filter>Header Files\Map\Objects\Buildings</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\BreakableBuilding.hpp">
-      <Filter>Header Files\Map\Objects\Buildings</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\CastleProps.hpp">
       <Filter>Header Files\Map\Objects\Props</Filter>
     </ClInclude>
@@ -252,5 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

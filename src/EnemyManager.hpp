@@ -37,16 +37,13 @@ namespace TowerDefence
 		void updateExistingRoutes();
 
 	public:
-		inline explicit EnemyManager() noexcept :
-			m_enemies(),
-			m_castlePos()
-		{ }
-
 		[[nodiscard]] std::vector<std::shared_ptr<Enemy>> getEnemiesAround(const PosF& pos, const float r) const;
 
-		void setCastlePos(const PosF& castlePos)
+		[[nodiscard]] inline auto getCastle() const noexcept { return m_castle; }
+
+		void setCastle(std::shared_ptr<Castle> castle)
 		{
-			m_castlePos = castlePos;
+			m_castle = std::move(castle);
 
 			updateRoutes();
 			updateExistingRoutes();
@@ -57,8 +54,8 @@ namespace TowerDefence
 		void add(std::shared_ptr<Enemy> enemy, const Lair* lairId);
 		
 	private:
+		std::shared_ptr<Castle>             m_castle;
 		std::vector<std::shared_ptr<Enemy>> m_enemies;
-		PosF                                m_castlePos;
 		std::map<const Lair*, Routes>       m_routes;
 	};
 } // namespace TowerDefence

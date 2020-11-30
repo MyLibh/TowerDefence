@@ -11,6 +11,7 @@
 #include "Landscape.hpp"
 #include "Mountain.hpp"
 #include "PropsManager.hpp"
+#include "Castle.hpp"
 
 #include <algorithm>
 
@@ -34,6 +35,8 @@ namespace TowerDefence
 {
 	std::shared_ptr<Route> EnemyManager::createRoute(const PosF& from, RouteType routeType)
 	{
+		PosF to = m_castle ? m_castle->getPos() : from;
+
 		std::map<PosF, bool> used;
 		std::map<PosF, PosF> prev;
 		std::queue<PosF>     queue;
@@ -70,10 +73,10 @@ namespace TowerDefence
 			tryAdd(cur, { cur.x    , cur.y - 1 }); // above
 		}
 
-		if (prev.find(m_castlePos) == std::end(prev))
+		if (prev.find(to) == std::end(prev))
 			return { };
 
-		PosF cur = m_castlePos;
+		PosF cur = to;
 		std::vector<PosF> revPath;
 		while (prev.at(cur) != PosF{ -1, -1 })
 		{
@@ -85,8 +88,7 @@ namespace TowerDefence
 		for (auto it = std::rbegin(revPath); it != std::rend(revPath); ++it)
 			path.push(*it);
 
-		return std::make_shared<Route>(m_castlePos, std::move(path));
-		return nullptr;
+		return std::make_shared<Route>(to, std::move(path));
 	}
 	
 	void EnemyManager::createRoutes(const Lair* lair)

@@ -2,12 +2,12 @@
 #define __CASTLE_HPP_INCLUDED__
 
 #include "UpgradableBuilding.hpp"
-#include "BreakableBuilding.hpp"
+#include "ObjectWithHP.hpp"
 #include "PropsManager.hpp"
 
 namespace TowerDefence
 {
-	class Castle final : public UpgradableBuilding, public BreakableBuilding
+	class Castle final : public UpgradableBuilding, public ObjectWithHP
 	{
 	private:
 		inline static constexpr auto REPAIR_AMOUNT{ 1 };
@@ -15,7 +15,7 @@ namespace TowerDefence
 	public:
 		inline Castle(const int startMoney, const PosF& pos) :
 			UpgradableBuilding(pos),
-			BreakableBuilding(pos, PropsManager::getCastleProps().maxHealth),
+			ObjectWithHP(PropsManager::getCastleProps().maxHealth),
 			Building(pos),
 			m_money(startMoney),
 			m_props(PropsManager::getCastleProps())

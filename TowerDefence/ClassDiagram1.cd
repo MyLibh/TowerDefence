@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ui::TowerDefenceClass" Collapsed="true">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>x64\Debug\uic\ui_TowerDefence.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Graphics" Collapsed="true">
+    <Position X="18" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABHAAAAAAAAACAAAAokAAgBgGAAIAQAAAAEgAgAmAAE=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Graphics.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Landscape" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAEAAEAQCgCAAEAJAgEAIIBAIIAQQACAEIABAACEAgA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Landscape.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::TowerDefence" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAAAAAAAAAAAAAABBICABAAAQAAEgAAgACAgEAAQ=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\TowerDefence.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::MapLoader" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\MapLoader.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Entity" Collapsed="true">
+    <Position X="9.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAACAAAAAAAAAAAAAAAAQACAIAAAAAAAAAGAEAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Entity.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Building" Collapsed="true">
+    <Position X="11" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Building.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Castle" Collapsed="true">
+    <Position X="10" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAiAAAAAAAAAAAAIAQIBQAAAAAIQABECAI=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Castle.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Enemy" Collapsed="true">
+    <Position X="6.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABAgAAAACgAACAAAAAAAQAQBAAAACAAQAAAABECBA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Enemy.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::EnemyManager" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAACgAAAEAEAAAoAAAAAAAAAAAgAAQEAEgAAGAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\EnemyManager.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Lair" Collapsed="true">
+    <Position X="9.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABEBAAAAAAAIAAAgAEABQ=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Lair.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Tower" Collapsed="true">
+    <Position X="14.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAACAAAAAIAAAAAAAAAAIAABECQA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Tower.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::UpgradableBuilding" Collapsed="true">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAIAAAEAAAAAAYAAAACAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\UpgradableBuilding.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Wall" Collapsed="true">
+    <Position X="11" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAgAAAAAAAAAAAACAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Wall.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::AirEnemy" Collapsed="true">
+    <Position X="5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\AirEnemy.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Aura" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAIAAAQBAAAAAACAAAAAAIABA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Aura.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::LightEnemy" Collapsed="true">
+    <Position X="7.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\LightEnemy.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::HeavyEnemy" Collapsed="true">
+    <Position X="12.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\HeavyEnemy.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Cell" Collapsed="true">
+    <Position X="5.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAQAAAIAAAAAAAAAGAAgAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Cell.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Field" Collapsed="true">
+    <Position X="3.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAABAAAAAEAAAAAAAAAAAAAAAIAAAAACgAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Field.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Mountain" Collapsed="true">
+    <Position X="5.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Mountain.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::River" Collapsed="true">
+    <Position X="7.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\River.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::HealingAura" Collapsed="true">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\HealingAura.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::ObjectWithHP" Collapsed="true">
+    <Position X="8.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAgAAAAAAAAQUACAAAAAAAAIAAAAAEAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\ObjectWithHP.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::Route" Collapsed="true">
+    <Position X="21.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAMAAAAgAAAAAAIAAAAACAAYAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Route.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::PropsManager" Collapsed="true">
+    <Position X="19.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAKAARAAAAAAAAAAAAAAICAAAgAAAAAAAAgQAAAEAgA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\PropsManager.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::GraphicsAura" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAYAAAAAIABAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\GraphicsAura.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::GraphicsObject&lt;_T&gt;" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAABAAAACIAAAAAAAAAAAAgAAIAAAAEAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\GraphicsObject.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::GraphicsObjectWithAura&lt;_T&gt;" Collapsed="true">
+    <Position X="16.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACCAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAgA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\GraphicsObjectWithAura.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::GraphicsObjectWithHP&lt;_T&gt;" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAABAAAAAIAAAAAAEAIA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\GraphicsObjectWithHP.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::GraphicsObjectWithHPAndAura&lt;_T&gt;" Collapsed="true">
+    <Position X="19.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\GraphicsObjectWithHPAndAura.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerDefence::HP" Collapsed="true">
+    <Position X="21.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAQAAAAAAAAAQAQAAAAAQAAAAABCAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\HP.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TowerDefence::CastleProps" Collapsed="true">
+    <Position X="16.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAIAAAAAAAAAAAAAAAAAgAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\CastleProps.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TowerDefence::TowerProps" Collapsed="true">
+    <Position X="16.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\TowerProps.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TowerDefence::EnemyProps" Collapsed="true">
+    <Position X="18" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAgAAAAAAAAAABAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\EnemyProps.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TowerDefence::Pos&lt;_T&gt;" Collapsed="true">
+    <Position X="19.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABABgAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Pos.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="TowerDefence::Routes" Collapsed="true">
+    <Position X="21.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Routes.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="TowerDefence::RouteType" Collapsed="true">
+    <Position X="16.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>D:\Github\TowerDefence\src\Routes.hpp</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

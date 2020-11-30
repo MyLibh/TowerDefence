@@ -142,15 +142,17 @@ namespace TowerDefence
 
     void TowerDefence::update()
     {
-        m_landscape->update(1.f);
-    
-        m_graphics->update();
+        if (m_landscape->getCastle()->isAlive())
+        {
+            m_landscape->update(0.1f);
 
-        updateMoneyLabel(m_landscape->getCastle()->getMoney());
+            m_graphics->update();
 
-        updateButtons();
+            updateMoneyLabel(m_landscape->getCastle()->getMoney());
 
-        if (!m_landscape->getCastle()->isAlive())
-            QMainWindow::close();
+            updateButtons();
+        }
+        else
+            m_graphics->showGameOver(QMainWindow::width() / 2, QMainWindow::height() / 2);
     }
 } // namespace TowerDefence

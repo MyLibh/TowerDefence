@@ -41,7 +41,8 @@ namespace TowerDefence
 			m_lairs(),
 			m_walls(),
 			m_towers(),
-			m_enemies()
+			m_enemies(),
+			m_gameOver{}
 		{ }
 
 		inline ~Graphics() noexcept = default;
@@ -61,6 +62,8 @@ namespace TowerDefence
 		void createMap(const std::shared_ptr<Landscape>& landscape);
 
 		void update();
+
+		void showGameOver(const int width, const int height);
 
 		void setCurrentTilePos(int x, int y);
 
@@ -107,6 +110,8 @@ namespace TowerDefence
 		std::vector<GObjectWithHP<Wall>>         m_walls;
 		std::vector<GObjectWithAura<Tower>>      m_towers;
 		std::vector<GObjectWithHPAndAura<Enemy>> m_enemies;
+
+		QGraphicsPixmapItem* m_gameOver;
 	};
 } // namespace TowerDefence
 

@@ -15,6 +15,8 @@ namespace TowerDefence
 		{
 			++m_lvl;
 			m_props = PropsManager::getCastleProps(m_lvl);
+			
+			m_health = getMaxHealth();
 		}
 
 		return res;

@@ -25,10 +25,10 @@ namespace TowerDefence
 
 	void HP::setHP(const float percent) noexcept
 	{
-		if (m_front)
+		if (m_front && m_back)
 		{
 			auto rect = m_front->rect();
-			rect.setWidth(rect.width() * percent);
+			rect.setWidth(m_back->rect().width() * percent);
 
 			m_front->setRect(rect);
 		}

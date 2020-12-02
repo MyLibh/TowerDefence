@@ -4,10 +4,16 @@
    "cells":
    [
       {
-         "type": "Field",
+         "type": "Lair",
          "x": 0,
-         "y": 0
-      },
+         "y": 0,
+         "spawn":
+         [
+          { "type": "Air", "time": 1 },
+          { "type": "Heavy", "time": 5 },
+          { "type": "Light", "time": 9 }
+         ]
+       },
       {
          "type": "Field",
          "x": 1,
@@ -335,9 +341,7 @@
         "y": 5,
         "spawn":
         [
-         { "type": "Air", "time": 1 },
-         { "type": "Heavy", "time": 5 },
-         { "type": "Light", "time": 9 }
+         { "type": "Heavy", "time": 1 }
         ]
       },
       {

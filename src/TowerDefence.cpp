@@ -46,9 +46,10 @@ namespace TowerDefence
         QMainWindow::showFullScreen();
         canvas->resize(QMainWindow::width() - TowerDefence::BUTTON_SIZE, QMainWindow::height());
 
-        m_ui->buildButton->move(canvas->width(), 0);
-        m_ui->upgradeButton->move(canvas->width(), TowerDefence::BUTTON_SIZE);
-        m_ui->repairButton->move(canvas->width(), 2 * TowerDefence::BUTTON_SIZE);
+        m_ui->buildTowerButton->move(canvas->width(), 0);
+        m_ui->buildWallButton->move(canvas->width(), TowerDefence::BUTTON_SIZE);
+        m_ui->upgradeButton->move(canvas->width(), 2 * TowerDefence::BUTTON_SIZE);
+        m_ui->repairButton->move(canvas->width(), 3 * TowerDefence::BUTTON_SIZE);
 
         m_ui->moneyLabel->move(canvas->width(), QMainWindow::height() - TowerDefence::BUTTON_SIZE);
 
@@ -59,25 +60,36 @@ namespace TowerDefence
 
     void TowerDefence::initButtons()
     {
+        //template<>
         auto exec = [&](auto func)
         {
             auto pos = m_graphics->getSelectedTilePos();
 
-            ((*m_landscape).*func)(pos);
+            func(m_landscape, pos);
+
+            //((*m_landscape).*func)(pos);
 
             setButtons(pos);
         };
 
-        QObject::connect(m_ui->buildButton,   &QPushButton::clicked,
+        QObject::connect(m_ui->buildTowerButton, &QPushButton::clicked,
             [=]()
             { 
-                exec(&Landscape::build);
+                exec(std::mem_fn(&Landscape::buildTower));
 
                 if (auto field = std::dynamic_pointer_cast<Field>(m_landscape->getCell(m_graphics->getSelectedTilePos())); field && field->isBusy())
                     m_graphics->add(std::dynamic_pointer_cast<Tower>(field->getBuilding()));
             });
-        QObject::connect(m_ui->upgradeButton, &QPushButton::clicked, [=]() { exec(&Landscape::upgrade); });
-        QObject::connect(m_ui->repairButton,  &QPushButton::clicked, [=]() { exec(&Landscape::repair); });
+        QObject::connect(m_ui->buildWallButton, &QPushButton::clicked,
+            [=]()
+            {
+                exec(std::mem_fn(&Landscape::buildWall));
+
+                if (auto field = std::dynamic_pointer_cast<Field>(m_landscape->getCell(m_graphics->getSelectedTilePos())); field && field->isBusy())
+                    m_graphics->add(std::dynamic_pointer_cast<Wall>(field->getBuilding()));
+            });
+        QObject::connect(m_ui->upgradeButton, &QPushButton::clicked, [=]() { exec(std::mem_fn(&Landscape::upgrade)); });
+        QObject::connect(m_ui->repairButton,  &QPushButton::clicked, [=]() { exec(std::mem_fn(&Landscape::repair)); });
     }
 
     void TowerDefence::updateMoneyLabel(const int money)
@@ -95,14 +107,16 @@ namespace TowerDefence
 
     void TowerDefence::setButtons(const PosF& pos)
     {
-        m_ui->buildButton->setEnabled(m_landscape->canBuildHere(pos));
+        m_ui->buildTowerButton->setEnabled(m_landscape->canBuildHere(pos));
+        m_ui->buildWallButton->setEnabled(m_landscape->canBuildHere(pos));
         m_ui->upgradeButton->setEnabled(m_landscape->canUpgradeHere(pos));
         m_ui->repairButton->setEnabled(m_landscape->canRepairHere(pos));
     }
 
     void TowerDefence::disableButtons()
     {
-        m_ui->buildButton->setEnabled(false);
+        m_ui->buildTowerButton->setEnabled(false);
+        m_ui->buildWallButton->setEnabled(false);
         m_ui->upgradeButton->setEnabled(false);
         m_ui->repairButton->setEnabled(false);
     }

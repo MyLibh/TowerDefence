@@ -6,7 +6,6 @@
         <file>assets/buttons/Upgrade.png</file>
         <file>assets/Lair.png</file>
         <file>assets/Water.jpg</file>
-        <file>assets/Mountain.jpg</file>
         <file>assets/AirEnemy.png</file>
         <file>assets/Grass.png</file>
         <file>assets/LightEnemy.png</file>
@@ -34,5 +33,7 @@
         <file>assets/Tower11.png</file>
         <file>assets/Tower12.png</file>
         <file>assets/Tower13.png</file>
+        <file>assets/Mountain.jpg</file>
+        <file>assets/Wall.png</file>
     </qresource>
 </RCC>

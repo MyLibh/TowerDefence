@@ -9,9 +9,22 @@
 namespace TowerDefence
 {
 	HP::HP(std::shared_ptr<QGraphicsScene> scene, const PosI& size /* = { HP::WIDTH, HP::HEIGHT } */) :
+		m_scene(scene),
 		m_back(scene->addRect(0., 0., size.x, size.y, QPen(Qt::black, 5), Qt::transparent)),
 		m_front(scene->addRect(0., 0., size.x, size.y, QPen(Qt::transparent, 5), Qt::green))
-	{ }
+	{
+		m_back->setZValue(2);
+		m_front->setZValue(2);
+	}
+
+	HP::~HP() noexcept
+	{
+		if (m_scene)
+		{
+			if (m_front) m_scene->removeItem(m_front);
+			if (m_back)  m_scene->removeItem(m_back);
+		}
+	}
 
 	void HP::setPos(const PosF & pos) noexcept
 	{

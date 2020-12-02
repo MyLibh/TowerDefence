@@ -15,14 +15,14 @@ namespace TowerDefence
 	class Aura;
 	class Enemy : public Entity, public ObjectWithHP
 	{
-	private:
+	protected:
 		inline static std::shared_ptr<EnemyManager> sEnemyManager;
 
 	public:
 		inline static void setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept { sEnemyManager = std::move(enemyManager); }
 
-	private:
-		void attack();
+	protected:
+		void attack(std::shared_ptr<ObjectWithHP> object) const noexcept;
 
 		void move(const float dt);
 
@@ -40,7 +40,7 @@ namespace TowerDefence
 
 		inline int getMaxHealth() const noexcept final { return m_props->maxHealth; }
 
-		void update(const float dt) override final;
+		void update(const float dt) override;
 
 		inline void setRoute(Route route) noexcept { m_route = std::move(route); }
 

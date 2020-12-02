@@ -105,6 +105,7 @@
     <ClCompile Include="..\src\Graphics.cpp" />
     <ClCompile Include="..\src\GraphicsAura.cpp" />
     <ClCompile Include="..\src\HealingAura.cpp" />
+    <ClCompile Include="..\src\HeavyEnemy.cpp" />
     <ClCompile Include="..\src\HP.cpp" />
     <ClCompile Include="..\src\Landscape.cpp" />
     <ClCompile Include="..\src\Lair.cpp" />

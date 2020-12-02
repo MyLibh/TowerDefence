@@ -10,11 +10,7 @@ namespace TowerDefence
 	class GraphicsObjectWithHPAndAura : public GObjectWithHP<_T>, public GObjectWithAura<_T>
 	{
 	public:
-		inline GraphicsObjectWithHPAndAura() noexcept :
-			GObjectWithHP<_T>(),
-			GObjectWithAura<_T>(),
-			GObject<_T>()
-		{ }
+		inline GraphicsObjectWithHPAndAura() noexcept = default;
 
 		inline GraphicsObjectWithHPAndAura(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const float rx, const float ry, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
 			GObjectWithHP<_T>(scene, pixmap, object, size),

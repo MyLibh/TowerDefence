@@ -30,6 +30,8 @@ namespace TowerDefence
 			m_lvl(1)
 		{ }
 
+		inline virtual ~GraphicsObjectUpgradable() noexcept override = default;
+
 		inline virtual void update(const float dx, const float dy) noexcept override
 		{
 			if (auto lvl = this->m_object->getLvl(); m_lvl != lvl)

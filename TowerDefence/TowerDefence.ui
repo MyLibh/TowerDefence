@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>675</width>
-    <height>486</height>
+    <height>593</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="buildButton">
+   <widget class="QPushButton" name="buildTowerButton">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -47,7 +47,7 @@
     </property>
     <property name="icon">
      <iconset resource="TowerDefence.qrc">
-      <normaloff>:/assets/buttons/Build.png</normaloff>:/assets/buttons/Build.png</iconset>
+      <normaloff>:/assets/Tower1.png</normaloff>:/assets/Tower1.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -63,7 +63,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>110</y>
+      <y>230</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -95,7 +95,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>220</y>
+      <y>330</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -124,7 +124,7 @@
     <property name="geometry">
      <rect>
       <x>500</x>
-      <y>330</y>
+      <y>460</y>
       <width>100</width>
       <height>100</height>
      </rect>
@@ -153,6 +153,38 @@
     </property>
     <property name="margin">
      <number>5</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buildWallButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>110</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="TowerDefence.qrc">
+      <normaloff>:/assets/Wall.png</normaloff>:/assets/Wall.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
     </property>
    </widget>
   </widget>

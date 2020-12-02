@@ -10,9 +10,7 @@ namespace TowerDefence
 	class GraphicsObjectWithAura : virtual public GObject<_T>
 	{
 	public:
-		inline GraphicsObjectWithAura() noexcept :
-			m_aura()
-		{ }
+		inline GraphicsObjectWithAura() noexcept = default;
 
 		inline GraphicsObjectWithAura(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const float rx, const float ry) :
 			GObject<_T>(scene, pixmap, object),

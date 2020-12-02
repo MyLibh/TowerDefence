@@ -15,7 +15,7 @@ namespace TowerDefence
 	class Castle;
 	class Lair;
 	class Landscape;
-
+	class ObjectWithHP;
 	class EnemyManager : std::enable_shared_from_this<EnemyManager>
 	{
 	private:
@@ -53,6 +53,8 @@ namespace TowerDefence
 
 		void add(std::shared_ptr<Enemy> enemy, const Lair* lairId);
 		
+		std::shared_ptr<ObjectWithHP> getTargetAt(const PosF& pos) const;
+
 	private:
 		std::shared_ptr<Castle>             m_castle;
 		std::vector<std::shared_ptr<Enemy>> m_enemies;

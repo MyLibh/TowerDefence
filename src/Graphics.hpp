@@ -101,6 +101,8 @@ namespace TowerDefence
 					_add(m_enemies, "HeavyEnemy", 0, 0);
 				else if (typeid(*object) == typeid(LightEnemy))
 					_add(m_enemies, "LightEnemy", 0, 0);
+
+				ptr->getItem()->setZValue(1);
 			}
 
 			if (ptr)

@@ -87,11 +87,22 @@ namespace TowerDefence
 	{
 		m_castle->update(m_tileWidth, m_tileHeight);
 
-		//m_enemies.erase(std::remove_if(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { return enemy.getObject()->isAlive(); }), std::end(m_enemies));
+#define _rem(collection)                                                      \
+		collection.erase(                                                     \
+			std::remove_if(std::begin(collection), std::end(collection),      \
+				[](const auto& item) { return !item.getObject()->isAlive(); } \
+			),                                                                \
+			std::end(collection)                                              \
+		);
+
+		_rem(m_walls);
+		_rem(m_enemies);
+		
+#undef _rem
 
 #define _upd(collection) std::for_each(std::begin(collection), std::end(collection), [&](auto& item) { item.update(m_tileWidth, m_tileHeight); });
 
-		// _upd(m_walls);
+		_upd(m_walls);
 		_upd(m_towers);
 		_upd(m_enemies);
 

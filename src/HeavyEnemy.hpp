@@ -13,6 +13,8 @@ namespace TowerDefence
 		{}
 
 		inline ~HeavyEnemy() noexcept override = default;
+
+		void update(const float dt) override final;
 	};
 } // namespace TowerDefence
 

@@ -10,10 +10,10 @@
 
 namespace TowerDefence
 {
-	void Enemy::attack()
+	void Enemy::attack(std::shared_ptr<ObjectWithHP> object) const noexcept
 	{
-		if (sEnemyManager && sEnemyManager->getCastle())
-			sEnemyManager->getCastle()->decreaseHealth(m_props->damage);
+		if (object && object->isAlive())
+			object->decreaseHealth(m_props->damage);
 	}
 
 	void Enemy::move(const float dt)
@@ -65,8 +65,8 @@ namespace TowerDefence
 		{
 			accumulator -= 1.f;
 
-			if (m_route.isFinished())
-				attack();
+			if (m_route.isFinished() && sEnemyManager)
+				attack(std::static_pointer_cast<ObjectWithHP>(sEnemyManager->getCastle()));
 
 			regenerate();
 

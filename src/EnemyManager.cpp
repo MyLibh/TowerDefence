@@ -12,6 +12,7 @@
 #include "Mountain.hpp"
 #include "PropsManager.hpp"
 #include "Castle.hpp"
+#include "Tower.hpp"
 
 #include <algorithm>
 
@@ -20,12 +21,15 @@ namespace detail
 	namespace TD = TowerDefence;
 	bool checkByType(TD::RouteType type, std::shared_ptr<TD::Cell> cell)
 	{
+		if (!cell)
+			return false;
+
 		if (type == TD::RouteType::Air)
 			return typeid(*cell) != typeid(TD::Mountain);
-		else if (type == TD::RouteType::Heavy)
-			return typeid(*cell) == typeid(TD::Field); // TODO: check not tower
-		else if (type == TD::RouteType::Light)
-			return typeid(*cell) == typeid(TD::Field);// && std::dynamic_pointer_cast<TD::Field>(cell)->getBuilding() == nullptr;
+		else if (auto field = std::dynamic_pointer_cast<TD::Field>(cell); type == TD::RouteType::Heavy && field)
+			return !field->getBuilding() || (field->getBuilding() && typeid(*field->getBuilding()) != typeid(TD::Tower));
+		else if (type == TD::RouteType::Light && field)
+			return !field->getBuilding();
 
 		return false;
 	}
@@ -48,7 +52,7 @@ namespace TowerDefence
 			if (auto cell = sLandscape->getCell(coord); sLandscape->isInField(coord) &&
 				!wasUsed(coord) &&
 				cell &&
-				detail::checkByType(routeType, cell)
+				(coord == to || detail::checkByType(routeType, cell))
 				)
 			{
 				queue.push(coord);
@@ -100,12 +104,23 @@ namespace TowerDefence
 
 	void EnemyManager::updateRoutes()
 	{
-		// std::for_each(std::begin(m_routes), std::end(m_routes), [&](auto& p) { p.second.light = createRoute(p.first->getPos()); });
+		std::for_each(std::begin(m_routes), std::end(m_routes),
+			[&](auto& p)
+			{
+				p.second.heavy = createRoute(p.first->getPos(), RouteType::Heavy);
+				p.second.light = createRoute(p.first->getPos(), RouteType::Light);
+			}
+		);
 	}
 
 	void EnemyManager::updateExistingRoutes()
 	{
-		//std::for_each(std::begin(m_enemies), std::end(m_enemies), [&](auto& enemy) { enemy->setRoute(createRoute(enemy->getPos(), RouteType::Light)); });
+		std::for_each(std::begin(m_enemies), std::end(m_enemies),
+			[&](auto& enemy)
+			{
+				enemy->setRoute(*createRoute(enemy->getPos(), RouteType::Light));
+			}
+		);
 	}
 
 	std::vector<std::shared_ptr<Enemy>> EnemyManager::getEnemiesAround(const PosF& pos, const float r) const
@@ -132,11 +147,20 @@ namespace TowerDefence
 
 		if (typeid(*enemy) == typeid(AirEnemy))
 			enemy->setRoute(*m_routes.at(lair).air);
-		else if (typeid(*enemy) == typeid(LightEnemy))
-			enemy->setRoute(*m_routes.at(lair).light);
 		else if (typeid(*enemy) == typeid(HeavyEnemy))
 			enemy->setRoute(*m_routes.at(lair).heavy);
+		else if (typeid(*enemy) == typeid(LightEnemy))
+			enemy->setRoute(*m_routes.at(lair).light);
 
 		sGraphics->add(enemy);
+	}
+
+	std::shared_ptr<ObjectWithHP> EnemyManager::getTargetAt(const PosF& pos) const
+	{
+		if (sLandscape && std::ceil(pos.x) == pos.x && std::ceil(pos.y) == pos.y)
+			if (auto field = std::dynamic_pointer_cast<Field>(sLandscape->getCell(pos)); field)
+				return std::static_pointer_cast<ObjectWithHP>(std::dynamic_pointer_cast<Wall>(field->getBuilding()));
+
+		return nullptr;
 	}
 } // namespace TowerDefence

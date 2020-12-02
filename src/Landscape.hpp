@@ -7,6 +7,7 @@
 #include "EnemyManager.hpp"
 #include "Lair.hpp"
 #include "Enemy.hpp"
+#include "Wall.hpp"
 
 #include <set>
 #include <memory>
@@ -25,12 +26,12 @@ namespace TowerDefence
 		{
 			return std::find_if(std::begin(m_cells), std::end(m_cells),
 				[&pos, p = std::move(pred)](const std::shared_ptr<Cell>& cell)
-			{
-				if (cell->getPos() != pos || typeid(*cell) != typeid(Field))
-					return false;
+				{
+					if (cell->getPos() != pos || typeid(*cell) != typeid(Field))
+						return false;
 
-				return p(std::dynamic_pointer_cast<Field>(cell));
-			}) != std::end(m_cells);
+					return p(std::dynamic_pointer_cast<Field>(cell));
+				}) != std::end(m_cells);
 		}
 
 	public:
@@ -112,25 +113,40 @@ namespace TowerDefence
 			return canDoHere(pos,
 				[&](const auto& field)
 				{
-					const auto ptr = std::dynamic_pointer_cast<UpgradableBuilding>(field->getBuilding());
+					const auto upgradable = std::dynamic_pointer_cast<UpgradableBuilding>(field->getBuilding());
 
-					return field->isBusy() && ptr && ptr->canUpgrade() && m_castle->hasMoney(ptr->getUpgradePrice());
+					return field->isBusy() && upgradable && upgradable->canUpgrade() && m_castle->hasMoney(upgradable->getUpgradePrice());
 				});
 		}
 
 		inline bool canRepairHere(const PosF& pos) const
 		{
-			return canDoHere(pos, [](const auto&) { return false; });
+			return canDoHere(pos, 
+				[&](const auto& field)
+				{
+					const auto obj = std::dynamic_pointer_cast<ObjectWithHP>(field->getBuilding());
+
+					return field->isBusy() && obj && obj->isAlive() && obj->getHealth() != obj->getMaxHealth() && m_castle->hasMoney(100);
+				});
 		}
 
-		inline void build(const PosF& pos)
+		inline void buildTower(const PosF& pos)
 		{
 			if (auto field = std::dynamic_pointer_cast<Field>(getCell(pos)); field)
 			{
 				m_castle->withdraw(PropsManager::getTowerProps().price);
 
-				auto tower = addEntity<Tower>(pos);
-				field->build(std::dynamic_pointer_cast<Building>(tower));
+				field->build(std::dynamic_pointer_cast<Building>(addEntity<Tower>(pos)));
+			}
+		}
+
+		inline void buildWall(const PosF& pos)
+		{
+			if (auto field = std::dynamic_pointer_cast<Field>(getCell(pos)); field)
+			{
+				m_castle->withdraw(100);
+
+				field->build(std::dynamic_pointer_cast<Building>(addEntity<Wall>(pos)));
 			}
 		}
 
@@ -147,7 +163,13 @@ namespace TowerDefence
 
 		inline void repair(const PosF& pos)
 		{
+			if (auto field = std::dynamic_pointer_cast<Field>(getCell(pos)); field)
+				if (auto repairable = std::dynamic_pointer_cast<ObjectWithHP>(field->getBuilding()); repairable && repairable->getHealth() != repairable->getMaxHealth())
+				{
+					m_castle->withdraw(100);
 
+					repairable->increaseHealth(repairable->getMaxHealth());
+				}
 		}
 
 	private:

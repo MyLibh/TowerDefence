@@ -11,9 +11,8 @@ namespace TowerDefence
 	class Field final : public Cell
 	{
 	public:
-		inline constexpr Field(const PosF& pos) noexcept :
-			Cell(pos),
-			m_building{}
+		explicit inline constexpr Field(const PosF& pos) noexcept :
+			Cell(pos)
 		{ }
 
 		inline ~Field() noexcept override = default;

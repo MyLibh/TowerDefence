@@ -21,11 +21,18 @@ namespace TowerDefence
 		{ }
 
 		inline GraphicsObject(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object) :
+			m_scene(scene),
 			m_item(scene->addPixmap(pixmap)),
 			m_object(std::move(object))
 		{ }
 
-		inline virtual ~GraphicsObject() noexcept = default;
+		inline virtual ~GraphicsObject() noexcept
+		{
+			if (m_scene && m_item.use_count() == 1)
+				m_scene->removeItem(m_item.get());
+		}
+
+		[[nodiscard]] inline constexpr auto getItem() const noexcept { return m_item; }
 
 		[[nodiscard]] inline constexpr auto getObject() const noexcept { return m_object; }
 
@@ -42,8 +49,11 @@ namespace TowerDefence
 		}
 
 	protected:
-		QGraphicsPixmapItem* m_item;
+		std::shared_ptr<QGraphicsPixmapItem> m_item;
 		std::shared_ptr<_T>  m_object;
+
+	private:
+		std::shared_ptr<QGraphicsScene> m_scene;
 	};
 
 	template<typename _T>

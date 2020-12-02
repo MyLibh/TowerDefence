@@ -15,6 +15,8 @@ namespace TowerDefence
 
 		inline virtual ~UpgradableBuilding() noexcept override = default;
 
+		[[nodiscard]] inline constexpr auto getLvl() const noexcept { return m_lvl; }
+
 		virtual bool canUpgrade() const = 0;
 
 		virtual bool upgrade() noexcept = 0;

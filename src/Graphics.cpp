@@ -85,12 +85,17 @@ namespace TowerDefence
 
 	void Graphics::update()
 	{
-		m_castle.update(m_tileWidth, m_tileHeight);
+		m_castle->update(m_tileWidth, m_tileHeight);
 
 		//m_enemies.erase(std::remove_if(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { return enemy.getObject()->isAlive(); }), std::end(m_enemies));
 
-		// std::for_each(std::begin(m_walls), std::end(m_walls), [](auto& wall) { wall.update(); });
-		std::for_each(std::begin(m_enemies), std::end(m_enemies), [&](auto& enemy) { enemy.update(m_tileWidth, m_tileHeight); });
+#define _upd(collection) std::for_each(std::begin(collection), std::end(collection), [&](auto& item) { item.update(m_tileWidth, m_tileHeight); });
+
+		// _upd(m_walls);
+		_upd(m_towers);
+		_upd(m_enemies);
+
+#undef _upd
 	}
 
 	void Graphics::showGameOver(const int width, const int height)

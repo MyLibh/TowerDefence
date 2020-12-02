@@ -335,9 +335,9 @@
         "y": 5,
         "spawn":
         [
-           { "type": "Air", "time": 1 },
-           { "type": "Heavy", "time": 5 },
-           { "type": "Light", "time": 9 }
+         { "type": "Air", "time": 1 },
+         { "type": "Heavy", "time": 5 },
+         { "type": "Light", "time": 9 }
         ]
       },
       {

@@ -241,6 +241,12 @@
     <ClInclude Include="..\src\EnemyProps.hpp">
       <Filter>Header Files\Map\Objects\Props</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\GraphicsObjectUpgradable.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GraphicsObjectUpgradableWithHP.hpp">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="..\src\TowerDefence.hpp">

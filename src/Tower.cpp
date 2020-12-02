@@ -3,26 +3,29 @@
 
 #include "Tower.hpp"
 
-bool TowerDefence::Tower::upgrade() noexcept
+namespace TowerDefence
 {
-	auto res = PropsManager::canTowerUpgrade(m_lvl + 1);
-	if (res)
+	bool Tower::upgrade() noexcept
 	{
-		++m_lvl;
-		m_props = PropsManager::getTowerProps(m_lvl);
+		auto res = PropsManager::canTowerUpgrade(m_lvl + 1);
+		if (res)
+		{
+			++m_lvl;
+			m_props = PropsManager::getTowerProps(m_lvl);
+		}
+
+		return res;
 	}
 
-	return res;
-}
-
-void TowerDefence::Tower::update(float dt)
-{
-	m_shotTimer += dt;
-
-	if (m_shotTimer > 0)
+	void Tower::update(float dt)
 	{
-		// Try attack
+		m_shotTimer += dt;
 
-		m_shotTimer = 0.f;
+		if (m_shotTimer > 0)
+		{
+			// Try attack
+
+			m_shotTimer = 0.f;
+		}
 	}
-}
+} // namespace TowerDefence

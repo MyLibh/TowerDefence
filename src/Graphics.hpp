@@ -2,6 +2,7 @@
 #define __GRAPHICS_HPP_INCLUDED__
 
 #include "GraphicsObjectWithHPAndAura.hpp"
+#include "GraphicsObjectUpgradableWithHP.hpp"
 #include "AirEnemy.hpp"
 #include "HeavyEnemy.hpp"
 #include "LightEnemy.hpp"
@@ -45,7 +46,10 @@ namespace TowerDefence
 			m_gameOver{}
 		{ }
 
-		inline ~Graphics() noexcept = default;
+		inline ~Graphics() noexcept
+		{
+			delete m_castle;
+		}
 
 		[[nodiscard]] inline auto& getScene() const noexcept { return m_scene; }
 
@@ -72,15 +76,23 @@ namespace TowerDefence
 		{
 #define _add(cont, str, ...) ptr = &cont.emplace_back(m_scene, m_images.at(str).scaled(m_tileWidth, m_tileHeight), object, __VA_ARGS__)
 
-			GraphicsObject<_T>* ptr{};
+			GObject<_T>* ptr{};
 			if constexpr (std::is_same_v<_T, Castle>)
-				ptr = &(m_castle = GraphicsObjectWithHP<Castle>(m_scene, m_images.at("Castle").scaled(m_tileWidth, m_tileHeight), object, PosI{ 100, 15 }));
+				ptr = (m_castle = new GObjectUpgradableWithHP<Castle>(
+					m_scene,
+					m_images.at("Castle1").scaled(m_tileWidth, m_tileHeight),
+					object,
+					"Castle",
+					m_images,
+					PosI{ 100, 15 }));
 			else if constexpr (std::is_same_v<_T, Lair>)
 				_add(m_lairs, "Lair");
 			else if constexpr (std::is_same_v<_T, Wall>)
 				_add(m_walls, "Wall");
 			else if constexpr (std::is_same_v<_T, Tower>)
-				_add(m_towers, "Tower", object->getR() * m_tileWidth, object->getR() * m_tileHeight);
+				_add(m_towers, "Tower1", "Tower", m_images);
+					//object->getR() * m_tileWidth,
+					//object->getR() * m_tileHeight);
 			else if constexpr (std::is_same_v<_T, Enemy>)
 			{
 				if (typeid(*object) == typeid(AirEnemy))
@@ -105,10 +117,10 @@ namespace TowerDefence
 		std::map<std::string, QPixmap>  m_images;
 		QGraphicsRectItem*              m_currentTile;
 		
-		GObjectWithHP<Castle>                    m_castle;
+		GObjectUpgradableWithHP<Castle>*         m_castle;
 		std::vector<GObject<Lair>>               m_lairs;
 		std::vector<GObjectWithHP<Wall>>         m_walls;
-		std::vector<GObjectWithAura<Tower>>      m_towers;
+		std::vector<GObjectUpgradable<Tower>>    m_towers;
 		std::vector<GObjectWithHPAndAura<Enemy>> m_enemies;
 
 		QGraphicsPixmapItem* m_gameOver;

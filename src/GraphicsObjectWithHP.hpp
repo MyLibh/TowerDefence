@@ -3,16 +3,15 @@
 
 #include "GraphicsObject.hpp"
 #include "HP.hpp"
+#include "ObjectWithHP.hpp"
 
 namespace TowerDefence
 {
-	template<typename _T>
+	template<typename _T> requires std::is_base_of_v<ObjectWithHP, _T>
 	class GraphicsObjectWithHP : virtual public GObject<_T>
 	{
 	public:
-		inline GraphicsObjectWithHP() noexcept :
-			m_hp()
-		{ }
+		inline GraphicsObjectWithHP() noexcept = default;
 
 		inline GraphicsObjectWithHP(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
 			GObject<_T>(scene, pixmap, object),
@@ -31,7 +30,7 @@ namespace TowerDefence
 			}
 		}
 
-		inline void update(const float dx, const float dy) noexcept override
+		inline virtual void update(const float dx, const float dy) noexcept override
 		{
 			m_hp.setHP(static_cast<float>(this->m_object->getHealth()) / this->m_object->getMaxHealth());
 

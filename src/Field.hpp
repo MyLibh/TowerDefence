@@ -17,18 +17,18 @@ namespace TowerDefence
 
 		inline ~Field() noexcept override = default;
 
-		[[nodiscard]] inline const auto getBuilding() const noexcept { return m_building; }
+		[[nodiscard]] inline const auto getBuilding() const noexcept { return m_building.lock(); }
 
-		inline bool isBusy() const noexcept { return m_building != nullptr; }
+		inline bool isBusy() const noexcept { return !m_building.expired(); }
 
-		inline void build(std::shared_ptr<Building> building) noexcept
+		inline void build(std::weak_ptr<Building> building) noexcept
 		{
 			if (!isBusy())
 				m_building = std::move(building);
 		}
 
 	private:
-		std::shared_ptr<Building> m_building;
+		std::weak_ptr<Building> m_building;
 	};
 } // namespace TowerDefence
 

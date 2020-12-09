@@ -2,32 +2,89 @@
 #define __GRAPHICS_AURA_HPP_INCLUDED__
 
 #include "Pos.hpp"
+#include "Particle.hpp"
+#include "Aura.hpp"
+
+#include <QPixmap>
 
 #include <memory>
+#include <array>
 
 class QGraphicsScene;
 class QGraphicsEllipseItem;
+class QGraphicsPixmapItem;
 
 namespace TowerDefence
 {
-	class GraphicsAura final
+	class GraphicsAura
 	{
-	public:
-		inline constexpr GraphicsAura() noexcept :
-			m_rx{},
-			m_ry{},
-			m_item{}
-		{ }
+	private:
+		inline static constexpr auto PARTICLES_NUM{ 6 };
 
-		GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float rx, const float ry);
+	public:
+		inline GraphicsAura() noexcept = default;
+
+		GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float r, const PosF& scale, QColor color, QPixmap particlePixmap);
+
+		GraphicsAura(const GraphicsAura&) = delete;
+
+		inline GraphicsAura(GraphicsAura&& other) noexcept :
+			m_scale(std::move(other.m_scale)),
+			m_r(std::move(other.m_r)),
+			m_scene(std::move(other.m_scene)),
+			m_item(std::move(other.m_item)),
+			m_particles(std::move(other.m_particles))
+		{
+			other.m_scale = {};
+			other.m_r = 0.f;
+			other.m_scene = nullptr;
+			other.m_item = nullptr;
+		}
+
+		inline virtual ~GraphicsAura() noexcept
+		{
+			if (m_scene && m_item && m_item.use_count() == 1)
+				m_scene->removeItem(m_item.get());
+		}
+
+		GraphicsAura& operator=(const GraphicsAura&) = delete;
+
+		inline GraphicsAura& operator=(GraphicsAura&& other) noexcept
+		{
+			if (this != &other)
+			{
+				m_scale = std::move(other.m_scale);
+				m_r = std::move(other.m_r);
+				m_scene = std::move(m_scene);
+				m_item = std::move(m_item);
+				m_particles = std::move(m_particles);
+
+				other.m_scale = {};
+				other.m_r = 0.f;
+				other.m_scene = nullptr;
+				other.m_item = nullptr;
+			}
+
+			return *this;
+		}
 
 		void setPos(const PosF& pos) noexcept;
 
+		inline void update() noexcept
+		{
+			for (auto& particle : m_particles)
+				particle.update(m_scale.x, m_scale.y);
+		}
+
 	private:
-		float m_rx;
-		float m_ry;
-		QGraphicsEllipseItem* m_item;
+		PosF m_scale;
+		float m_r;
+		std::shared_ptr<QGraphicsScene> m_scene;
+		std::shared_ptr<QGraphicsEllipseItem> m_item;
+		std::vector<Particle> m_particles;
 	};
+
+	using GAura = GraphicsAura;
 } // namespace TowerDefence
 
 #endif /* !__GRAPHICS_AURA_HPP_INCLUDED__ */

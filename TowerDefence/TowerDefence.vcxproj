@@ -145,9 +145,9 @@
     <ClInclude Include="..\src\Lair.hpp" />
     <ClInclude Include="..\src\LightEnemy.hpp" />
     <ClInclude Include="..\src\MapLoader.hpp" />
-    <ClInclude Include="..\src\MaxHealthAura.hpp" />
     <ClInclude Include="..\src\Mountain.hpp" />
     <ClInclude Include="..\src\ObjectWithHP.hpp" />
+    <ClInclude Include="..\src\Particle.hpp" />
     <ClInclude Include="..\src\Pos.hpp" />
     <ClInclude Include="..\src\PropsManager.hpp" />
     <ClInclude Include="..\src\River.hpp" />
@@ -157,6 +157,7 @@
     <ClInclude Include="..\src\Tower.hpp" />
     <ClInclude Include="..\src\TowerProps.hpp" />
     <ClInclude Include="..\src\UpgradableBuilding.hpp" />
+    <ClInclude Include="..\src\Utility.hpp" />
     <ClInclude Include="..\src\Wall.hpp" />
     <QtMoc Include="..\src\TowerDefence.hpp" />
   </ItemGroup>

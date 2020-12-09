@@ -11,11 +11,14 @@
 #include "HeavyEnemy.hpp"
 #include "LightEnemy.hpp"
 #include "PropsManager.hpp"
+#include "HealingAura.hpp"
 
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QFile>
+
+#include <span>
 
 namespace detail
 {
@@ -26,18 +29,43 @@ namespace detail
 #define loadFloat(name) static_cast<float>(object.value(QString(name)).toDouble())
 #define loadString(name) object.value(QString(name)).toString().toUtf8()
 
+    auto loadAuras(const QJsonArray& array)
+    {
+        std::vector<std::shared_ptr<Aura>> auras;
+
+        for (const auto& item : array)
+        {
+            const auto&& object = item.toObject();
+            if (const auto&& type = loadString("type"); type == "heal")
+                auras.emplace_back(std::make_shared<HealingAura>(loadInt("heal"), loadFloat("r")));
+        }
+
+        return std::move(auras);
+    }
+
+    template<typename _EnemyType> requires std::is_base_of_v<Enemy, _EnemyType>
+    void loadEnemy(std::multimap<float, std::shared_ptr<Enemy>>& shedule, std::string&& type, const float time, std::vector<std::shared_ptr<Aura>>&& auras)
+    {
+        type.front() = std::tolower(type.front());
+
+        shedule.emplace(time, std::make_shared<_EnemyType>(PropsManager::getEnemyProps(type), std::move(auras)));
+    }
+
     auto loadLairInfo(const QJsonArray& array, std::shared_ptr<Landscape> landscape)
     {
         std::multimap<float, std::shared_ptr<Enemy>> shedule;
         for (const auto& item : array)
         {
             const auto&& object = item.toObject();
-            if (const auto&& type = loadString("type"); type == "Air")
-                shedule.emplace(loadFloat("time"), std::make_shared<AirEnemy>(PropsManager::getEnemyProps("air")));
+
+            auto&& auras = loadAuras(object.value(QString("auras")).toArray());
+            const auto&& time = loadFloat("time");
+            if (std::string type = loadString("type").data(); type == "Air")
+                loadEnemy<AirEnemy>(shedule, std::move(type), time, std::move(auras));
             else if (type == "Heavy")
-                shedule.emplace(loadFloat("time"), std::make_shared<HeavyEnemy>(PropsManager::getEnemyProps("heavy")));
+                loadEnemy<HeavyEnemy>(shedule, std::move(type), time, std::move(auras));
             else if (type == "Light")
-                shedule.emplace(loadFloat("time"), std::make_shared<LightEnemy>(PropsManager::getEnemyProps("light")));
+                loadEnemy<LightEnemy>(shedule, std::move(type), time, std::move(auras));
         }
 
         return std::move(shedule);

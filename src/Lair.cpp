@@ -23,7 +23,7 @@ namespace TowerDefence
 	void Lair::spawn()
 	{
 		auto [begin, end] = m_shedule.equal_range(std::floor(m_timer));
-		for (auto it = begin; it != end; ++it)
+		for (auto it = begin; it != end; it = m_shedule.erase(it))
 			spawn(it->second);
 	}
 } // namespace TowerDefence

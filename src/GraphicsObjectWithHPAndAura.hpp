@@ -12,13 +12,32 @@ namespace TowerDefence
 	public:
 		inline GraphicsObjectWithHPAndAura() noexcept = default;
 
-		inline GraphicsObjectWithHPAndAura(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const float rx, const float ry, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
-			GObjectWithHP<_T>(scene, pixmap, object, size),
-			GObjectWithAura<_T>(scene, pixmap, object, rx, ry),
-			GObject<_T>(scene, pixmap, object)
+		inline GraphicsObjectWithHPAndAura(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, std::map<std::string, QPixmap>& assets, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
+			GObject<_T>(scale, scene, pixmap, object),
+			GObjectWithHP<_T>(scale, scene, pixmap, object, size),
+			GObjectWithAura<_T>(scale, scene, pixmap, object, assets)
+		{ }
+
+		GraphicsObjectWithHPAndAura(const GraphicsObjectWithHPAndAura& other) = delete;
+
+		inline GraphicsObjectWithHPAndAura(GraphicsObjectWithHPAndAura&& other) noexcept :
+			GObject<_T>(std::move(other)),
+			GObjectWithHP<_T>(std::move(other)),
+			GObjectWithAura<_T>(std::move(other))
 		{ }
 
 		inline ~GraphicsObjectWithHPAndAura() noexcept override = default;
+
+		GraphicsObjectWithHPAndAura& operator=(const GraphicsObjectWithHPAndAura& other) = delete;
+
+		inline GraphicsObjectWithHPAndAura& operator=(GraphicsObjectWithHPAndAura&& other) noexcept
+		{
+			GObject<_T>::operator=(std::move(other));
+			GObjectWithHP<_T>::operator=(std::move(other));
+			GObjectWithAura<_T>::operator=(std::move(other));
+
+			return *this;
+		}
 
 		inline void setPos(const PosF& pos) noexcept override
 		{
@@ -26,7 +45,11 @@ namespace TowerDefence
 			GObjectWithAura<_T>::setPos(pos);
 		}
 
-		inline void update(const float dx, const float dy) noexcept override { GObjectWithHP<_T>::update(dx, dy); }
+		inline void update() noexcept override
+		{
+			GObjectWithAura<_T>::update();
+			GObjectWithHP<_T>::update();
+		}
 	};
 
 	template<typename _T>

@@ -85,7 +85,7 @@ namespace TowerDefence
 
 	void Graphics::update()
 	{
-		m_castle->update(m_tileWidth, m_tileHeight);
+		m_castle->update();
 
 #define _rem(collection)                                                      \
 		collection.erase(                                                     \
@@ -100,7 +100,7 @@ namespace TowerDefence
 		
 #undef _rem
 
-#define _upd(collection) std::for_each(std::begin(collection), std::end(collection), [&](auto& item) { item.update(m_tileWidth, m_tileHeight); });
+#define _upd(collection) std::for_each(std::begin(collection), std::end(collection), [&](auto& item) { item.update(); });
 
 		_upd(m_walls);
 		_upd(m_towers);

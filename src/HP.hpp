@@ -31,9 +31,9 @@ namespace TowerDefence
 		void setHP(const float percent) noexcept;
 
 	private:
-		std::shared_ptr<QGraphicsScene> m_scene;
-		QGraphicsRectItem*				m_back;
-		QGraphicsRectItem*				m_front;
+		std::shared_ptr<QGraphicsScene>    m_scene;
+		std::shared_ptr<QGraphicsRectItem> m_back;
+		std::shared_ptr<QGraphicsRectItem> m_front;
 	};
 } // namespace TowerDefence
 

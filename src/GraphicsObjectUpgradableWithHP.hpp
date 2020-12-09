@@ -17,6 +17,7 @@ namespace TowerDefence
 		{ }
 
 		inline GraphicsObjectUpgradableWithHP(
+			const PosF& scale,
 			std::shared_ptr<QGraphicsScene> scene,
 			QPixmap pixmap,
 			std::shared_ptr<_T> object,
@@ -24,15 +25,15 @@ namespace TowerDefence
 			std::map<std::string, QPixmap>& assets,
 			const PosI& size = { HP::WIDTH, HP::HEIGHT }
 		) :
-			GObject<_T>(scene, pixmap, object),
-			GObjectWithHP<_T>(scene, pixmap, object, size),
-			GObjectUpgradable<_T>(scene, pixmap, object, std::move(name), assets)
+			GObject<_T>(scale, scene, pixmap, object),
+			GObjectWithHP<_T>(scale, scene, pixmap, object, size),
+			GObjectUpgradable<_T>(scale, scene, pixmap, object, std::move(name), assets)
 		{ }
 
-		inline virtual void update(const float dx, const float dy) noexcept override
+		inline virtual void update() noexcept override
 		{
-			GObjectWithHP<_T>::update(dx, dy);
-			GObjectUpgradable<_T>::update(dx, dy);
+			GObjectWithHP<_T>::update();
+			GObjectUpgradable<_T>::update();
 		}
 	};
 

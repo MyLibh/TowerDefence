@@ -8,8 +8,8 @@ namespace TowerDefence
 	class HeavyEnemy : public Enemy
 	{
 	public:
-		inline HeavyEnemy(std::shared_ptr<EnemyProps> props) noexcept :
-			Enemy(props)
+		inline HeavyEnemy(std::shared_ptr<EnemyProps> props, std::vector<std::shared_ptr<Aura>>&& auras) noexcept :
+			Enemy(props, std::move(auras))
 		{}
 
 		inline ~HeavyEnemy() noexcept override = default;

@@ -74,17 +74,14 @@ namespace TowerDefence
 		template<typename _T>
 		inline void add(std::shared_ptr<_T> object)
 		{
-#define _add(cont, str, ...) ptr = &cont.emplace_back(m_scene, m_images.at(str).scaled(m_tileWidth, m_tileHeight), object, __VA_ARGS__)
+			auto scale = PosF{ m_tileWidth, m_tileHeight };
+
+#define _params(str, ...) scale, m_scene, m_images.at(str).scaled(m_tileWidth, m_tileHeight), object, __VA_ARGS__
+#define _add(cont, str, ...) ptr = &cont.emplace_back(_params(str, __VA_ARGS__))
 
 			GObject<_T>* ptr{};
 			if constexpr (std::is_same_v<_T, Castle>)
-				ptr = (m_castle = new GObjectUpgradableWithHP<Castle>(
-					m_scene,
-					m_images.at("Castle1").scaled(m_tileWidth, m_tileHeight),
-					object,
-					"Castle",
-					m_images,
-					PosI{ 100, 15 }));
+				ptr = (m_castle = new GObjectUpgradableWithHP<Castle>(_params("Castle1", "Castle", m_images, PosI{ 100, 15 })));
 			else if constexpr (std::is_same_v<_T, Lair>)
 				_add(m_lairs, "Lair");
 			else if constexpr (std::is_same_v<_T, Wall>)
@@ -95,14 +92,20 @@ namespace TowerDefence
 					//object->getR() * m_tileHeight);
 			else if constexpr (std::is_same_v<_T, Enemy>)
 			{
+				std::string name;
 				if (typeid(*object) == typeid(AirEnemy))
-					_add(m_enemies, "AirEnemy", 0, 0);
+					name = "AirEnemy";
 				else if (typeid(*object) == typeid(HeavyEnemy))
-					_add(m_enemies, "HeavyEnemy", 0, 0);
+					name = "HeavyEnemy";
 				else if (typeid(*object) == typeid(LightEnemy))
-					_add(m_enemies, "LightEnemy", 0, 0);
+					name =  "LightEnemy";
 
-				ptr->getItem()->setZValue(1);
+				if (!name.empty())
+				{
+					_add(m_enemies, name, m_images);
+
+					ptr->getItem()->setZValue(1);
+				}
 			}
 
 			if (ptr)

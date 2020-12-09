@@ -13,12 +13,33 @@ namespace TowerDefence
 	public:
 		inline GraphicsObjectWithHP() noexcept = default;
 
-		inline GraphicsObjectWithHP(std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
-			GObject<_T>(scene, pixmap, object),
+		inline GraphicsObjectWithHP(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
+			GObject<_T>(scale, scene, pixmap, object),
 			m_hp(scene, size)
 		{ }
 
+		GraphicsObjectWithHP(const GraphicsObjectWithHP&) = delete;
+
+		inline GraphicsObjectWithHP(GraphicsObjectWithHP&& other) noexcept :
+			GObject<_T>(std::move(other)),
+			m_hp(std::move(other.m_hp))
+		{
+			other.m_hp = {};
+		}
+
 		inline virtual ~GraphicsObjectWithHP() noexcept override = default;
+
+		GraphicsObjectWithHP& operator=(const GraphicsObjectWithHP&) = delete;
+
+		inline GraphicsObjectWithHP& operator=(GraphicsObjectWithHP&& other) noexcept
+		{
+			GObject<_T>::operator=(std::move(other));
+
+			if (this != &other)
+				m_hp = std::move(other.m_hp);
+
+			return *this;
+		}
 
 		inline virtual void setPos(const PosF& pos) noexcept override
 		{
@@ -30,11 +51,11 @@ namespace TowerDefence
 			}
 		}
 
-		inline virtual void update(const float dx, const float dy) noexcept override
+		inline virtual void update() noexcept override
 		{
 			m_hp.setHP(static_cast<float>(this->m_object->getHealth()) / this->m_object->getMaxHealth());
 
-			GObject<_T>::update(dx, dy);
+			GObject<_T>::update();
 		}
 
 	protected:

@@ -5,6 +5,7 @@
 #include "ObjectWithHP.hpp"
 #include "EnemyProps.hpp"
 #include "Route.hpp"
+#include "Aura.hpp"
 
 #include <vector>
 #include <memory>
@@ -12,7 +13,6 @@
 namespace TowerDefence
 {
 	class EnemyManager;
-	class Aura;
 	class Enemy : public Entity, public ObjectWithHP
 	{
 	protected:
@@ -31,9 +31,10 @@ namespace TowerDefence
 		void useAuras();
 
 	public:
-		inline Enemy(std::shared_ptr<EnemyProps> props) noexcept :
+		inline Enemy(std::shared_ptr<EnemyProps> props, std::vector<std::shared_ptr<Aura>>&& auras) noexcept :
 			ObjectWithHP(props->maxHealth),
-			m_props(std::move(props))
+			m_props(std::move(props)),
+			m_auras(std::move(auras))
 		{}
 
 		inline virtual ~Enemy() noexcept override = default;
@@ -41,6 +42,8 @@ namespace TowerDefence
 		inline int getMaxHealth() const noexcept final { return m_props->maxHealth; }
 
 		void update(const float dt) override;
+
+		[[nodiscard]] inline const auto& getAuras() const noexcept { return m_auras; }
 
 		inline void setRoute(Route route) noexcept { m_route = std::move(route); }
 

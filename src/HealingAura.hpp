@@ -10,9 +10,14 @@ namespace TowerDefence
 	private:
 		void apply(std::shared_ptr<Enemy> enemy) const override;
 
-	private:
-		float m_healthAmount;
+	public:
+		explicit inline HealingAura(const int heal, const float r) noexcept :
+			Aura(r),
+			m_heal(heal)
+		{ }
 
+	private:
+		int m_heal;
 	};
 } // namesapce TowerDefence
 

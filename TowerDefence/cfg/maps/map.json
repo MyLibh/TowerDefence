@@ -9,9 +9,6 @@
          "y": 0,
          "spawn":
          [
-          { "type": "Air", "time": 1 },
-          { "type": "Heavy", "time": 5 },
-          { "type": "Light", "time": 9 }
          ]
        },
       {
@@ -341,7 +338,7 @@
         "y": 5,
         "spawn":
         [
-         { "type": "Heavy", "time": 1 }
+            { "type": "Heavy", "auras": [ { "type": "heal", "heal": 1, "r": 1 } ], "time": 1 }
         ]
       },
       {

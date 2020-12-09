@@ -19,14 +19,16 @@ namespace TowerDefence
 
 	HP::~HP() noexcept
 	{
-		if (m_scene)
+		if (m_scene && m_front.use_count() == 1 && m_back.use_count() == 1)
 		{
-			if (m_front) m_scene->removeItem(m_front);
-			if (m_back)  m_scene->removeItem(m_back);
+			if (m_front) m_scene->removeItem(m_front.get());
+			if (m_back)  m_scene->removeItem(m_back.get());
+
+			m_front = m_back = nullptr;
 		}
 	}
 
-	void HP::setPos(const PosF & pos) noexcept
+	void HP::setPos(const PosF& pos) noexcept
 	{
 		if (m_back && m_front)
 		{

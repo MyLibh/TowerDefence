@@ -6,19 +6,26 @@
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
 
+#include <algorithm>
+
 namespace TowerDefence
 {
-	GraphicsAura::GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float rx, const float ry) :
-		m_rx(rx),
-		m_ry(ry),
-		m_item(scene->addEllipse(0., 0., 2. * m_rx, 2. * m_ry, QPen(Qt::black)))
-	{ }
+	GraphicsAura::GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float r, const PosF& scale, QColor color, QPixmap particlePixmap) :
+		m_scale(scale),
+		m_r(r),
+		m_scene(scene),
+		m_item(scene->addEllipse(0., 0., 2. * m_r * m_scale.x, 2. * m_r * m_scale.y, QPen(color)))
+	{
+		for (size_t i{}; i < GAura::PARTICLES_NUM; ++i)
+			m_particles.emplace_back(m_scene, particlePixmap, m_r * m_scale.x, m_r * m_scale.y);
+	}
 
 	void GraphicsAura::setPos(const PosF& pos) noexcept
 	{
 		if (m_item)
-		{
-			m_item->setPos(static_cast<qreal>(pos.x) - m_rx, pos.y - m_ry / 2.);
-		}
+			m_item->setPos(pos.x - static_cast<qreal>(m_r) * m_scale.x, pos.y - static_cast<qreal>(m_r) * m_scale.y / 2.);
+
+		for (auto& particle : m_particles) 
+			particle.setPos(pos);
 	}
 } // namespace TowerDefence

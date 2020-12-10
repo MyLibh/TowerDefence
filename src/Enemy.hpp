@@ -34,7 +34,8 @@ namespace TowerDefence
 		inline Enemy(std::shared_ptr<EnemyProps> props, std::vector<std::shared_ptr<Aura>>&& auras) noexcept :
 			ObjectWithHP(props->maxHealth),
 			m_props(std::move(props)),
-			m_auras(std::move(auras))
+			m_auras(std::move(auras)),
+			m_buffs{}
 		{}
 
 		inline virtual ~Enemy() noexcept override = default;
@@ -45,6 +46,8 @@ namespace TowerDefence
 
 		[[nodiscard]] inline const auto& getAuras() const noexcept { return m_auras; }
 
+		[[nodiscard]] inline auto& getBuffs() noexcept { return m_buffs; }
+
 		inline void setRoute(Route route) noexcept { m_route = std::move(route); }
 
 		inline void setProperties(std::shared_ptr<EnemyProps> props) noexcept { m_props = std::move(props); }
@@ -53,6 +56,7 @@ namespace TowerDefence
 		std::shared_ptr<EnemyProps>        m_props;
 		Route                              m_route;
 		std::vector<std::shared_ptr<Aura>> m_auras;
+		Buffs                              m_buffs;
 	};
 } // namespace TowerDefence
 

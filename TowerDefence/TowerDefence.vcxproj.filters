@@ -122,9 +122,6 @@
     <ClCompile Include="..\src\Aura.cpp">
       <Filter>Source Files\Map\Auras</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\HealingAura.cpp">
-      <Filter>Source Files\Map\Auras</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Enemy.cpp">
       <Filter>Source Files\Map\Enemies</Filter>
     </ClCompile>
@@ -261,6 +258,24 @@
     </ClInclude>
     <ClInclude Include="..\src\Constants.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Buffs.hpp">
+      <Filter>Header Files\Map\Objects\Auras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Enemies.hpp">
+      <Filter>Header Files\Map\Objects\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Auras.hpp">
+      <Filter>Header Files\Map\Objects\Auras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Cells.hpp">
+      <Filter>Header Files\Map\Objects\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Buildings.hpp">
+      <Filter>Header Files\Map\Objects\Buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DamageAura.hpp">
+      <Filter>Header Files\Map\Objects\Auras</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

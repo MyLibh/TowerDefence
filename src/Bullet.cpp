@@ -9,8 +9,17 @@ namespace TowerDefence
 {
 	void Bullet::update(const float dt)
 	{
-		if (!(m_isAlive = m_target->isAlive()))
+		if (!m_isAlive)
 			return;
+
+		if (!m_target->isAlive())
+		{
+			// TODO: Retarget
+
+			m_isAlive = false;
+
+			return;
+		}
 
 		auto targetPos = m_target->getPos();
 		targetPos.x += .5f;

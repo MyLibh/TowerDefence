@@ -18,7 +18,8 @@ namespace TowerDefence
 			const QPixmap& pixmap,
 			std::shared_ptr<_T> object,
 			std::map<std::string, QPixmap>& assets,
-			const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
+			const PosI& size = { HP::WIDTH, HP::HEIGHT }
+		) :
 			GObject<_T>(scale, scene, pixmap, object),
 			GObjectWithHP<_T>(scale, scene, pixmap, object, size),
 			GObjectWithAura<_T>(scale, scene, pixmap, object, assets)
@@ -34,13 +35,14 @@ namespace TowerDefence
 
 		inline ~GraphicsObjectWithHPAndAura() noexcept override = default;
 
-		GraphicsObjectWithHPAndAura& operator=(const GraphicsObjectWithHPAndAura& other) = delete;
+		GraphicsObjectWithHPAndAura& operator=(const GraphicsObjectWithHPAndAura&) = delete;
 
 		inline GraphicsObjectWithHPAndAura& operator=(GraphicsObjectWithHPAndAura&& other) noexcept
 		{
-			GObject<_T>::operator=(std::move(other));
 			GObjectWithHP<_T>::operator=(std::move(other));
-			GObjectWithAura<_T>::operator=(std::move(other));
+
+			if (this != &other)
+				this->m_auras = std::move(other.m_auras);
 
 			return *this;
 		}

@@ -8,7 +8,7 @@ namespace TowerDefence
 	class HealingAura final : public Aura
 	{
 	private:
-		void apply(std::shared_ptr<Enemy> enemy) const override;
+		inline void apply(Buffs& buffs) const override { buffs.regen += m_heal; }
 
 	public:
 		explicit inline HealingAura(const int heal, const float r) noexcept :

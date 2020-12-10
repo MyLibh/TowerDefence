@@ -2,6 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 #include "GraphicsAura.hpp"
+#include "Constants.hpp"
 
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
@@ -16,7 +17,7 @@ namespace TowerDefence
 		m_scene(scene),
 		m_item(scene->addEllipse(0., 0., 2. * m_r * m_scale.x, 2. * m_r * m_scale.y, QPen(color)))
 	{
-		for (size_t i{}; i < GAura::PARTICLES_NUM; ++i)
+		for (size_t i{}; i < Constants::PARTICLES_NUM; ++i)
 			m_particles.emplace_back(m_scene, particlePixmap, m_r * m_scale.x, m_r * m_scale.y);
 	}
 

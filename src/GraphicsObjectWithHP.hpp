@@ -58,7 +58,8 @@ namespace TowerDefence
 
 		inline virtual void update() noexcept override
 		{
-			m_hp.setHP(static_cast<float>(this->m_object->getHealth()) / this->m_object->getMaxHealth());
+			if (this->m_object)
+				m_hp.setHP(static_cast<float>(this->m_object->getHealth()) / this->m_object->getMaxHealth());
 
 			GObject<_T>::update();
 		}

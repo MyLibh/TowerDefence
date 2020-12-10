@@ -19,7 +19,7 @@ namespace detail
 		p.drawPixmap(0, 0, pixmap);
 		p.end();
 
-		return std::move(alpha);
+		return alpha;
 	}
 } // namespace detail
 

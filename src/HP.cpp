@@ -2,6 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 #include "HP.hpp"
+#include "Constants.hpp"
 
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
@@ -13,8 +14,8 @@ namespace TowerDefence
 		m_back(scene->addRect(0., 0., size.x, size.y, QPen(Qt::black, 3), Qt::transparent)),
 		m_front(scene->addRect(0., 0., size.x, size.y, QPen(Qt::transparent, 3), Qt::green))
 	{
-		m_back->setZValue(2);
-		m_front->setZValue(2);
+		m_back->setZValue(Constants::GUI_Z_LVL);
+		m_front->setZValue(Constants::GUI_Z_LVL);
 	}
 
 	HP::~HP() noexcept

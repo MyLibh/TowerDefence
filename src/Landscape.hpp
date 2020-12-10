@@ -1,13 +1,10 @@
 #ifndef __LANDSCAPE_HPP_INCLUDED__
 #define __LANDSCAPE_HPP_INCLUDED__
 
-#include "Castle.hpp"
 #include "Field.hpp"
-#include "Tower.hpp"
 #include "EnemyManager.hpp"
-#include "Lair.hpp"
 #include "Enemy.hpp"
-#include "Wall.hpp"
+#include "Buildings.hpp"
 
 #include <set>
 #include <memory>
@@ -128,7 +125,7 @@ namespace TowerDefence
 				{
 					const auto obj = std::dynamic_pointer_cast<ObjectWithHP>(field->getBuilding());
 
-					return field->isBusy() && obj && obj->isAlive() && obj->getHealth() != obj->getMaxHealth() && m_castle->hasMoney(100);
+					return field->isBusy() && obj && obj->isAlive() && obj->getHealth() != obj->getMaxHealth() && m_castle->hasMoney(Constants::REPAIR_COST);
 				});
 		}
 
@@ -139,6 +136,8 @@ namespace TowerDefence
 				m_castle->withdraw(PropsManager::getTowerProps().price);
 
 				field->build(std::dynamic_pointer_cast<Building>(addEntity<Tower>(pos)));
+
+				// TODO: update routes
 			}
 		}
 
@@ -146,9 +145,11 @@ namespace TowerDefence
 		{
 			if (auto field = std::dynamic_pointer_cast<Field>(getCell(pos)); field)
 			{
-				m_castle->withdraw(100);
+				m_castle->withdraw(Constants::WALL_COST);
 
 				field->build(std::dynamic_pointer_cast<Building>(addEntity<Wall>(pos)));
+
+				// TODO: update routes
 			}
 		}
 
@@ -168,7 +169,7 @@ namespace TowerDefence
 			if (auto field = std::dynamic_pointer_cast<Field>(getCell(pos)); field)
 				if (auto repairable = std::dynamic_pointer_cast<ObjectWithHP>(field->getBuilding()); repairable && repairable->getHealth() != repairable->getMaxHealth())
 				{
-					m_castle->withdraw(100);
+					m_castle->withdraw(Constants::REPAIR_COST);
 
 					repairable->increaseHealth(repairable->getMaxHealth());
 				}

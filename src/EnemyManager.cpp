@@ -2,17 +2,11 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 #include "EnemyManager.hpp"
-#include "AirEnemy.hpp"
-#include "HeavyEnemy.hpp"
-#include "LightEnemy.hpp"
+#include "Enemies.hpp"
 #include "Graphics.hpp"
-#include "Route.hpp"
-#include "Lair.hpp"
+#include "Cells.hpp"
 #include "Landscape.hpp"
-#include "Mountain.hpp"
 #include "PropsManager.hpp"
-#include "Castle.hpp"
-#include "Tower.hpp"
 #include "Bullet.hpp"
 
 #include <algorithm>
@@ -150,12 +144,16 @@ namespace TowerDefence
 	
 	void EnemyManager::update(const float dt)
 	{
-		std::for_each(std::begin(m_enemies), std::end(m_enemies), [dt](auto& enemy) { enemy->update(dt); });
-		std::for_each(std::begin(m_bullets), std::end(m_bullets), [dt](auto& bullet) { bullet->update(dt); });
+		m_enemies.erase(
+			std::remove_if(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { return !enemy->isAlive(); }),
+			std::end(m_enemies));
 
 		m_bullets.erase(
 			std::remove_if(std::begin(m_bullets), std::end(m_bullets), [](const auto& bullet) { return !bullet->isAlive(); }),
 			std::end(m_bullets));
+
+		std::for_each(std::begin(m_enemies), std::end(m_enemies), [dt](auto& enemy) { enemy->update(dt); });
+		std::for_each(std::begin(m_bullets), std::end(m_bullets), [dt](auto& bullet) { bullet->update(dt); });
 	}
 
 	void EnemyManager::add(std::shared_ptr<Enemy> enemy, const Lair* lair)
@@ -177,9 +175,7 @@ namespace TowerDefence
 
 	void EnemyManager::addBullet(const int damage, const PosF& pos, std::shared_ptr<Enemy> target)
 	{
-		m_bullets.emplace_back(std::make_shared<Bullet>(damage, pos, target));
-
-		sGraphics->add(m_bullets.back());
+		sGraphics->add(m_bullets.emplace_back(std::make_shared<Bullet>(damage, pos, target)));
 	}
 
 	std::shared_ptr<ObjectWithHP> EnemyManager::getTargetAt(const PosF& pos) const

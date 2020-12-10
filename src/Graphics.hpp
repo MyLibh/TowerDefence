@@ -92,8 +92,8 @@ namespace TowerDefence
 			else if constexpr (std::is_same_v<_T, Bullet>)
 			{
 				ptr = &m_bullets.emplace_back(scale, m_scene, m_images.at("Bullet").scaled(30, 20), object);
-				if (ptr)
-					ptr->getItem()->setZValue(2);
+
+				ptr->getItem()->setZValue(Constants::BULLETS_Z_LVL);
 			}
 			else if constexpr (std::is_base_of_v<Enemy, _T>)
 			{
@@ -105,7 +105,7 @@ namespace TowerDefence
 					_add(m_enemies, "LightEnemy", m_images);
 
 				if (ptr)
-					ptr->getItem()->setZValue(1);
+					ptr->getItem()->setZValue(Constants::ENEMIES_Z_LVL);
 			}
 
 			if (ptr)

@@ -27,7 +27,10 @@ namespace TowerDefence
 			{
 				m_shotTimer = 0.f;
 
-				sEnemyManager->addBullet(m_props.damage, m_pos, target);
+				auto bulletPos = m_pos;
+				bulletPos.x += .5f;
+				bulletPos.y += .5f;
+				sEnemyManager->addBullet(m_props.damage, bulletPos, target);
 			}
 	}
 } // namespace TowerDefence

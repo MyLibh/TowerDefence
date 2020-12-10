@@ -37,5 +37,7 @@
         <file>assets/Wall.png</file>
         <file>assets/HealParticle.png</file>
         <file>assets/Bullet.png</file>
+        <file>assets/SpeedParticle.png</file>
+        <file>assets/DamageParticle.png</file>
     </qresource>
 </RCC>

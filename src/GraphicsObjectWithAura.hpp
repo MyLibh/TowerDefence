@@ -3,7 +3,7 @@
 
 #include "GraphicsObject.hpp"
 #include "GraphicsAura.hpp"
-#include "HealingAura.hpp"
+#include "Auras.hpp"
 
 namespace TowerDefence
 {
@@ -18,12 +18,17 @@ namespace TowerDefence
 			std::shared_ptr<QGraphicsScene> scene,
 			const QPixmap& pixmap,
 			std::shared_ptr<_T> object,
-			std::map<std::string, QPixmap>& assets) :
+			std::map<std::string, QPixmap>& assets
+		) :
 			GObject<_T>(scale, scene, pixmap, object)
 		{
 			for (const auto& aura : object->getAuras())
 				if (typeid(*aura) == typeid(HealingAura))
 					m_auras.emplace_back(scene, aura->getRadius(), scale, Qt::GlobalColor::green, assets.at("HealParticle"));
+				else if (typeid(*aura) == typeid(SpeedAura))
+					m_auras.emplace_back(scene, aura->getRadius(), scale, Qt::GlobalColor::blue, assets.at("SpeedParticle"));
+				else if (typeid(*aura) == typeid(DamageAura))
+					m_auras.emplace_back(scene, aura->getRadius(), scale, Qt::GlobalColor::magenta, assets.at("DamageParticle"));
 		}
 
 		GraphicsObjectWithAura(const GraphicsObjectWithAura&) = delete;

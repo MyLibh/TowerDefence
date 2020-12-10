@@ -105,7 +105,6 @@
     <ClCompile Include="..\src\EnemyManager.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
     <ClCompile Include="..\src\GraphicsAura.cpp" />
-    <ClCompile Include="..\src\HealingAura.cpp" />
     <ClCompile Include="..\src\HeavyEnemy.cpp" />
     <ClCompile Include="..\src\HP.cpp" />
     <ClCompile Include="..\src\Landscape.cpp" />
@@ -122,12 +121,18 @@
   <ItemGroup>
     <ClInclude Include="..\src\AirEnemy.hpp" />
     <ClInclude Include="..\src\Aura.hpp" />
+    <ClInclude Include="..\src\Auras.hpp" />
+    <ClInclude Include="..\src\Buffs.hpp" />
     <ClInclude Include="..\src\Building.hpp" />
+    <ClInclude Include="..\src\Buildings.hpp" />
     <ClInclude Include="..\src\Bullet.hpp" />
     <ClInclude Include="..\src\Castle.hpp" />
     <ClInclude Include="..\src\CastleProps.hpp" />
     <ClInclude Include="..\src\Cell.hpp" />
+    <ClInclude Include="..\src\Cells.hpp" />
     <ClInclude Include="..\src\Constants.hpp" />
+    <ClInclude Include="..\src\DamageAura.hpp" />
+    <ClInclude Include="..\src\Enemies.hpp" />
     <ClInclude Include="..\src\Enemy.hpp" />
     <ClInclude Include="..\src\EnemyManager.hpp" />
     <ClInclude Include="..\src\EnemyProps.hpp" />

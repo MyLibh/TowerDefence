@@ -26,18 +26,14 @@ namespace TowerDefence
 	public:
 		inline Lair(const PosF& pos, std::multimap<float, std::shared_ptr<Enemy>> shedule) noexcept :
 			Building(pos),
-			m_timer{},
 			m_shedule(std::move(shedule))
 		{ }
 
 		inline ~Lair() noexcept override = default;
 
-		void update(float dt) override;
-
-		void spawn();
+		void update(const float dt) override;
 
 	private:
-		float                                        m_timer;
 		std::multimap<float, std::shared_ptr<Enemy>> m_shedule;
 	};
 } // namespace TowerDefence

@@ -1,5 +1,6 @@
 #include "Aura.hpp"
 #include "EnemyManager.hpp"
+#include "Enemy.hpp"
 
 namespace TowerDefence
 {
@@ -13,7 +14,7 @@ namespace TowerDefence
 		if (Aura::sEnemyManager)
 		{
 			for (auto& enemy : Aura::sEnemyManager->getEnemiesAround(pos, m_r))
-				apply(enemy);
+				apply(enemy->getBuffs());
 		}
 	}
 } // namespace TowerDefence

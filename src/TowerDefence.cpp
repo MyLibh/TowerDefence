@@ -6,6 +6,7 @@
 #include "PropsManager.hpp"
 #include "MapLoader.hpp"
 #include "Landscape.hpp"
+#include "Utility.hpp"
 
 #include "ui_TowerDefence.h"
 
@@ -60,36 +61,26 @@ namespace TowerDefence
 
     void TowerDefence::initButtons()
     {
-        //template<>
-        auto exec = [&](auto func)
+        auto _exec = [&](auto func)
         {
             auto pos = m_graphics->getSelectedTilePos();
 
             func(m_landscape, pos);
 
-            //((*m_landscape).*func)(pos);
-
             setButtons(pos);
         };
 
-        QObject::connect(m_ui->buildTowerButton, &QPushButton::clicked,
-            [=]()
-            { 
-                exec(std::mem_fn(&Landscape::buildTower));
+        auto _add = [&](auto tag)
+        {
+            using type = tag_type_t<decltype(tag)>;
+            if (auto field = std::dynamic_pointer_cast<Field>(m_landscape->getCell(m_graphics->getSelectedTilePos())); field && field->isBusy())
+                m_graphics->add(std::dynamic_pointer_cast<type>(field->getBuilding()));
+        };
 
-                if (auto field = std::dynamic_pointer_cast<Field>(m_landscape->getCell(m_graphics->getSelectedTilePos())); field && field->isBusy())
-                    m_graphics->add(std::dynamic_pointer_cast<Tower>(field->getBuilding()));
-            });
-        QObject::connect(m_ui->buildWallButton, &QPushButton::clicked,
-            [=]()
-            {
-                exec(std::mem_fn(&Landscape::buildWall));
-
-                if (auto field = std::dynamic_pointer_cast<Field>(m_landscape->getCell(m_graphics->getSelectedTilePos())); field && field->isBusy())
-                    m_graphics->add(std::dynamic_pointer_cast<Wall>(field->getBuilding()));
-            });
-        QObject::connect(m_ui->upgradeButton, &QPushButton::clicked, [=]() { exec(std::mem_fn(&Landscape::upgrade)); });
-        QObject::connect(m_ui->repairButton,  &QPushButton::clicked, [=]() { exec(std::mem_fn(&Landscape::repair)); });
+        QObject::connect(m_ui->buildTowerButton, &QPushButton::clicked, [=]() { _exec(std::mem_fn(&Landscape::buildTower)); _add(Tag<Tower>{}); });
+        QObject::connect(m_ui->buildWallButton, &QPushButton::clicked, [=]() { _exec(std::mem_fn(&Landscape::buildWall)); _add(Tag<Wall>{}); });
+        QObject::connect(m_ui->upgradeButton, &QPushButton::clicked, [=]() { _exec(std::mem_fn(&Landscape::upgrade)); });
+        QObject::connect(m_ui->repairButton,  &QPushButton::clicked, [=]() { _exec(std::mem_fn(&Landscape::repair)); });
     }
 
     void TowerDefence::updateMoneyLabel(const int money)
@@ -139,7 +130,7 @@ namespace TowerDefence
         PropsManager::loadTowerProps("cfg/tower.props");
         PropsManager::loadEnemyProps("cfg/enemies/");
 
-        m_landscape = MapLoader::load("cfg/maps/map.json");
+        m_landscape = MapLoader::load("cfg/maps/Big.json");
 
         m_graphics->setTileSize(m_ui->canvas->width() * 1. / m_landscape->getWidth(), m_ui->canvas->height() * 1. / m_landscape->getHeight());
         m_graphics->createMap(m_landscape);
@@ -158,7 +149,7 @@ namespace TowerDefence
     {
         if (m_landscape->getCastle()->isAlive())
         {
-            m_landscape->update(0.1f);
+            m_landscape->update(Constants::DT);
 
             m_graphics->update();
 

@@ -17,16 +17,13 @@ namespace TowerDefence
 	class GraphicsObject
 	{
 	public:
-		inline constexpr GraphicsObject() noexcept :
-			m_item{},
-			m_object()
-		{ }
+		inline GraphicsObject() noexcept = default;
 
 		inline GraphicsObject(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, const QPixmap& pixmap, std::shared_ptr<_T> object) :
 			m_scale(scale),
 			m_scene(scene),
 			m_item(scene->addPixmap(pixmap)),
-			m_object(std::move(object))
+			m_object(object)
 		{ }
 
 		GraphicsObject(const GraphicsObject&) = delete;
@@ -43,11 +40,7 @@ namespace TowerDefence
 			other.m_scene = nullptr;
 		}
 
-		inline virtual ~GraphicsObject() noexcept
-		{
-			if (m_scene && m_item && m_item.use_count() == 1)
-				m_scene->removeItem(m_item.get());
-		}
+		inline virtual ~GraphicsObject() noexcept = default;
 
 		GraphicsObject& operator=(const GraphicsObject&) = delete;
 

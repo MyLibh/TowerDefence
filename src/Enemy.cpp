@@ -13,19 +13,20 @@ namespace TowerDefence
 	void Enemy::attack(std::shared_ptr<ObjectWithHP> object) const noexcept
 	{
 		if (object && object->isAlive())
-			object->decreaseHealth(m_props->damage);
+			object->decreaseHealth(m_props->damage + m_buffs.damage);
 	}
 
 	void Enemy::move(const float dt)
 	{
 		if (m_route)
 		{
+			auto speed = m_props->speed + m_buffs.speed;
 			if (auto next = m_route.next(); next.x == m_pos.x)
 			{
 				if (next.y > m_pos.y)
-					m_pos.y = std::min(m_pos.y + m_props->speed * dt, next.y);
+					m_pos.y = std::min(m_pos.y + speed * dt, next.y);
 				else
-					m_pos.y = std::max(m_pos.y - m_props->speed * dt, next.y);
+					m_pos.y = std::max(m_pos.y - speed * dt, next.y);
 
 				if (m_pos == next)
 					(void)m_route.getNext();
@@ -33,9 +34,9 @@ namespace TowerDefence
 			else if (next.y == m_pos.y)
 			{
 				if (next.x > m_pos.x)
-					m_pos.x = std::min(m_pos.x + m_props->speed * dt, next.x);
+					m_pos.x = std::min(m_pos.x + speed * dt, next.x);
 				else
-					m_pos.x = std::max(m_pos.x - m_props->speed * dt, next.x);
+					m_pos.x = std::max(m_pos.x - speed * dt, next.x);
 
 				if (m_pos == next)
 					(void)m_route.getNext();
@@ -45,7 +46,7 @@ namespace TowerDefence
 
 	void Enemy::regenerate()
 	{
-		increaseHealth(m_props->regen * m_props->maxHealth);
+		increaseHealth(m_props->regen * m_props->maxHealth + m_buffs.regen);
 	}
 
 	void Enemy::useAuras()
@@ -58,6 +59,9 @@ namespace TowerDefence
 		static float accumulator{};
 
 		accumulator += dt;
+
+		if (!isAlive())
+			return;
 
 		if (m_route && !m_route.isFinished())
 			move(dt);
@@ -73,5 +77,7 @@ namespace TowerDefence
 
 			useAuras();
 		}
+
+		ClearBuffs(m_buffs);
 	}
 }

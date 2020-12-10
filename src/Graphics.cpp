@@ -3,15 +3,14 @@
 
 #include "Graphics.hpp"
 #include "Landscape.hpp"
-#include "Mountain.hpp"
-#include "River.hpp"
-#include "Field.hpp"
+#include "Cells.hpp"
 #include "Lair.hpp"
 #include "Utility.hpp"
 
 #include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
 #include <QDir>
+#include <QDebug>
 
 namespace TowerDefence
 {
@@ -34,12 +33,11 @@ namespace TowerDefence
 	void Graphics::createSelectionTile()
 	{
 		m_currentTile = m_scene->addRect(0., 0., m_tileWidth, m_tileHeight, QPen(Qt::green));
-		m_currentTile->setVisible(false);
 	}
 
 	PosF Graphics::getSelectedTilePos() const noexcept
 	{
-		return { std::ceil(static_cast<float>(m_currentTile->x()) / m_tileWidth), std::ceil(static_cast<float>(m_currentTile->y()) / m_tileHeight) };
+		return { std::ceil(static_cast<int>(m_currentTile->x()) / m_tileWidth), std::ceil(static_cast<int>(m_currentTile->y()) / m_tileHeight) };
 	}
 
 	bool Graphics::isTileSelected() const noexcept
@@ -89,9 +87,18 @@ namespace TowerDefence
 		auto _remove = [](auto& collection)
 		{
 			collection.erase(
-				std::remove_if(std::begin(collection), std::end(collection), [](const auto& item) { return !item.getObject()->isAlive(); }),
+				std::remove_if(std::begin(collection), std::end(collection),
+					[](const auto& item)
+					{
+						auto obj = item.getObject();
+
+						return !obj || !obj->isAlive();
+					}),
 				std::end(collection));
 		};
+
+		for (const auto& o : m_enemies)
+			qDebug() << o.getObject().get();
 
 		_remove(m_walls);
 		_remove(m_enemies);
@@ -113,23 +120,15 @@ namespace TowerDefence
 		if (!m_gameOver)
 		{
 			m_gameOver = m_scene->addPixmap(m_images.at("GameOver").scaled(width, height));
-			m_gameOver->setPos(width / 2, height / 2);
+			m_gameOver->setPos(width / 2.f, height / 2.f);
 		}
 	}
 
 	void Graphics::setCurrentTilePos(int x, int y)
 	{
-		x -= x % static_cast<int>(m_tileWidth);
-		y -= y % static_cast<int>(m_tileHeight);
+		x = std::floor(x / m_tileWidth);
+		y = std::floor(y / m_tileHeight);
 
-		if (m_currentTile->isVisible())
-		{
-			if (auto pos = m_currentTile->pos(); pos.x() == x && pos.y() == y)
-				m_currentTile->setVisible(false);
-		}
-		else
-			m_currentTile->setVisible(true);
-
-		m_currentTile->setPos(x - x % static_cast<int>(m_tileWidth), y - y % static_cast<int>(m_tileHeight));
+		m_currentTile->setPos(static_cast<double>(x) * m_tileWidth, static_cast<double>(y) * m_tileHeight);
 	}
 } // namespace TowerDefence

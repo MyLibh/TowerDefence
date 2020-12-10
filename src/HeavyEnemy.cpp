@@ -32,5 +32,7 @@ namespace TowerDefence
 
 			useAuras();
 		}
+
+		ClearBuffs(m_buffs);
 	}
 } // namespace TowerDefence

@@ -18,9 +18,6 @@ namespace TowerDefence
 {
 	class GraphicsAura
 	{
-	private:
-		inline static constexpr auto PARTICLES_NUM{ 4 };
-
 	public:
 		inline GraphicsAura() noexcept = default;
 
@@ -41,11 +38,7 @@ namespace TowerDefence
 			other.m_item = nullptr;
 		}
 
-		inline virtual ~GraphicsAura() noexcept
-		{
-			if (m_scene && m_item && m_item.use_count() == 1)
-				m_scene->removeItem(m_item.get());
-		}
+		inline ~GraphicsAura() noexcept = default;
 
 		GraphicsAura& operator=(const GraphicsAura&) = delete;
 
@@ -55,9 +48,9 @@ namespace TowerDefence
 			{
 				m_scale = std::move(other.m_scale);
 				m_r = std::move(other.m_r);
-				m_scene = std::move(m_scene);
-				m_item = std::move(m_item);
-				m_particles = std::move(m_particles);
+				m_scene = std::move(other.m_scene);
+				m_item = std::move(other.m_item);
+				m_particles = std::move(other.m_particles);
 
 				other.m_scale = {};
 				other.m_r = 0.f;

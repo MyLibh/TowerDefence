@@ -3,15 +3,10 @@
 
 #include "MapLoader.hpp"
 #include "Landscape.hpp"
-#include "Mountain.hpp"
-#include "River.hpp"
-#include "Field.hpp"
-#include "Lair.hpp"
-#include "AirEnemy.hpp"
-#include "HeavyEnemy.hpp"
-#include "LightEnemy.hpp"
+#include "Cells.hpp"
+#include "Enemies.hpp"
 #include "PropsManager.hpp"
-#include "HealingAura.hpp"
+#include "Auras.hpp"
 
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -38,6 +33,10 @@ namespace detail
             const auto&& object = item.toObject();
             if (const auto&& type = loadString("type"); type == "heal")
                 auras.emplace_back(std::make_shared<HealingAura>(loadInt("heal"), loadFloat("r")));
+            else if (type == "speed")
+                auras.emplace_back(std::make_shared<SpeedAura>(loadFloat("speed"), loadFloat("r")));
+            else if (type == "damage")
+                auras.emplace_back(std::make_shared<DamageAura>(loadInt("damage"), loadFloat("r")));
         }
 
         return std::move(auras);

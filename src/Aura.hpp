@@ -2,6 +2,7 @@
 #define __AURA_HPP_INCLUDED__
 
 #include "Pos.hpp"
+#include "Buffs.hpp"
 
 #include <memory>
 
@@ -15,7 +16,7 @@ namespace TowerDefence
 		inline static std::shared_ptr<EnemyManager> sEnemyManager;
 
 	protected:
-		virtual void apply(std::shared_ptr<Enemy> enemy) const = 0;
+		virtual void apply(Buffs& buffs) const = 0;
 
 	public:
 		static void setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept;

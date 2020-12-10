@@ -31,7 +31,7 @@ namespace TowerDefence
 		{
 			accumulator = 0.f;
 
-			increaseHealth(dt * Constants::CASTLE_REPAIR_AMOUNT);
+			increaseHealth(dt * Constants::CASTLE_REGEN_AMOUNT);
 		}
 
 		m_money += m_props.profit;

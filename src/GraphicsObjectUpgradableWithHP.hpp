@@ -30,6 +30,28 @@ namespace TowerDefence
 			GObjectUpgradable<_T>(scale, scene, pixmap, object, std::move(name), assets)
 		{ }
 
+		GraphicsObjectUpgradableWithHP(const GraphicsObjectUpgradableWithHP&) = delete;
+
+		inline GraphicsObjectUpgradableWithHP(GraphicsObjectUpgradableWithHP&& other) noexcept :
+			GObject<_T>(std::move(other)),
+			GObjectWithHP<_T>(std::move(other)),
+			GObjectUpgradable<_T>(std::move(other))
+		{ }
+
+		inline ~GraphicsObjectUpgradableWithHP() noexcept override = default;
+
+		GraphicsObjectUpgradableWithHP& operator=(const GraphicsObjectUpgradableWithHP&) = delete;
+
+		inline GraphicsObjectUpgradableWithHP& operator=(GraphicsObjectUpgradableWithHP&& other)
+		{
+			GObjectUpgradable<_T>::operator=(std::move(other));
+
+			if (this != &other)
+				this->m_hp = std::move(other.m_hp);
+
+			return *this;
+		}
+
 		inline virtual void update() noexcept override
 		{
 			GObjectWithHP<_T>::update();

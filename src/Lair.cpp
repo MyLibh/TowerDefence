@@ -15,14 +15,11 @@ namespace TowerDefence
 
 	void Lair::update(float dt)
 	{
-		spawn();
+		static float accumulator{};
 
-		m_timer += dt;
-	}
+		accumulator += dt;
 
-	void Lair::spawn()
-	{
-		auto [begin, end] = m_shedule.equal_range(std::floor(m_timer));
+		auto [begin, end] = m_shedule.equal_range(std::ceil(accumulator));
 		for (auto it = begin; it != end; it = m_shedule.erase(it))
 			spawn(it->second);
 	}

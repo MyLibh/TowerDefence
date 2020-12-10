@@ -338,7 +338,9 @@
         "y": 5,
         "spawn":
         [
-            { "type": "Heavy", "auras": [ { "type": "heal", "heal": 5, "r": 1 } ], "time": 1 }
+            { "type": "Heavy", "auras": [ { "type": "heal", "heal": 5, "r": 1 } ], "time": 1 },
+            { "type": "Air", "auras": [ { "type": "damage", "damage": 5, "r": 1 } ], "time": 2 },
+            { "type": "Light", "auras": [ { "type": "speed", "speed": 5, "r": 1 } ], "time": 3 }
         ]
       },
       {

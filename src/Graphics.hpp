@@ -3,6 +3,7 @@
 
 #include "GraphicsObjectWithHPAndAura.hpp"
 #include "GraphicsObjectUpgradableWithHP.hpp"
+#include "GraphicsBullet.hpp"
 #include "AirEnemy.hpp"
 #include "HeavyEnemy.hpp"
 #include "LightEnemy.hpp"
@@ -35,14 +36,8 @@ namespace TowerDefence
 			m_tileWidth{},
 			m_tileHeight{},
 			m_scene(std::make_shared<QGraphicsScene>()),
-			m_grid(),
-			m_images(),
 			m_currentTile{},
 			m_castle{},
-			m_lairs(),
-			m_walls(),
-			m_towers(),
-			m_enemies(),
 			m_gameOver{}
 		{ }
 
@@ -50,6 +45,10 @@ namespace TowerDefence
 		{
 			delete m_castle;
 		}
+
+		[[nodiscard]] inline constexpr auto getScaleX() const noexcept { return m_tileWidth; }
+
+		[[nodiscard]] inline constexpr auto getScaleY() const noexcept { return m_tileHeight; }
 
 		[[nodiscard]] inline auto& getScene() const noexcept { return m_scene; }
 
@@ -88,30 +87,32 @@ namespace TowerDefence
 				_add(m_walls, "Wall");
 			else if constexpr (std::is_same_v<_T, Tower>)
 				_add(m_towers, "Tower1", "Tower", m_images);
-					//object->getR() * m_tileWidth,
-					//object->getR() * m_tileHeight);
-			else if constexpr (std::is_same_v<_T, Enemy>)
+			//object->getR() * m_tileWidth,
+			//object->getR() * m_tileHeight);
+			else if constexpr (std::is_same_v<_T, Bullet>)
 			{
-				std::string name;
+				ptr = &m_bullets.emplace_back(scale, m_scene, m_images.at("Bullet").scaled(30, 20), object);
+				if (ptr)
+					ptr->getItem()->setZValue(2);
+			}
+			else if constexpr (std::is_base_of_v<Enemy, _T>)
+			{
 				if (typeid(*object) == typeid(AirEnemy))
-					name = "AirEnemy";
+					_add(m_enemies, "AirEnemy", m_images);
 				else if (typeid(*object) == typeid(HeavyEnemy))
-					name = "HeavyEnemy";
+					_add(m_enemies, "HeavyEnemy", m_images);
 				else if (typeid(*object) == typeid(LightEnemy))
-					name =  "LightEnemy";
+					_add(m_enemies, "LightEnemy", m_images);
 
-				if (!name.empty())
-				{
-					_add(m_enemies, name, m_images);
-
+				if (ptr)
 					ptr->getItem()->setZValue(1);
-				}
 			}
 
 			if (ptr)
 				ptr->setPos({ object->getX() * m_tileWidth, object->getY() * m_tileHeight });
 
 #undef _add
+#undef _params
 		}
 
 	private:
@@ -127,6 +128,7 @@ namespace TowerDefence
 		std::vector<GObjectWithHP<Wall>>         m_walls;
 		std::vector<GObjectUpgradable<Tower>>    m_towers;
 		std::vector<GObjectWithHPAndAura<Enemy>> m_enemies;
+		std::vector<GObject<Bullet>>             m_bullets;
 
 		QGraphicsPixmapItem* m_gameOver;
 	};

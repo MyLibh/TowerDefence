@@ -20,7 +20,8 @@ namespace TowerDefence
 			else
 				move(dt);
 		}
-		else if (accumulator >= 1.f)
+		
+		if (accumulator >= 1.f)
 		{
 			accumulator -= 1.f;
 

@@ -13,6 +13,7 @@
 #include "PropsManager.hpp"
 #include "Castle.hpp"
 #include "Tower.hpp"
+#include "Bullet.hpp"
 
 #include <algorithm>
 
@@ -132,10 +133,29 @@ namespace TowerDefence
 
 		return res;
 	}
+
+	const std::shared_ptr<Enemy> EnemyManager::getNearestEnemy(const PosF& pos, const float r) const noexcept
+	{
+		float minDist = std::numeric_limits<float>::max();
+		std::shared_ptr<Enemy> target;
+		for (const auto& enemy : m_enemies)
+			if (auto dist = Distance(enemy->getPos(), pos); dist < r && dist < minDist)
+			{
+				minDist = dist;
+				target = enemy;
+			}
+
+		return target;
+	}
 	
 	void EnemyManager::update(const float dt)
 	{
 		std::for_each(std::begin(m_enemies), std::end(m_enemies), [dt](auto& enemy) { enemy->update(dt); });
+		std::for_each(std::begin(m_bullets), std::end(m_bullets), [dt](auto& bullet) { bullet->update(dt); });
+
+		m_bullets.erase(
+			std::remove_if(std::begin(m_bullets), std::end(m_bullets), [](const auto& bullet) { return !bullet->isAlive(); }),
+			std::end(m_bullets));
 	}
 
 	void EnemyManager::add(std::shared_ptr<Enemy> enemy, const Lair* lair)
@@ -153,6 +173,13 @@ namespace TowerDefence
 			enemy->setRoute(*m_routes.at(lair).light);
 
 		sGraphics->add(enemy);
+	}
+
+	void EnemyManager::addBullet(const int damage, const PosF& pos, std::shared_ptr<Enemy> target)
+	{
+		m_bullets.emplace_back(std::make_shared<Bullet>(damage, pos, target));
+
+		sGraphics->add(m_bullets.back());
 	}
 
 	std::shared_ptr<ObjectWithHP> EnemyManager::getTargetAt(const PosF& pos) const

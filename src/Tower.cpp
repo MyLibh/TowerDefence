@@ -2,6 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 #include "Tower.hpp"
+#include "EnemyManager.hpp"
 
 namespace TowerDefence
 {
@@ -21,11 +22,12 @@ namespace TowerDefence
 	{
 		m_shotTimer += dt;
 
-		if (m_shotTimer > 0)
-		{
-			// Try attack
+		if (sEnemyManager && m_shotTimer > 1.)
+			if (auto target = sEnemyManager->getNearestEnemy(m_pos, m_props.r); target)
+			{
+				sEnemyManager->addBullet(m_props.damage, m_pos, target);
 
-			m_shotTimer = 0.f;
-		}
+				m_shotTimer = 0.f;
+			}
 	}
 } // namespace TowerDefence

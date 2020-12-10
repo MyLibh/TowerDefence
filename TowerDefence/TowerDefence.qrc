@@ -36,5 +36,6 @@
         <file>assets/Mountain.jpg</file>
         <file>assets/Wall.png</file>
         <file>assets/HealParticle.png</file>
+        <file>assets/Bullet.png</file>
     </qresource>
 </RCC>

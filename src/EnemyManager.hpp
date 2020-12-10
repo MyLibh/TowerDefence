@@ -16,6 +16,7 @@ namespace TowerDefence
 	class Lair;
 	class Landscape;
 	class ObjectWithHP;
+	class Bullet;
 	class EnemyManager : std::enable_shared_from_this<EnemyManager>
 	{
 	private:
@@ -39,6 +40,8 @@ namespace TowerDefence
 	public:
 		[[nodiscard]] std::vector<std::shared_ptr<Enemy>> getEnemiesAround(const PosF& pos, const float r) const;
 
+		[[nodiscard]] const std::shared_ptr<Enemy> getNearestEnemy(const PosF& pos, const float r) const noexcept;
+
 		[[nodiscard]] inline auto getCastle() const noexcept { return m_castle; }
 
 		void setCastle(std::shared_ptr<Castle> castle)
@@ -52,13 +55,16 @@ namespace TowerDefence
 		void update(const float dt);
 
 		void add(std::shared_ptr<Enemy> enemy, const Lair* lairId);
+
+		void addBullet(const int damage, const PosF& pos, std::shared_ptr<Enemy> target);
 		
 		std::shared_ptr<ObjectWithHP> getTargetAt(const PosF& pos) const;
 
 	private:
-		std::shared_ptr<Castle>             m_castle;
-		std::vector<std::shared_ptr<Enemy>> m_enemies;
-		std::map<const Lair*, Routes>       m_routes;
+		std::shared_ptr<Castle>              m_castle;
+		std::vector<std::shared_ptr<Enemy>>  m_enemies;
+		std::map<const Lair*, Routes>        m_routes;
+		std::vector<std::shared_ptr<Bullet>> m_bullets;
 	};
 } // namespace TowerDefence
 

@@ -6,8 +6,15 @@
 
 namespace TowerDefence
 {
+	class EnemyManager;
 	class Tower final : public UpgradableBuilding
 	{
+	protected:
+		inline static std::shared_ptr<EnemyManager> sEnemyManager;
+
+	public:
+		inline static void setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept { sEnemyManager = std::move(enemyManager); }
+
 	public:
 		inline Tower(const PosF& pos) :
 			UpgradableBuilding(pos),

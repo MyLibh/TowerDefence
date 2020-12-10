@@ -61,7 +61,8 @@ namespace TowerDefence
 
 		if (m_route && !m_route.isFinished())
 			move(dt);
-		else if (accumulator >= 1.f)
+		
+		if (accumulator >= 1.f)
 		{
 			accumulator -= 1.f;
 

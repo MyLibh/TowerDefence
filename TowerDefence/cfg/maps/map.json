@@ -338,7 +338,7 @@
         "y": 5,
         "spawn":
         [
-            { "type": "Heavy", "auras": [ { "type": "heal", "heal": 1, "r": 1 } ], "time": 1 }
+            { "type": "Heavy", "auras": [ { "type": "heal", "heal": 5, "r": 1 } ], "time": 1 }
         ]
       },
       {

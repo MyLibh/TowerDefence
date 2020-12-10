@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Aura.cpp" />
+    <ClCompile Include="..\src\Bullet.cpp" />
     <ClCompile Include="..\src\Enemy.cpp" />
     <ClCompile Include="..\src\EnemyManager.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="..\src\AirEnemy.hpp" />
     <ClInclude Include="..\src\Aura.hpp" />
     <ClInclude Include="..\src\Building.hpp" />
+    <ClInclude Include="..\src\Bullet.hpp" />
     <ClInclude Include="..\src\Castle.hpp" />
     <ClInclude Include="..\src\CastleProps.hpp" />
     <ClInclude Include="..\src\Cell.hpp" />
@@ -160,10 +162,6 @@
     <ClInclude Include="..\src\Utility.hpp" />
     <ClInclude Include="..\src\Wall.hpp" />
     <QtMoc Include="..\src\TowerDefence.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

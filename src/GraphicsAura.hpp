@@ -19,7 +19,7 @@ namespace TowerDefence
 	class GraphicsAura
 	{
 	private:
-		inline static constexpr auto PARTICLES_NUM{ 6 };
+		inline static constexpr auto PARTICLES_NUM{ 4 };
 
 	public:
 		inline GraphicsAura() noexcept = default;

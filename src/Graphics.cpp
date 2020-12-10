@@ -7,6 +7,7 @@
 #include "River.hpp"
 #include "Field.hpp"
 #include "Lair.hpp"
+#include "Utility.hpp"
 
 #include <QGraphicsLineItem>
 #include <QGraphicsRectItem>
@@ -52,27 +53,25 @@ namespace TowerDefence
 
 		m_scene->setBackgroundBrush(Qt::black);
 
+		auto addCell = [&]<typename _T> (Tag<_T> tag, auto&& cell, const std::string& name) requires std::is_base_of_v<Cell, _T>
+		{
+			using type = tag_type_t<decltype(tag)>;
+
+			auto [x, y] = std::dynamic_pointer_cast<type>(cell)->getPos();
+			auto pm = m_scene->addPixmap(m_images.at(name).scaled(m_tileWidth, m_tileHeight));
+			pm->setPos(1. * x * m_tileWidth, 1. * y * m_tileHeight);
+		};
+
 		for (const auto& cell : landscape->getCells())
 			if (const auto& id = typeid(*cell); id == typeid(Mountain))
-			{
-				auto [x, y] = std::dynamic_pointer_cast<Mountain>(cell)->getPos();
-				auto pm = m_scene->addPixmap(m_images.at("Mountain").scaled(m_tileWidth, m_tileHeight));
-				pm->setPos(1. * x * m_tileWidth, 1. * y * m_tileHeight);
-			}
+				addCell(Tag<Mountain>{}, cell, "Mountain");
 			else if (id == typeid(River))
-			{
-				auto [x, y] = std::dynamic_pointer_cast<River>(cell)->getPos();
-				auto pm = m_scene->addPixmap(m_images.at("Water").scaled(m_tileWidth, m_tileHeight));
-				pm->setPos(1. * x * m_tileWidth, 1. * y * m_tileHeight);
-			}
+				addCell(Tag<River>{}, cell, "Water");
 			else if(id == typeid(Field))
 			{
-				auto field = std::dynamic_pointer_cast<Field>(cell);
-				auto [x, y] = field->getPos();
-				auto pm = m_scene->addPixmap(m_images.at("Grass").scaled(m_tileWidth, m_tileHeight));
-				pm->setPos(1. * x * m_tileWidth, 1. * y * m_tileHeight);
+				addCell(Tag<Field>{}, cell, "Grass");
 
-				if (field->isBusy())
+				if (auto field = std::dynamic_pointer_cast<Field>(cell); field->isBusy())
 					if (typeid(*field->getBuilding()) == typeid(Castle))
 						add(std::dynamic_pointer_cast<Castle>(field->getBuilding()));
 					else if (typeid(*field->getBuilding()) == typeid(Lair))
@@ -87,26 +86,26 @@ namespace TowerDefence
 	{
 		m_castle->update();
 
-#define _rem(collection)                                                      \
-		collection.erase(                                                     \
-			std::remove_if(std::begin(collection), std::end(collection),      \
-				[](const auto& item) { return !item.getObject()->isAlive(); } \
-			),                                                                \
-			std::end(collection)                                              \
-		);
+		auto _remove = [](auto& collection)
+		{
+			collection.erase(
+				std::remove_if(std::begin(collection), std::end(collection), [](const auto& item) { return !item.getObject()->isAlive(); }),
+				std::end(collection));
+		};
 
-		_rem(m_walls);
-		_rem(m_enemies);
-		
-#undef _rem
+		_remove(m_walls);
+		_remove(m_enemies);
+		_remove(m_bullets);
 
-#define _upd(collection) std::for_each(std::begin(collection), std::end(collection), [&](auto& item) { item.update(); });
+		auto _update = [](auto& collection)
+		{
+			std::for_each(std::begin(collection), std::end(collection), [&](auto& item) { item.update(); });
+		};
 
-		_upd(m_walls);
-		_upd(m_towers);
-		_upd(m_enemies);
-
-#undef _upd
+		_update(m_walls);
+		_update(m_towers);
+		_update(m_enemies);
+		_update(m_bullets);
 	}
 
 	void Graphics::showGameOver(const int width, const int height)

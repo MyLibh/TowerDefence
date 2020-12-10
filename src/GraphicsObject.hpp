@@ -2,6 +2,8 @@
 #define __GRAPHICS_OBJECT_HPP_INCLUDED__
 
 #include "Entity.hpp"
+#include "Bullet.hpp"
+#include "Enemy.hpp"
 
 #include <memory>
 
@@ -11,7 +13,7 @@
 
 namespace TowerDefence
 {
-	template<typename _T>
+	template<typename _T> requires std::is_base_of_v<Entity, _T>
 	class GraphicsObject
 	{
 	public:
@@ -91,8 +93,11 @@ namespace TowerDefence
 
 		inline virtual void update() noexcept
 		{
-			auto [x, y] = m_object->getPos();
-			setPos(PosF{ x * m_scale.x, y * m_scale.y });
+			if (m_object)
+			{
+				auto [x, y] = m_object->getPos();
+				setPos(PosF{ x * m_scale.x, y * m_scale.y });
+			}
 		}
 
 	protected:
@@ -103,6 +108,25 @@ namespace TowerDefence
 		PosF m_scale;
 		std::shared_ptr<QGraphicsScene> m_scene;
 	};
+
+	template<>
+	inline void GraphicsObject<Bullet>::update() noexcept
+	{
+		if (m_object)
+		{
+			const auto [x, y] = m_object->getPos();
+			setPos(PosF{ x * m_scale.x, y * m_scale.y });
+
+			if (m_item)
+			{
+				const auto [targetX, targetY] = m_object->getTarget()->getPos();
+				PosF v{ targetX + .5f - x, targetY +.5f - y };
+
+				int angle = Angle(v);
+				m_item->setRotation(angle);
+			}
+		}
+	}
 
 	template<typename _T>
 	using GObject = GraphicsObject<_T>;

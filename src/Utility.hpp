@@ -3,6 +3,15 @@
 
 #include <set>
 
+template<typename _T>
+struct Tag
+{
+    using type = _T;
+};
+
+template<typename _Tag>
+using tag_type_t = typename _Tag::type;
+
 template <typename _T, typename _Pred>
 void discard_if(std::set<_T>& s, _Pred pred)
 {

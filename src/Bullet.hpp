@@ -10,9 +10,6 @@ namespace TowerDefence
 	class Enemy;
 	class Bullet : public Entity
 	{
-	private:
-		inline static constexpr auto SPEED{ 1.f };
-
 	public:
 		inline Bullet(const int power, const PosF& pos, std::shared_ptr<Enemy> target) noexcept :
 			Entity(pos),

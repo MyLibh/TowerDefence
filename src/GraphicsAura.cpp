@@ -10,7 +10,7 @@
 
 namespace TowerDefence
 {
-	GraphicsAura::GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float r, const PosF& scale, QColor color, QPixmap particlePixmap) :
+	GraphicsAura::GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float r, const PosF& scale, QColor color, const QPixmap& particlePixmap) :
 		m_scale(scale),
 		m_r(r),
 		m_scene(scene),

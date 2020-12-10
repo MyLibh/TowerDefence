@@ -10,8 +10,8 @@ namespace TowerDefence
 {
 	HP::HP(std::shared_ptr<QGraphicsScene> scene, const PosI& size /* = { HP::WIDTH, HP::HEIGHT } */) :
 		m_scene(scene),
-		m_back(scene->addRect(0., 0., size.x, size.y, QPen(Qt::black, 5), Qt::transparent)),
-		m_front(scene->addRect(0., 0., size.x, size.y, QPen(Qt::transparent, 5), Qt::green))
+		m_back(scene->addRect(0., 0., size.x, size.y, QPen(Qt::black, 3), Qt::transparent)),
+		m_front(scene->addRect(0., 0., size.x, size.y, QPen(Qt::transparent, 3), Qt::green))
 	{
 		m_back->setZValue(2);
 		m_front->setZValue(2);

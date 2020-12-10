@@ -15,7 +15,7 @@ namespace TowerDefence
 		auto targetPos = m_target->getPos();
 		targetPos.x += .5f;
 		targetPos.y += .5f;
-		if (auto dist = Distance(m_pos, targetPos); dist < 1.)
+		if (auto dist = Distance(m_pos, targetPos); dist < Constants::BULLET_MIN_DISTANCE_TO_TARGET)
 		{
 			std::dynamic_pointer_cast<ObjectWithHP>(m_target)->decreaseHealth(m_power);
 
@@ -25,7 +25,7 @@ namespace TowerDefence
 		}
 
 		PosF v = PosF{ targetPos.x - m_pos.x, targetPos.y - m_pos.y };
-		m_pos.x += Bullet::SPEED * v.x * dt;
-		m_pos.y += Bullet::SPEED * v.y * dt;
+		m_pos.x += Constants::BULLET_SPEED * v.x * dt;
+		m_pos.y += Constants::BULLET_SPEED * v.y * dt;
 	}
 } // namespace TowerDefence

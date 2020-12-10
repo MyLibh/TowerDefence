@@ -21,9 +21,9 @@ namespace TowerDefence
 				move(dt);
 		}
 		
-		if (accumulator >= 1.f)
+		if (accumulator >= Constants::ENEMY_UPDATE_RATIO)
 		{
-			accumulator -= 1.f;
+			accumulator = 0.f;
 
 			if (m_route.isFinished() && sEnemyManager)
 				attack(std::static_pointer_cast<ObjectWithHP>(sEnemyManager->getCastle()));

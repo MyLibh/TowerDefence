@@ -22,12 +22,12 @@ namespace TowerDefence
 	{
 		m_shotTimer += dt;
 
-		if (sEnemyManager && m_shotTimer > 1.)
+		if (sEnemyManager && m_shotTimer >= Constants::TOWER_UPDATE_RATIO)
 			if (auto target = sEnemyManager->getNearestEnemy(m_pos, m_props.r); target)
 			{
-				sEnemyManager->addBullet(m_props.damage, m_pos, target);
-
 				m_shotTimer = 0.f;
+
+				sEnemyManager->addBullet(m_props.damage, m_pos, target);
 			}
 	}
 } // namespace TowerDefence

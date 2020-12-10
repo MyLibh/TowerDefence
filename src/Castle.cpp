@@ -27,11 +27,11 @@ namespace TowerDefence
 		static float accumulator{};
 
 		accumulator += dt;
-		if (accumulator >= 1.f)
+		if (accumulator >= Constants::CASTLE_UPDATE_RATIO)
 		{
-			accumulator -= 1.f;
+			accumulator = 0.f;
 
-			increaseHealth(dt * REPAIR_AMOUNT);
+			increaseHealth(dt * Constants::CASTLE_REPAIR_AMOUNT);
 		}
 
 		m_money += m_props.profit;

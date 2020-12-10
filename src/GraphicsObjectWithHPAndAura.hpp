@@ -12,13 +12,19 @@ namespace TowerDefence
 	public:
 		inline GraphicsObjectWithHPAndAura() noexcept = default;
 
-		inline GraphicsObjectWithHPAndAura(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, std::map<std::string, QPixmap>& assets, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
+		inline GraphicsObjectWithHPAndAura(
+			const PosF& scale,
+			std::shared_ptr<QGraphicsScene> scene,
+			const QPixmap& pixmap,
+			std::shared_ptr<_T> object,
+			std::map<std::string, QPixmap>& assets,
+			const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
 			GObject<_T>(scale, scene, pixmap, object),
 			GObjectWithHP<_T>(scale, scene, pixmap, object, size),
 			GObjectWithAura<_T>(scale, scene, pixmap, object, assets)
 		{ }
 
-		GraphicsObjectWithHPAndAura(const GraphicsObjectWithHPAndAura& other) = delete;
+		GraphicsObjectWithHPAndAura(const GraphicsObjectWithHPAndAura&) = delete;
 
 		inline GraphicsObjectWithHPAndAura(GraphicsObjectWithHPAndAura&& other) noexcept :
 			GObject<_T>(std::move(other)),

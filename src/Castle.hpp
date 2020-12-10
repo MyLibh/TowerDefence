@@ -9,9 +9,6 @@ namespace TowerDefence
 {
 	class Castle final : public UpgradableBuilding, public ObjectWithHP
 	{
-	private:
-		inline static constexpr auto REPAIR_AMOUNT{ 9 };
-
 	public:
 		inline Castle(const int startMoney, const PosF& pos) :
 			UpgradableBuilding(pos),

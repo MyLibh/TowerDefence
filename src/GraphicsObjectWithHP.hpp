@@ -13,7 +13,12 @@ namespace TowerDefence
 	public:
 		inline GraphicsObjectWithHP() noexcept = default;
 
-		inline GraphicsObjectWithHP(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
+		inline GraphicsObjectWithHP(
+			const PosF& scale,
+			std::shared_ptr<QGraphicsScene> scene,
+			const QPixmap& pixmap,
+			std::shared_ptr<_T> object,
+			const PosI& size = { HP::WIDTH, HP::HEIGHT }) :
 			GObject<_T>(scale, scene, pixmap, object),
 			m_hp(scene, size)
 		{ }

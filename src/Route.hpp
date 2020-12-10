@@ -10,7 +10,9 @@ namespace TowerDefence
 	class Route
 	{
 	public:
-		Route() = default;
+		inline Route() noexcept :
+			m_to{}
+		{}
 
 		inline Route(const PosF& to, std::queue<PosF> path) noexcept :
 			m_to(to),

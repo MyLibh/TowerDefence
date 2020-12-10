@@ -22,7 +22,7 @@ namespace TowerDefence
 			m_object()
 		{ }
 
-		inline GraphicsObject(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object) :
+		inline GraphicsObject(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, const QPixmap& pixmap, std::shared_ptr<_T> object) :
 			m_scale(scale),
 			m_scene(scene),
 			m_item(scene->addPixmap(pixmap)),

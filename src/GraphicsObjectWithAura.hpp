@@ -13,7 +13,12 @@ namespace TowerDefence
 	public:
 		inline GraphicsObjectWithAura() noexcept = default;
 
-		inline GraphicsObjectWithAura(const PosF& scale, std::shared_ptr<QGraphicsScene> scene, QPixmap pixmap, std::shared_ptr<_T> object, std::map<std::string, QPixmap>& assets) :
+		inline GraphicsObjectWithAura(
+			const PosF& scale,
+			std::shared_ptr<QGraphicsScene> scene,
+			const QPixmap& pixmap,
+			std::shared_ptr<_T> object,
+			std::map<std::string, QPixmap>& assets) :
 			GObject<_T>(scale, scene, pixmap, object)
 		{
 			for (const auto& aura : object->getAuras())

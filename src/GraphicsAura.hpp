@@ -24,7 +24,7 @@ namespace TowerDefence
 	public:
 		inline GraphicsAura() noexcept = default;
 
-		GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float r, const PosF& scale, QColor color, QPixmap particlePixmap);
+		GraphicsAura(std::shared_ptr<QGraphicsScene> scene, const float r, const PosF& scale, QColor color, const QPixmap& particlePixmap);
 
 		GraphicsAura(const GraphicsAura&) = delete;
 

@@ -8,20 +8,17 @@ namespace TowerDefence
 {
 	class Wall final : public Building, public ObjectWithHP
 	{
-	private:
-		inline static constexpr auto MAX_HEALTH{ 100 };
-
 	public:
 		inline Wall(const PosF& pos) noexcept :
 			Building(pos),
-			ObjectWithHP(Wall::MAX_HEALTH)
+			ObjectWithHP(Constants::WALL_MAX_HEALTH)
 		{ }
 
 		inline ~Wall() noexcept override = default;
 
 		inline void update(const float dt) { }
 
-		[[nodiscard]] inline int getMaxHealth() const noexcept override { return Wall::MAX_HEALTH; }
+		[[nodiscard]] inline int getMaxHealth() const noexcept override { return Constants::WALL_MAX_HEALTH; }
 	};
 } // namespace TowerDefence
 

@@ -20,7 +20,7 @@ namespace TowerDefence
 		inline GraphicsObjectUpgradable(
 			const PosF& scale,
 			std::shared_ptr<QGraphicsScene> scene,
-			QPixmap pixmap,
+			const QPixmap& pixmap,
 			std::shared_ptr<_T> object,
 			std::string name,
 			std::map<std::string, QPixmap>& assets

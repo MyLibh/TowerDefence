@@ -2,6 +2,7 @@
 #define __ENTITY_HPP_INCLUDED__
 
 #include "Pos.hpp"
+#include "Constants.hpp"
 
 namespace TowerDefence
 {

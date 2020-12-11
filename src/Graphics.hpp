@@ -75,7 +75,7 @@ namespace TowerDefence
 		{
 			auto scale = PosF{ m_tileWidth, m_tileHeight };
 
-#define _params(str, ...) scale, m_scene, m_images.at(str).scaled(m_tileWidth, m_tileHeight), object, __VA_ARGS__
+#define _params(str, ...) scale, m_scene, m_images.at(str).scaled(.8 * m_tileWidth, m_tileHeight), object, __VA_ARGS__
 #define _add(cont, str, ...) ptr = &cont.emplace_back(_params(str, __VA_ARGS__))
 
 			GObject<_T>* ptr{};

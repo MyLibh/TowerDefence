@@ -43,6 +43,7 @@ namespace TowerDefence
 			Lair::setEnemyManager(m_enemyManager);
 			Enemy::setEnemyManager(m_enemyManager);
 			Tower::setEnemyManager(m_enemyManager);
+			Aura::setEnemyManager(m_enemyManager);
 		}
 
 		inline ~Landscape() noexcept
@@ -50,6 +51,7 @@ namespace TowerDefence
 			Lair::setEnemyManager(nullptr);
 			Enemy::setEnemyManager(nullptr);
 			Tower::setEnemyManager(nullptr);
+			Aura::setEnemyManager(nullptr);
 		}
 
 		[[nodiscard]] inline constexpr auto getWidth() const noexcept { return m_width; }

@@ -27,7 +27,7 @@ namespace TowerDefence
 		static float accumulator{};
 
 		accumulator += dt;
-		if (accumulator >= Constants::CASTLE_UPDATE_RATIO)
+		if (accumulator >= m_props.repairSpeed)
 		{
 			accumulator = 0.f;
 

@@ -130,7 +130,7 @@ namespace TowerDefence
         PropsManager::loadTowerProps("cfg/tower.props");
         PropsManager::loadEnemyProps("cfg/enemies/");
 
-        m_landscape = MapLoader::load("cfg/maps/Big.json");
+        m_landscape = MapLoader::load("cfg/maps/map.json");
 
         m_graphics->setTileSize(m_ui->canvas->width() * 1. / m_landscape->getWidth(), m_ui->canvas->height() * 1. / m_landscape->getHeight());
         m_graphics->createMap(m_landscape);

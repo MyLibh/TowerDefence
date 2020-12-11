@@ -18,14 +18,16 @@ namespace TowerDefence
 		return res;
 	}
 
-	void Tower::update(float dt)
+	void Tower::update(const float dt)
 	{
-		m_shotTimer += dt;
+		static float accumulator{};
 
-		if (sEnemyManager && m_shotTimer >= Constants::TOWER_UPDATE_RATIO)
+		accumulator += dt;
+
+		if (sEnemyManager && accumulator >= m_props.attackSpeed)
 			if (auto target = sEnemyManager->getNearestEnemy(m_pos, m_props.r); target)
 			{
-				m_shotTimer = 0.f;
+				accumulator = 0.f;
 
 				auto bulletPos = m_pos;
 				bulletPos.x += .5f;

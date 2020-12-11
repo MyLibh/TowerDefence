@@ -74,10 +74,10 @@ namespace TowerDefence
 				attack(std::static_pointer_cast<ObjectWithHP>(sEnemyManager->getCastle()));
 
 			regenerate();
-
-			useAuras();
 		}
 
 		ClearBuffs(m_buffs);
+
+		useAuras();
 	}
 }

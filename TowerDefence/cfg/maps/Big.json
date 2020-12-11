@@ -19,6 +19,17 @@
           "time": 1
         },
         {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 6
+        },
+        {
           "type": "Light",
           "auras": [
             {
@@ -27,18 +38,40 @@
               "r": 1
             }
           ],
-          "time": 2
+          "time": 11
         },
         {
-          "type": "Air",
+          "type": "Heavy",
           "auras": [
             {
-              "type": "heal",
-              "heal": 5,
+              "type": "speed",
+              "speed": 0.2,
               "r": 1
             }
           ],
-          "time": 3
+          "time": 16
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 21
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 26
         },
         {
           "type": "Heavy",
@@ -49,7 +82,40 @@
               "r": 1
             }
           ],
-          "time": 4
+          "time": 31
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 36
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "speed",
+              "speed": 0.2,
+              "r": 1
+            }
+          ],
+          "time": 41
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 46
         },
         {
           "type": "Heavy",
@@ -60,7 +126,7 @@
               "r": 1
             }
           ],
-          "time": 5
+          "time": 51
         },
         {
           "type": "Air",
@@ -71,10 +137,21 @@
               "r": 1
             }
           ],
-          "time": 6
+          "time": 56
         },
         {
           "type": "Air",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 61
+        },
+        {
+          "type": "Heavy",
           "auras": [
             {
               "type": "heal",
@@ -82,10 +159,21 @@
               "r": 1
             }
           ],
-          "time": 7
+          "time": 66
         },
         {
-          "type": "Air",
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 71
+        },
+        {
+          "type": "Light",
           "auras": [
             {
               "type": "heal",
@@ -93,7 +181,51 @@
               "r": 1
             }
           ],
-          "time": 1
+          "time": 76
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 81
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 86
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 91
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 96
         }
       ]
     },
@@ -427,58 +559,47 @@
           "type": "Heavy",
           "auras": [
             {
-              "type": "heal",
-              "heal": 5,
-              "r": 1
-            }
-          ],
-          "time": 2
-        },
-        {
-          "type": "Light",
-          "auras": [
-            {
-              "type": "heal",
-              "heal": 5,
-              "r": 1
-            }
-          ],
-          "time": 3
-        },
-        {
-          "type": "Heavy",
-          "auras": [
-            {
-              "type": "heal",
-              "heal": 5,
-              "r": 1
-            }
-          ],
-          "time": 4
-        },
-        {
-          "type": "Light",
-          "auras": [
-            {
-              "type": "heal",
-              "heal": 5,
-              "r": 1
-            }
-          ],
-          "time": 5
-        },
-        {
-          "type": "Heavy",
-          "auras": [
-            {
-              "type": "heal",
-              "heal": 5,
+              "type": "damage",
+              "damage": 5,
               "r": 1
             }
           ],
           "time": 6
         },
         {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 11
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "speed",
+              "speed": 0.2,
+              "r": 1
+            }
+          ],
+          "time": 16
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 21
+        },
+        {
           "type": "Heavy",
           "auras": [
             {
@@ -487,7 +608,106 @@
               "r": 1
             }
           ],
-          "time": 7
+          "time": 26
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 31
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 36
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "speed",
+              "speed": 0.2,
+              "r": 1
+            }
+          ],
+          "time": 41
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 46
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 51
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 56
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 61
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 66
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 71
         },
         {
           "type": "Light",
@@ -498,7 +718,40 @@
               "r": 1
             }
           ],
-          "time": 12
+          "time": 76
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 81
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 86
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 91
         },
         {
           "type": "Air",
@@ -509,18 +762,7 @@
               "r": 1
             }
           ],
-          "time": 15
-        },
-        {
-          "type": "Air",
-          "auras": [
-            {
-              "type": "heal",
-              "heal": 5,
-              "r": 1
-            }
-          ],
-          "time": 20
+          "time": 96
         }
       ]
     },
@@ -1096,6 +1338,17 @@
           "time": 1
         },
         {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 6
+        },
+        {
           "type": "Light",
           "auras": [
             {
@@ -1104,18 +1357,40 @@
               "r": 1
             }
           ],
-          "time": 4
+          "time": 11
         },
         {
-          "type": "Air",
+          "type": "Heavy",
           "auras": [
             {
-              "type": "heal",
-              "heal": 5,
+              "type": "speed",
+              "speed": 0.2,
               "r": 1
             }
           ],
-          "time": 5
+          "time": 16
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 21
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 26
         },
         {
           "type": "Heavy",
@@ -1126,7 +1401,29 @@
               "r": 1
             }
           ],
-          "time": 6
+          "time": 31
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 36
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "speed",
+              "speed": 0.2,
+              "r": 1
+            }
+          ],
+          "time": 41
         },
         {
           "type": "Air",
@@ -1137,7 +1434,7 @@
               "r": 1
             }
           ],
-          "time": 7
+          "time": 46
         },
         {
           "type": "Air",
@@ -1148,7 +1445,7 @@
               "r": 1
             }
           ],
-          "time": 9
+          "time": 51
         },
         {
           "type": "Heavy",
@@ -1159,7 +1456,95 @@
               "r": 1
             }
           ],
-          "time": 10
+          "time": 56
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 61
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 66
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 71
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 76
+        },
+        {
+          "type": "Light",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 81
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 86
+        },
+        {
+          "type": "Air",
+          "auras": [
+            {
+              "type": "damage",
+              "damage": 5,
+              "r": 1
+            }
+          ],
+          "time": 91
+        },
+        {
+          "type": "Heavy",
+          "auras": [
+            {
+              "type": "heal",
+              "heal": 5,
+              "r": 1
+            }
+          ],
+          "time": 96
         }
       ]
     },

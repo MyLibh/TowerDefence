@@ -8,9 +8,6 @@ namespace TowerDefence::Constants
 	inline constexpr auto REPAIR_COST{ 100 };
 
 	inline constexpr auto CASTLE_REGEN_AMOUNT{ 10 };
-	inline constexpr auto CASTLE_UPDATE_RATIO{ 1.f };
-
-	inline constexpr auto TOWER_UPDATE_RATIO{ 1.f };
 
 	inline constexpr auto WALL_COST{ 100 };
 	inline constexpr auto WALL_MAX_HEALTH{ 100 };
@@ -24,7 +21,7 @@ namespace TowerDefence::Constants
 	inline constexpr auto BULLETS_Z_LVL{ 2 };
 	inline constexpr auto GUI_Z_LVL{ 3 };
 
-	inline constexpr auto PARTICLES_NUM{ 5LLU };
+	inline constexpr auto PARTICLES_NUM{ 4LLU };
 } // namespace TowerDefence::Constants
 
 #endif /* !__CONSTANTS_HPP_INCLUDED__ */

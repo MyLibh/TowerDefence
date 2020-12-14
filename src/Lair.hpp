@@ -10,18 +10,18 @@
 namespace TowerDefence
 {
 	class Enemy;
-	class EnemyManager;
+	class GameManager;
 
 	class Lair final : public Building
 	{
 	private:
-		inline static std::shared_ptr<EnemyManager> sEnemyManager{};
+		inline static std::shared_ptr<GameManager> sGameManager{};
 
 	private:
 		void spawn(std::shared_ptr<Enemy> enemy);
 
 	public:
-		inline static void setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept { sEnemyManager = std::move(enemyManager); }
+		inline static void setGameManager(std::shared_ptr<GameManager> GameManager) noexcept { sGameManager = std::move(GameManager); }
 
 	public:
 		inline Lair(const PosF& pos, std::multimap<float, std::shared_ptr<Enemy>> shedule) noexcept :

@@ -3,14 +3,14 @@
 
 #include "Lair.hpp"
 #include "Enemy.hpp"
-#include "EnemyManager.hpp"
+#include "GameManager.hpp"
 
 namespace TowerDefence
 {
 	void Lair::spawn(std::shared_ptr<Enemy> enemy)
 	{
 		enemy->setPos(m_pos);
-		sEnemyManager->add(enemy, this);
+		sGameManager->add(enemy, this);
 	}
 
 	void Lair::update(float dt)

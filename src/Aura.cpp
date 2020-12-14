@@ -1,19 +1,19 @@
 #include "Aura.hpp"
-#include "EnemyManager.hpp"
+#include "GameManager.hpp"
 #include "Enemy.hpp"
 
 namespace TowerDefence
 {
-	void Aura::setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept
+	void Aura::setGameManager(std::shared_ptr<GameManager> GameManager) noexcept
 	{
-		Aura::sEnemyManager = std::move(enemyManager);
+		Aura::sGameManager = std::move(GameManager);
 	}
 
 	void Aura::applyEffect(const PosF& pos) const
 	{
-		if (Aura::sEnemyManager)
+		if (Aura::sGameManager)
 		{
-			for (auto& enemy : Aura::sEnemyManager->getEnemiesAround(pos, m_r))
+			for (auto& enemy : Aura::sGameManager->getEnemiesAround(pos, m_r))
 				apply(enemy->getBuffs());
 		}
 	}

@@ -2,7 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 #include "Tower.hpp"
-#include "EnemyManager.hpp"
+#include "GameManager.hpp"
 
 namespace TowerDefence
 {
@@ -24,15 +24,15 @@ namespace TowerDefence
 
 		accumulator += dt;
 
-		if (sEnemyManager && accumulator >= m_props.attackSpeed)
-			if (auto target = sEnemyManager->getNearestEnemy(m_pos, m_props.r); target)
+		if (sGameManager && accumulator >= m_props.attackSpeed)
+			if (auto target = sGameManager->getNearestEnemy(m_pos, m_props.r); target)
 			{
 				accumulator = 0.f;
 
 				auto bulletPos = m_pos;
 				bulletPos.x += .5f;
 				bulletPos.y += .5f;
-				sEnemyManager->addBullet(m_props.damage, bulletPos, target);
+				sGameManager->addBullet(m_props.damage, bulletPos, target);
 			}
 	}
 } // namespace TowerDefence

@@ -8,18 +8,18 @@
 
 namespace TowerDefence
 {
-	class EnemyManager;
+	class GameManager;
 	class Enemy;
 	class Aura
 	{
 	private:
-		inline static std::shared_ptr<EnemyManager> sEnemyManager;
+		inline static std::shared_ptr<GameManager> sGameManager;
 
 	protected:
 		virtual void apply(Buffs& buffs) const = 0;
 
 	public:
-		static void setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept;
+		static void setGameManager(std::shared_ptr<GameManager> GameManager) noexcept;
 
 	public:
 		Aura() = delete;

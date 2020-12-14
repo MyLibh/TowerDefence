@@ -1,5 +1,5 @@
-#ifndef __ENEMY_MANAGER_HPP_INCLUDED__
-#define __ENEMY_MANAGER_HPP_INCLUDED__
+#ifndef __GAME_MANAGER_HPP_INCLUDED__
+#define __GAME_MANAGER_HPP_INCLUDED__
 
 #include "Pos.hpp"
 #include "Routes.hpp"
@@ -17,7 +17,7 @@ namespace TowerDefence
 	class Landscape;
 	class ObjectWithHP;
 	class Bullet;
-	class EnemyManager : std::enable_shared_from_this<EnemyManager>
+	class GameManager : std::enable_shared_from_this<GameManager>
 	{
 	private:
 		inline static std::shared_ptr<Graphics> sGraphics;
@@ -33,7 +33,7 @@ namespace TowerDefence
 
 		void createRoutes(const Lair* lair);
 
-		void updateRoutes();
+		void updateNewRoutes();
 
 		void updateExistingRoutes();
 
@@ -49,10 +49,13 @@ namespace TowerDefence
 			m_castle = std::move(castle);
 
 			updateRoutes();
-			updateExistingRoutes();
 		}
 
 		void update(const float dt);
+
+		void updateRoutes();
+
+		void updateLightRoutes();
 
 		void add(std::shared_ptr<Enemy> enemy, const Lair* lairId);
 
@@ -68,4 +71,4 @@ namespace TowerDefence
 	};
 } // namespace TowerDefence
 
-#endif /* !__ENEMY_MANAGER_HPP_INCLUDED__ */
+#endif /* !__GAME_MANAGER_HPP_INCLUDED__ */

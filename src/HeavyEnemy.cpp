@@ -2,7 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
 #include "HeavyEnemy.hpp"
-#include "EnemyManager.hpp"
+#include "GameManager.hpp"
 #include "Castle.hpp"
 
 namespace TowerDefence
@@ -15,7 +15,7 @@ namespace TowerDefence
 
 		if (m_route && !m_route.isFinished())
 		{
-			if (auto target = sEnemyManager->getTargetAt(m_pos); target && target->isAlive())
+			if (auto target = sGameManager->getTargetAt(m_pos); target && target->isAlive())
 				attack(target);
 			else
 				move(dt);
@@ -25,8 +25,8 @@ namespace TowerDefence
 		{
 			accumulator = 0.f;
 
-			if (m_route.isFinished() && sEnemyManager)
-				attack(std::static_pointer_cast<ObjectWithHP>(sEnemyManager->getCastle()));
+			if (m_route.isFinished() && sGameManager)
+				attack(std::static_pointer_cast<ObjectWithHP>(sGameManager->getCastle()));
 
 			regenerate();
 		}

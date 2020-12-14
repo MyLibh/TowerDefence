@@ -12,14 +12,14 @@
 
 namespace TowerDefence
 {
-	class EnemyManager;
+	class GameManager;
 	class Enemy : public Entity, public ObjectWithHP
 	{
 	protected:
-		inline static std::shared_ptr<EnemyManager> sEnemyManager;
+		inline static std::shared_ptr<GameManager> sGameManager;
 
 	public:
-		inline static void setEnemyManager(std::shared_ptr<EnemyManager> enemyManager) noexcept { sEnemyManager = std::move(enemyManager); }
+		inline static void setGameManager(std::shared_ptr<GameManager> GameManager) noexcept { sGameManager = std::move(GameManager); }
 
 	protected:
 		void attack(std::shared_ptr<ObjectWithHP> object) const noexcept;

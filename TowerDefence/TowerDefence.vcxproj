@@ -52,11 +52,13 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
@@ -102,7 +104,7 @@
     <ClCompile Include="..\src\Aura.cpp" />
     <ClCompile Include="..\src\Bullet.cpp" />
     <ClCompile Include="..\src\Enemy.cpp" />
-    <ClCompile Include="..\src\EnemyManager.cpp" />
+    <ClCompile Include="..\src\GameManager.cpp" />
     <ClCompile Include="..\src\Graphics.cpp" />
     <ClCompile Include="..\src\GraphicsAura.cpp" />
     <ClCompile Include="..\src\HeavyEnemy.cpp" />
@@ -134,7 +136,7 @@
     <ClInclude Include="..\src\DamageAura.hpp" />
     <ClInclude Include="..\src\Enemies.hpp" />
     <ClInclude Include="..\src\Enemy.hpp" />
-    <ClInclude Include="..\src\EnemyManager.hpp" />
+    <ClInclude Include="..\src\GameManager.hpp" />
     <ClInclude Include="..\src\EnemyProps.hpp" />
     <ClInclude Include="..\src\Entity.hpp" />
     <ClInclude Include="..\src\Field.hpp" />

@@ -1,9 +1,9 @@
 #ifndef __POS_HPP_INCLUDED__
 #define __POS_HPP_INCLUDED__
 
+#include <cmath>
 #include <type_traits>
 #include <compare>
-#include <cmath>
 
 namespace TowerDefence
 {
@@ -55,7 +55,7 @@ namespace TowerDefence
 			return (pos.x >= 0) ? 0
 			: 180;
 
-		int ret = std::atan(pos.y / pos.x) * (180 / 3.1415);
+		int ret = std::atan(pos.y / pos.x) * (180 / M_PI);
 		if (pos.x < 0 && pos.y < 0)
 			ret += 180;
 		else if (pos.x < 0)

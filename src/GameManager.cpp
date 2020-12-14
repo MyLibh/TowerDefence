@@ -1,7 +1,7 @@
 // This is a personal academic project. Dear PVS-Studio, please check it.
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 
-#include "EnemyManager.hpp"
+#include "GameManager.hpp"
 #include "Enemies.hpp"
 #include "Graphics.hpp"
 #include "Cells.hpp"
@@ -32,7 +32,7 @@ namespace detail
 
 namespace TowerDefence
 {
-	std::shared_ptr<Route> EnemyManager::createRoute(const PosF& from, RouteType routeType)
+	std::shared_ptr<Route> GameManager::createRoute(const PosF& from, RouteType routeType)
 	{
 		PosF to = m_castle ? m_castle->getPos() : from;
 
@@ -90,35 +90,37 @@ namespace TowerDefence
 		return std::make_shared<Route>(to, std::move(path));
 	}
 	
-	void EnemyManager::createRoutes(const Lair* lair)
+	void GameManager::createRoutes(const Lair* lair)
 	{
 		auto from = lair->getPos();
 
 		m_routes.try_emplace(lair, Routes{ createRoute(from, RouteType::Light), createRoute(from, RouteType::Heavy), createRoute(from, RouteType::Air) });
 	}
 
-	void EnemyManager::updateRoutes()
+	void GameManager::updateNewRoutes()
 	{
 		std::for_each(std::begin(m_routes), std::end(m_routes),
 			[&](auto& p)
 			{
-				p.second.heavy = createRoute(p.first->getPos(), RouteType::Heavy);
-				p.second.light = createRoute(p.first->getPos(), RouteType::Light);
+				auto&& [lair, routes] = p;
+				routes.heavy = createRoute(lair->getPos(), RouteType::Heavy);
+				routes.light = createRoute(lair->getPos(), RouteType::Light);
 			}
 		);
 	}
 
-	void EnemyManager::updateExistingRoutes()
+	void GameManager::updateExistingRoutes()
 	{
 		std::for_each(std::begin(m_enemies), std::end(m_enemies),
 			[&](auto& enemy)
 			{
-				enemy->setRoute(*createRoute(enemy->getPos(), RouteType::Light));
+				if (typeid(*enemy) != typeid(AirEnemy))
+					enemy->setRoute(*createRoute(enemy->getPos(), RouteType::Light));
 			}
 		);
 	}
 
-	std::vector<std::shared_ptr<Enemy>> EnemyManager::getEnemiesAround(const PosF& pos, const float r) const
+	std::vector<std::shared_ptr<Enemy>> GameManager::getEnemiesAround(const PosF& pos, const float r) const
 	{
 		std::vector<std::shared_ptr<Enemy>> res;
 		for (const auto& enemy : m_enemies)
@@ -128,7 +130,7 @@ namespace TowerDefence
 		return res;
 	}
 
-	const std::shared_ptr<Enemy> EnemyManager::getNearestEnemy(const PosF& pos, const float r) const noexcept
+	const std::shared_ptr<Enemy> GameManager::getNearestEnemy(const PosF& pos, const float r) const noexcept
 	{
 		float minDist = std::numeric_limits<float>::max();
 		std::shared_ptr<Enemy> target;
@@ -142,7 +144,7 @@ namespace TowerDefence
 		return target;
 	}
 	
-	void EnemyManager::update(const float dt)
+	void GameManager::update(const float dt)
 	{
 		m_enemies.erase(
 			std::remove_if(std::begin(m_enemies), std::end(m_enemies), [](const auto& enemy) { return !enemy->isAlive(); }),
@@ -156,7 +158,32 @@ namespace TowerDefence
 		std::for_each(std::begin(m_bullets), std::end(m_bullets), [dt](auto& bullet) { bullet->update(dt); });
 	}
 
-	void EnemyManager::add(std::shared_ptr<Enemy> enemy, const Lair* lair)
+	void GameManager::updateRoutes()
+	{
+		updateNewRoutes();
+		// updateExistingRoutes();
+	}
+
+	void TowerDefence::GameManager::updateLightRoutes()
+	{
+		std::for_each(std::begin(m_routes), std::end(m_routes),
+			[&](auto& p)
+			{
+				auto&& [lair, routes] = p;
+				routes.light = createRoute(lair->getPos(), RouteType::Light);
+			}
+		);
+
+		/*std::for_each(std::begin(m_enemies), std::end(m_enemies),
+			[&](auto& enemy)
+			{
+				if (typeid(*enemy) == typeid(LightEnemy))
+					enemy->setRoute(*createRoute(enemy->getPos(), RouteType::Light));
+			}
+		);*/
+	}
+
+	void GameManager::add(std::shared_ptr<Enemy> enemy, const Lair* lair)
 	{
 		m_enemies.emplace_back(enemy);
 
@@ -173,12 +200,12 @@ namespace TowerDefence
 		sGraphics->add(enemy);
 	}
 
-	void EnemyManager::addBullet(const int damage, const PosF& pos, std::shared_ptr<Enemy> target)
+	void GameManager::addBullet(const int damage, const PosF& pos, std::shared_ptr<Enemy> target)
 	{
 		sGraphics->add(m_bullets.emplace_back(std::make_shared<Bullet>(damage, pos, target)));
 	}
 
-	std::shared_ptr<ObjectWithHP> EnemyManager::getTargetAt(const PosF& pos) const
+	std::shared_ptr<ObjectWithHP> GameManager::getTargetAt(const PosF& pos) const
 	{
 		if (sLandscape && std::ceil(pos.x) == pos.x && std::ceil(pos.y) == pos.y)
 			if (auto field = std::dynamic_pointer_cast<Field>(sLandscape->getCell(pos)); field)

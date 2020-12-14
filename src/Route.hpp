@@ -44,6 +44,8 @@ namespace TowerDefence
 
 		inline bool isFinished() const noexcept { return m_path.empty(); }
 
+		// inline bool hasPoint(const PosF& pos) const noexcept { return std::find(std::begin(m_path), std::end(m_path), pos) != std::end(m_path); }
+
 		operator bool() const noexcept { return !m_path.empty(); }
 
 	private:

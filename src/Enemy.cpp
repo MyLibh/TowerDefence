@@ -3,7 +3,7 @@
 
 #include "Enemy.hpp"
 #include "Aura.hpp"
-#include "EnemyManager.hpp"
+#include "GameManager.hpp"
 #include "Castle.hpp"
 
 #include <algorithm>
@@ -70,8 +70,8 @@ namespace TowerDefence
 		{
 			accumulator = 0.f;
 
-			if (m_route.isFinished() && sEnemyManager)
-				attack(std::static_pointer_cast<ObjectWithHP>(sEnemyManager->getCastle()));
+			if (m_route.isFinished() && sGameManager)
+				attack(std::static_pointer_cast<ObjectWithHP>(sGameManager->getCastle()));
 
 			regenerate();
 		}

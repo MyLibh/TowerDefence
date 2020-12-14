@@ -2,7 +2,7 @@
 #define __LANDSCAPE_HPP_INCLUDED__
 
 #include "Field.hpp"
-#include "EnemyManager.hpp"
+#include "GameManager.hpp"
 #include "Enemy.hpp"
 #include "Buildings.hpp"
 
@@ -38,20 +38,20 @@ namespace TowerDefence
 			m_entities(),
 			m_cells(),
 			m_castle{},
-			m_enemyManager(std::make_shared<EnemyManager>())
+			m_gameManager(std::make_shared<GameManager>())
 		{
-			Lair::setEnemyManager(m_enemyManager);
-			Enemy::setEnemyManager(m_enemyManager);
-			Tower::setEnemyManager(m_enemyManager);
-			Aura::setEnemyManager(m_enemyManager);
+			Lair::setGameManager(m_gameManager);
+			Enemy::setGameManager(m_gameManager);
+			Tower::setGameManager(m_gameManager);
+			Aura::setGameManager(m_gameManager);
 		}
 
 		inline ~Landscape() noexcept
 		{
-			Lair::setEnemyManager(nullptr);
-			Enemy::setEnemyManager(nullptr);
-			Tower::setEnemyManager(nullptr);
-			Aura::setEnemyManager(nullptr);
+			Lair::setGameManager(nullptr);
+			Enemy::setGameManager(nullptr);
+			Tower::setGameManager(nullptr);
+			Aura::setGameManager(nullptr);
 		}
 
 		[[nodiscard]] inline constexpr auto getWidth() const noexcept { return m_width; }
@@ -73,7 +73,7 @@ namespace TowerDefence
 
 		[[nodiscard]] inline auto getCastle() const noexcept { return m_castle; }
 
-		[[nodiscard]] inline auto getEnemyManager() const noexcept { return m_enemyManager; }
+		[[nodiscard]] inline auto getGameManager() const noexcept { return m_gameManager; }
 
 		inline bool isInField(const PosF& pos) const noexcept { return pos.x >= 0.f && pos.x < m_width&& pos.y >= 0.f && pos.y <= m_height; }
 
@@ -88,7 +88,7 @@ namespace TowerDefence
 			{
 				m_castle = std::dynamic_pointer_cast<Castle>(entity);
 
-				m_enemyManager->setCastle(m_castle);
+				m_gameManager->setCastle(m_castle);
 			}
 
 			return entity;
@@ -139,7 +139,7 @@ namespace TowerDefence
 
 				field->build(std::dynamic_pointer_cast<Building>(addEntity<Tower>(pos)));
 
-				// TODO: update routes
+				m_gameManager->updateRoutes();
 			}
 		}
 
@@ -151,7 +151,7 @@ namespace TowerDefence
 
 				field->build(std::dynamic_pointer_cast<Building>(addEntity<Wall>(pos)));
 
-				// TODO: update routes
+				// m_gameManager->updateLightRoutes();
 			}
 		}
 
@@ -183,7 +183,7 @@ namespace TowerDefence
 		std::set<std::shared_ptr<Entity>> m_entities;
 		std::set<std::shared_ptr<Cell>>   m_cells;
 		std::shared_ptr<Castle>           m_castle;
-		std::shared_ptr<EnemyManager>     m_enemyManager;
+		std::shared_ptr<GameManager>      m_gameManager;
 	};
 } // namespace TowerDefence
 

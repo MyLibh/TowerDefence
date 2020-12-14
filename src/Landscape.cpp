@@ -19,6 +19,6 @@ namespace TowerDefence
 			}
 		);
 
-		m_enemyManager->update(dt);
+		m_gameManager->update(dt);
 	}
 }
